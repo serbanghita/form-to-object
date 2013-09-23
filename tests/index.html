@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QUnit Tests</title>
+  <link rel="stylesheet" href="qunit/qunit.css">
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+  
+  <form id="testForm">
+      <label>Name</label> <input type="text" name="name" value="Serban Ghita" /> <br>
+      
+      <label>Email</label> <input type="email" name="email" value="serbanghita@gmail.com" /> <br>
+      
+      <label>Address</label> <textarea name="address">1 Avenue Henry Dunant 
+98000 Monaco</textarea> <br>
+      
+      <label>Country</label> 
+      <select name="country">
+          <option value="MC" selected>Monaco</option>
+          <option value="RO">Romania</option>
+          <option value="US">United States of America</option>          
+      </select> <br>
+      
+      <label>Payment method</label>
+      <input type="radio" name="payment_method" value="cc"> <label>Credit card</label>
+      <input type="radio" name="payment_method" value="paypal" checked> <label>PayPal</label>
+      <input type="radio" name="payment_method" value="wire"> <label>Wire</label> <br>
+      
+      <label>Where did you hear about us?</label>
+      <input type="checkbox" name="source[]" value="search_engine" checked> <label>Search engine</label>
+      <input type="checkbox" name="source[]" value="ad"> <label>Advertising</label>
+      <input type="checkbox" name="source[]" value="friend" checked> <label>Friend</label>
+      <input type="checkbox" name="source[]" value="social"> <label>Social networks</label> <br>
+
+      <label>What features you need?</label>
+      <select name="features[]" multiple>
+          <option value="mobile" selected>Mobile interface</option>
+          <option value="admin" selected>Admin interface</option>
+          <option value="saas">SaaS</option>
+          <option value="money_back" selected>Money back guarantee</option>
+      </select>
+
+      <fieldset>
+        <legend>Prefered settings</legend>
+        <label>Username</label> <input type="text" name="settings[username]" value="serbanghita"><br>
+
+        <label>Password</label> <input type="password" name="settings[password]" value="qwerty"> <br>
+
+        <label>Theme type</label>  
+        <select name="settings[theme][type]">
+            <option value="dark" selected>Dark</option>
+            <option value="bright">Bright</option>
+            <option value="yellow">Yellow</option>
+          </select><br>
+
+        <label>Theme font</label>  
+        <select name="settings[theme][font]">
+            <option value="arial" selected>Arial</option>
+            <option value="tahoma">Tahoma</option>
+            <option value="verdana">Verdana</option>
+         </select>
+      </fieldset>
+
+      <fieldset>
+        <legend>Forgotten area</legend>
+        <label></label>
+
+      </fieldset>
+
+      
+      <input type="hidden" name="token" value="123456">
+      <input type="submit" name="signup" value="Sign-up" />      
+  </form>
+  
+  <script src="../formToObject.js"></script>
+  <script src="qunit/qunit.js"></script>
+  <script src="tests.js"></script>
+  <script type="text/javascript">
+      console.log( new formToObject('testForm') );
+  </script>
+</body>
+</html>
