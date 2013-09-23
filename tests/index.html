@@ -3,32 +3,40 @@
 <head>
   <meta charset="utf-8">
   <title>QUnit Tests</title>
+  <style type="text/css">
+    form, input, textarea, select { font-family: Arial; font-size:10px; }
+  </style>
   <link rel="stylesheet" href="qunit/qunit.css">
 </head>
 <body>
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
-  
+
   <form id="testForm">
+
+    <fieldset>
+      <legend>General fields</legend>
+
+
       <label>Name</label> <input type="text" name="name" value="Serban Ghita" /> <br>
-      
+
       <label>Email</label> <input type="email" name="email" value="serbanghita@gmail.com" /> <br>
-      
-      <label>Address</label> <textarea name="address">1 Avenue Henry Dunant 
+
+      <label>Address</label> <textarea name="address">1 Avenue Henry Dunant
 98000 Monaco</textarea> <br>
-      
-      <label>Country</label> 
+
+      <label>Country</label>
       <select name="country">
           <option value="MC" selected>Monaco</option>
           <option value="RO">Romania</option>
-          <option value="US">United States of America</option>          
+          <option value="US">United States of America</option>
       </select> <br>
-      
+
       <label>Payment method</label>
       <input type="radio" name="payment_method" value="cc"> <label>Credit card</label>
       <input type="radio" name="payment_method" value="paypal" checked> <label>PayPal</label>
       <input type="radio" name="payment_method" value="wire"> <label>Wire</label> <br>
-      
+
       <label>Where did you hear about us?</label>
       <input type="checkbox" name="source[]" value="search_engine" checked> <label>Search engine</label>
       <input type="checkbox" name="source[]" value="ad"> <label>Advertising</label>
@@ -43,20 +51,32 @@
           <option value="money_back" selected>Money back guarantee</option>
       </select>
 
+      </fieldset>
+
+      <fieldset>
+        <legend>HTML5 fields</legend>
+
+        <label>Number</label> <input type="number" name="number" value="123" /> <br>
+        <label>Date</label> <input type="date" name="date" value="2013-09-23" /> <br>
+        <label>Date</label> <input type="time" name="time" value="10:12" /> <br>
+        <label>Tel</label> <input type="tel" name="tel" value="1234567890">
+
+      </fieldset>
+
       <fieldset>
         <legend>Prefered settings</legend>
         <label>Username</label> <input type="text" name="settings[username]" value="serbanghita"><br>
 
         <label>Password</label> <input type="password" name="settings[password]" value="qwerty"> <br>
 
-        <label>Theme type</label>  
+        <label>Theme type</label>
         <select name="settings[theme][type]">
             <option value="dark" selected>Dark</option>
             <option value="bright">Bright</option>
             <option value="yellow">Yellow</option>
           </select><br>
 
-        <label>Theme font</label>  
+        <label>Theme font</label>
         <select name="settings[theme][font]">
             <option value="arial" selected>Arial</option>
             <option value="tahoma">Tahoma</option>
@@ -65,21 +85,27 @@
       </fieldset>
 
       <fieldset>
-        <legend>Forgotten area</legend>
-        <label></label>
-
+        <legend>Corner cases</legend>
+        <label>No name input</label> <input type="text" /><br>
+        <label>No type input</label> <input name="test1" /><br>
+        <label>Only input tag</label> <input /><br>
+        <label>File</label> <input type="file" name="file" id="file" value="">
       </fieldset>
 
-      
+
       <input type="hidden" name="token" value="123456">
-      <input type="submit" name="signup" value="Sign-up" />      
+      <input type="submit" name="signup" value="Sign-up" />
+      <input type="button" value="Convert to object &raquo;" id="convertBtn">
   </form>
-  
+
   <script src="../formToObject.js"></script>
   <script src="qunit/qunit.js"></script>
   <script src="tests.js"></script>
   <script type="text/javascript">
-      console.log( new formToObject('testForm') );
+      document.getElementById('convertBtn').addEventListener('click', function(e){
+        console.log( new formToObject('testForm') );
+        return false;
+      });
   </script>
 </body>
 </html>
