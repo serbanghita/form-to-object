@@ -1,4 +1,3 @@
-// Usage: new formToObject('gameSettingsForm');
 (function(){
 
     // Constructor.
@@ -16,8 +15,11 @@
 
         var test, i = 0;
 		for(var i = 0; i < this.$formElements.length; i++){
-			test = this.$formElements[i].name.match( this.keyRegex );
-			this.addChild( this.formObj, this.$formElements[i], test, this.$formElements[i].value );
+			// Ignore the element if the 'name' attribute is empty.
+			if( this.$formElements[i].name ) {
+				test = this.$formElements[i].name.match( this.keyRegex );
+				this.addChild( this.formObj, this.$formElements[i], test, this.$formElements[i].value );
+			}
 		}
 
 		return this.formObj;
@@ -83,7 +85,7 @@
 				result[keys[0]] = {};
 			}
 
-			return this.addChild(result[keys[0]], domNode, keys.splice(1, keys.length), value);			
+			return this.addChild(result[keys[0]], domNode, keys.splice(1, keys.length), value);
 
 		}
 
