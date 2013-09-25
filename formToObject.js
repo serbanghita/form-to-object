@@ -1,16 +1,26 @@
 (function(){
 
     // Constructor.
-	var formToObject = function( formId ){
-
-		if(!formId || typeof formId !== 'string'){ return false; }
+	var formToObject = function( formRef ){
+		if(!formRef){ return false; }
 
 		this.keyRegex      = /[^\[\]]+/g;
 		this.$form         = null;
 		this.$formElements = [];
 		this.formObj       = {};
 
-		this.$form         = document.getElementById( formId );
+		if( typeof formRef == 'string' ){
+			this.$form = document.getElementById( formRef );
+		}else if( typeof formRef == 'object' ){
+			if ( typeof formRef.nodeType != 'undefined' && formRef.nodeType == 1 ){
+				this.$form = formRef;
+			}
+		}
+
+		if (!this.$form) {
+			return false;
+		}
+
 		this.$formElements = this.$form.querySelectorAll('input, textarea, select');
 
         var test, i = 0;
