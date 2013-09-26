@@ -39,12 +39,11 @@ DEALINGS IN THE SOFTWARE.
 		if( !this.setForm() ){ return false; }
 		if( !this.setFormElements() ){ return false; }
 
-		this.setFormObj();
-
-		return this.formObj;
+		return this.setFormObj();
 
 	};
 
+	// Set the main form object we are working on.
 	formToObject.prototype.setForm = function(){
 
 		switch( typeof this.formRef ){
@@ -65,14 +64,35 @@ DEALINGS IN THE SOFTWARE.
 
 	};
 
+	// Set the elements we need to parse.
 	formToObject.prototype.setFormElements = function(){
 		this.$formElements = this.$form.querySelectorAll('input, textarea, select');
 		return this.$formElements.length;
 	};
 
+	// Check to see if the object is a HTML node.
 	formToObject.prototype.isDomNode = function( node ){
 		return typeof node === "object" && "nodeType" in node && node.nodeType === 1;
 	};
+
+	// Iteration through arrays and objects. Compatible with IE.
+	formToObject.prototype.forEach = function( arr, callback ){
+
+		if([].forEach){
+			return [].forEach.call(arr, callback);
+		}
+
+		var i;
+		for(i in arr){
+			// Object.prototype.hasOwnProperty instead of arr.hasOwnProperty for IE8 compatibility.
+			if( Object.prototype.hasOwnProperty.call(arr,i) ){
+				callback.call(arr, arr[i]);
+			}
+		}
+
+		return;
+
+	}
 
     // Recursive method that adds keys and values of the corresponding fields.
 	formToObject.prototype.addChild = function( result, domNode, keys, value ){
@@ -113,7 +133,7 @@ DEALINGS IN THE SOFTWARE.
 				result[keys] = [];
 				var DOMchilds = domNode.querySelectorAll('option[selected]');
 				if( DOMchilds ){
-					[].forEach.call(DOMchilds, function(child){
+					this.forEach(DOMchilds, function(child){
 						result[keys].push( child.value );
 					});
 				}
@@ -147,11 +167,14 @@ DEALINGS IN THE SOFTWARE.
 
 		for(i = 0; i < this.$formElements.length; i++){
 			// Ignore the element if the 'name' attribute is empty.
-			if( this.$formElements[i].name ) {
+			// Ignore the 'disabled' elements.
+			if( this.$formElements[i].name && !this.$formElements[i].disabled ) {
 				test = this.$formElements[i].name.match( this.keyRegex );
 				this.addChild( this.formObj, this.$formElements[i], test, this.$formElements[i].value );
 			}
 		}
+
+		return this.formObj;
 
 	}
 
