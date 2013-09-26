@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <title>QUnit Tests</title>
+  <!-- include jQuery for additional tests -->
+  <script type="text/javascript" src="jquery.js"></script>
   <style type="text/css">
     form, input, textarea, select { font-family: Arial; font-size:10px; }
   </style>
@@ -11,6 +13,9 @@
 <body>
   <div id="qunit"></div>
   <div id="qunit-fixture"></div>
+
+  <form id="emptyForm">
+  </form>
 
   <form id="testForm">
 
@@ -89,7 +94,9 @@
         <label>No name input</label> <input type="text" /><br>
         <label>No type input</label> <input name="test1" /><br>
         <label>Only input tag</label> <input /><br>
-        <label>File</label> <input type="file" name="file" id="file" value="">
+        <label>File</label> <input type="file" name="file" id="file" value=""> <br>
+        <label>Disabled text field</label> <input type="text" name="thisIsADisabledField" value="No no no" disabled>
+        <!-- this is a comment -->
       </fieldset>
 
 
