@@ -1,7 +1,8 @@
 Ever wanted to convert a HTML <b>form</b> with all it's <b>fields</b> and <b>values</b> to a <b>multi-dimensional JavaScript</b> object?<br>
 Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 
-The method differs from jQuery's [`.serialize()`](http://api.jquery.com/serialize/) and [`.serializeArray()`](http://api.jquery.com/serializeArray/). The following table explains it better:
+How is this different from jQuery's [`.serialize()`](http://api.jquery.com/serialize/) or [`.serializeArray()`](http://api.jquery.com/serializeArray/)? 
+The following table explains it better:
 
 <table>
 <tr>
@@ -15,6 +16,10 @@ The method differs from jQuery's [`.serialize()`](http://api.jquery.com/serializ
 <td>Creates a <i>multi-dimensional JavaScript object</i> with all the field names and values.</td>
 </tr>
 </table>
+
+##### Browser support
+
+IE 8, Firefox 3.5, Chrome, Safari, Opera 10, every mobile browser.
 
 ##### Example
 
