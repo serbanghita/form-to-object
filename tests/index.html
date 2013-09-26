@@ -109,10 +109,14 @@
   <script src="qunit/qunit.js"></script>
   <script src="tests.js"></script>
   <script type="text/javascript">
-      document.getElementById('convertBtn').addEventListener('click', function(e){
+
+      $('#convertBtn').on('click', function(e){
+
         console.log( new formToObject('testForm') );
         return false;
+
       });
+
   </script>
 </body>
 </html>
