@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <title>QUnit Tests</title>
   <!-- include jQuery for additional tests -->
-  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="vendors/jquery.js"></script>
+  <script type="text/javascript" src="vendors/prototype.js"></script>
+  <link rel="stylesheet" href="vendors/qunit/qunit.css">
   <style type="text/css">
     form, input, textarea, select { font-family: Arial; font-size:10px; }
   </style>
-  <link rel="stylesheet" href="qunit/qunit.css">
 </head>
 <body>
   <div id="qunit"></div>
@@ -106,11 +107,11 @@
   </form>
 
   <script src="../formToObject.js"></script>
-  <script src="qunit/qunit.js"></script>
+  <script src="vendors/qunit/qunit.js"></script>
   <script src="tests.js"></script>
   <script type="text/javascript">
 
-      $('#convertBtn').on('click', function(e){
+      jQuery('#convertBtn').on('click', function(e){
 
         console.log( new formToObject('testForm') );
         return false;
