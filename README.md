@@ -15,6 +15,11 @@ Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 [Object], [Object], [Object] ...</code></td>
 </tr>
 <tr>
+<td>Backbone.Syphon</td>
+<td><code>Backbone.Syphon.serialize(this);</code> called in a <code>Backbone.View</code></td>
+<td>Creates a <i>multi-dimensional JavaScript object</i> with only a <a href="https://github.com/derickbailey/backbone.syphon#current-limitations">few limitations</a>. Has the ability to include/exclude fields.</td>
+</tr>
+<tr>
 <td>plain JavaScript</td>
 <td><code>new formToObject('form')</code></td>
 <td>Creates a <i>multi-dimensional JavaScript object</i> with all the field names and values.</td>
