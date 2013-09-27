@@ -1,17 +1,21 @@
 Ever wanted to convert a HTML <b>form</b> with all it's <b>fields</b> and <b>values</b> to a <b>multi-dimensional JavaScript</b> object?<br>
 Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 
-How is this different from jQuery's [`.serialize()`](http://api.jquery.com/serialize/) or [`.serializeArray()`](http://api.jquery.com/serializeArray/)? 
-The following table explains it better:
+##### Comparison with 3rd party solutions
 
 <table>
 <tr>
-<td><code>$('#form').serialize()</code></td><td>Creates a <i>text string</i> in standard URL-encoded notation.</td>
+<td>Prototype.js</td>
+<td><code>Form.serialize($('testForm'), true);</code></td>
+<td>Creates a <i>JavaScript object</i> but it's not multi-dimensional. In <code>"settings[theme][type]": "dark"</code> the key is a string. Tested with the latest built version from git, 1.7.1 throws errors.</td>
 </tr>
 <tr>
-<td><code>$('#form').serializeArray()</code></td><td>Creates a <i>JavaScript array of objects</i>, ready to be encoded as a JSON string. It takes in account the W3C rules for <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.2">successful controls</a>.</td>
+<td>jQuery</td>
+<td><code>$('#form').serializeArray()</code></td><td>Creates a <i>JavaScript array of objects</i>, ready to be encoded as a JSON string. It takes in account the W3C rules for <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.2">successful controls</a>. Output is like <code>[
+[Object], [Object], [Object] ...</code></td>
 </tr>
 <tr>
+<td>plain JavaScript</td>
 <td><code>new formToObject('form')</code></td>
 <td>Creates a <i>multi-dimensional JavaScript object</i> with all the field names and values.</td>
 </tr>
