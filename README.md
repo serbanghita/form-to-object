@@ -30,6 +30,11 @@ Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 <td>Plugin for jQuery.</td>
 </tr>
 <tr>
+<td><a href="https://github.com/danheberden/jquery-serializeForm">jQuery.serializeForm</a></td>
+<td><code>$( '#test' ).serializeForm();</code></td>
+<td>Plugin for jQuery.</td>
+</tr>
+<tr>
 <td>plain JavaScript</td>
 <td><code>new formToObject('form')</code></td>
 <td>Creates a <i>multi-dimensional JavaScript object</i> with all the field names and values.</td>
