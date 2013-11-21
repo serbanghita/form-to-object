@@ -12,7 +12,7 @@ Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 <tr>
 <td>jQuery</td>
 <td><code>$('#form').serializeArray()</code></td><td>Creates a <i>JavaScript array of objects</i>, ready to be encoded as a JSON string. It takes in account the W3C rules for <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.2">successful controls</a>. Output is like <code>[
-[Object], [Object], [Object] ...</code></td>
+Object, Object, Object ...]</code></td>
 </tr>
 <tr>
 <td>Backbone.Syphon</td>
