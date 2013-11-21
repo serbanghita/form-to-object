@@ -20,7 +20,7 @@ Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 <td>Creates a <i>multi-dimensional JavaScript object</i> with only a <a href="https://github.com/derickbailey/backbone.syphon#current-limitations">few limitations</a>. Has the ability to include/exclude fields.</td>
 </tr>
 <tr>
-<td>dojo.formToObject</td>
+<td><a href="https://dojotoolkit.org/reference-guide/1.9/dojo/dom-form.html#dojo-dom-form-toobject">dojo.formToObject</a></td>
 <td><code>domForm.toObject("myId")</code></td>
 <td>Depends on dojo framework. Disabled form elements, buttons, elements with just an id attribute but no name attribute, and other non-valued HTML elements are skipped.</td>
 </tr>
