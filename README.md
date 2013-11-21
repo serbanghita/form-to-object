@@ -1,7 +1,7 @@
 Ever wanted to convert a HTML <b>form</b> with all it's <b>fields</b> and <b>values</b> to a <b>multi-dimensional JavaScript</b> object?<br>
 Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 
-##### Comparison with 3rd party solutions
+##### Comparison with other solutions
 
 <table>
 <tr>
@@ -23,6 +23,11 @@ Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 <td><a href="https://dojotoolkit.org/reference-guide/1.9/dojo/dom-form.html#dojo-dom-form-toobject">dojo.formToObject</a></td>
 <td><code>domForm.toObject("myId")</code></td>
 <td>Depends on dojo framework. Disabled form elements, buttons, elements with just an id attribute but no name attribute, and other non-valued HTML elements are skipped.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/hongymagic/jQuery.serializeObject">jQuery.serializeObject</a></td>
+<td><code>$('form').serializeObject();</code></td>
+<td>Plugin for jQuery.</td>
 </tr>
 <tr>
 <td>plain JavaScript</td>
