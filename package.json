@@ -3,6 +3,7 @@
     "title": "formToObject",
     "description": "Plain JavaScript method to convert a HTML form (fields and values) to JavaScript (multidimensional) object.",
     "version": "1.0.1",
+    "main": "formToObject.js",
     "homepage": "https://github.com/serbanghita/formToObject",
     "author": {
         "name": "Serban Ghita",
@@ -16,7 +17,8 @@
         "form",
         "serialize",
         "json",
-        "convert"
+        "convert",
+        "javascript"
     ],
     "bugs": {
         "url": "https://github.com/serbanghita/formToObject/issues"
@@ -27,11 +29,8 @@
             "url": "https://github.com/serbanghita/formToObject/blob/master/LICENSE.txt"
         }
     ],
+    "readmeFilename": "README.md",
     "dependencies": {},
-    "devDependencies": {
-        "grunt": "~0.4.1"
-    },
-    "scripts": {
-        "test": "grunt"
-    }
+    "devDependencies": {},
+    "scripts": {}
 }
