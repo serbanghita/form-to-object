@@ -1,7 +1,7 @@
 Ever wanted to convert a HTML <b>form</b> with all it's <b>fields</b> and <b>values</b> to a <b>multi-dimensional JavaScript</b> object?<br>
 Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 
-##### Comparison with 3rd party solutions
+##### Comparison with other solutions
 
 <table>
 <tr>
@@ -12,7 +12,27 @@ Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 <tr>
 <td>jQuery</td>
 <td><code>$('#form').serializeArray()</code></td><td>Creates a <i>JavaScript array of objects</i>, ready to be encoded as a JSON string. It takes in account the W3C rules for <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.2">successful controls</a>. Output is like <code>[
-[Object], [Object], [Object] ...</code></td>
+Object, Object, Object ...]</code></td>
+</tr>
+<tr>
+<td>Backbone.Syphon</td>
+<td><code>Backbone.Syphon.serialize(this);</code> called in a <code>Backbone.View</code></td>
+<td>Creates a <i>multi-dimensional JavaScript object</i> with only a <a href="https://github.com/derickbailey/backbone.syphon#current-limitations">few limitations</a>. Has the ability to include/exclude fields.</td>
+</tr>
+<tr>
+<td><a href="https://dojotoolkit.org/reference-guide/1.9/dojo/dom-form.html#dojo-dom-form-toobject">dojo.formToObject</a></td>
+<td><code>domForm.toObject("myId")</code></td>
+<td>Depends on dojo framework. Disabled form elements, buttons, elements with just an id attribute but no name attribute, and other non-valued HTML elements are skipped.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/hongymagic/jQuery.serializeObject">jQuery.serializeObject</a></td>
+<td><code>$('form').serializeObject();</code></td>
+<td>Plugin for jQuery.</td>
+</tr>
+<tr>
+<td><a href="https://github.com/danheberden/jquery-serializeForm">jQuery.serializeForm</a></td>
+<td><code>$( '#test' ).serializeForm();</code></td>
+<td>Plugin for jQuery.</td>
 </tr>
 <tr>
 <td>plain JavaScript</td>
