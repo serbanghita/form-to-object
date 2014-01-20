@@ -6,7 +6,7 @@ Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 <table>
 <tr>
 	<td>Prototype.js</td>
-	<td><code>Form.serialize($('testForm'), true);</code></td>
+	<td><code>Form.serialize($('test'), true);</code></td>
 	<td>Creates a <i>JavaScript object</i> but it's not multi-dimensional. In <code>"settings[theme][type]": "dark"</code> the key is a string. Tested with the latest built version from git, 1.7.1 throws errors.</td>
 </tr>
 <tr>
