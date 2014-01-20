@@ -5,39 +5,45 @@ Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 
 <table>
 <tr>
-<td>Prototype.js</td>
-<td><code>Form.serialize($('testForm'), true);</code></td>
-<td>Creates a <i>JavaScript object</i> but it's not multi-dimensional. In <code>"settings[theme][type]": "dark"</code> the key is a string. Tested with the latest built version from git, 1.7.1 throws errors.</td>
+	<td>Prototype.js</td>
+	<td><code>Form.serialize($('testForm'), true);</code></td>
+	<td>Creates a <i>JavaScript object</i> but it's not multi-dimensional. In <code>"settings[theme][type]": "dark"</code> the key is a string. Tested with the latest built version from git, 1.7.1 throws errors.</td>
 </tr>
 <tr>
-<td>jQuery</td>
-<td><code>$('#form').serializeArray()</code></td><td>Creates a <i>JavaScript array of objects</i>, ready to be encoded as a JSON string. It takes in account the W3C rules for <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.2">successful controls</a>. Output is like <code>[
-Object, Object, Object ...]</code></td>
+	<td>jQuery</td>
+	<td><code>$('#form').serializeArray()</code></td>
+	<td>Creates a <i>JavaScript array of objects</i>, ready to be encoded as a JSON string. It takes in account the W3C rules for <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.2">successful controls</a>. 
+	Output is like <code>[Object, Object, Object ...]</code></td>
 </tr>
 <tr>
-<td>Backbone.Syphon</td>
-<td><code>Backbone.Syphon.serialize(this);</code> called in a <code>Backbone.View</code></td>
-<td>Creates a <i>multi-dimensional JavaScript object</i> with only a <a href="https://github.com/derickbailey/backbone.syphon#current-limitations">few limitations</a>. Has the ability to include/exclude fields.</td>
+	<td>Backbone.Syphon</td>
+	<td><code>Backbone.Syphon.serialize(this);</code> called in a <code>Backbone.View</code></td>
+	<td>Creates a <i>multi-dimensional JavaScript object</i> with only a <a href="https://github.com/derickbailey/backbone.syphon#current-limitations">few limitations</a>. Has the ability to include/exclude fields.</td>
 </tr>
 <tr>
-<td><a href="https://dojotoolkit.org/reference-guide/1.9/dojo/dom-form.html#dojo-dom-form-toobject">dojo.formToObject</a></td>
-<td><code>domForm.toObject("myId")</code></td>
-<td>Depends on dojo framework. Disabled form elements, buttons, elements with just an id attribute but no name attribute, and other non-valued HTML elements are skipped.</td>
+	<td><a href="https://dojotoolkit.org/reference-guide/1.9/dojo/dom-form.html#dojo-dom-form-toobject">dojo.formToObject</a></td>
+	<td><code>domForm.toObject("myId")</code></td>
+	<td>Depends on dojo framework. Disabled form elements, buttons, elements with just an id attribute but no name attribute, and other non-valued HTML elements are skipped.</td>
 </tr>
 <tr>
-<td><a href="https://github.com/hongymagic/jQuery.serializeObject">jQuery.serializeObject</a></td>
-<td><code>$('form').serializeObject();</code></td>
-<td>Plugin for jQuery.</td>
+	<td><a href="https://github.com/hongymagic/jQuery.serializeObject">jQuery.serializeObject</a></td>
+	<td><code>$('form').serializeObject();</code></td>
+	<td>Plugin for jQuery.</td>
 </tr>
 <tr>
-<td><a href="https://github.com/danheberden/jquery-serializeForm">jQuery.serializeForm</a></td>
-<td><code>$( '#test' ).serializeForm();</code></td>
-<td>Plugin for jQuery.</td>
+	<td><a href="https://github.com/danheberden/jquery-serializeForm">jQuery.serializeForm</a></td>
+	<td><code>$('#test').serializeForm();</code></td>
+	<td>Plugin for jQuery.</td>
 </tr>
 <tr>
-<td>plain JavaScript</td>
-<td><code>new formToObject('form')</code></td>
-<td>Creates a <i>multi-dimensional JavaScript object</i> with all the field names and values.</td>
+	<td><a href="https://github.com/marioizquierdo/jquery.serializeJSON">jQuery.serializeJSON</a></td>
+	<td><code>$('#test').serializeJSON()</code></td>
+	<td>Adds the method <code>.serializeJSON()</code> to jQuery, that serializes a form into a JavaScript Object with the same format as the default Ruby on Rails request params hash.</td>
+</tr>
+<tr>
+	<td>plain JavaScript</td>
+	<td><code>new formToObject('form')</code></td>
+	<td>Creates a <i>multi-dimensional JavaScript object</i> with all the field names and values.</td>
 </tr>
 </table>
 
