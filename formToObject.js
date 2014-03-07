@@ -109,21 +109,13 @@ DEALINGS IN THE SOFTWARE.
 				}
 			}
 
-			// Checkboxes are a special case. We have to grab each checked values
-			// and put them into an array.
+			// if single dimension array get only the value of the checkbox checked
 			if( domNode.nodeName === 'INPUT' && domNode.type === 'checkbox' ) {
-
-				if( domNode.checked ){
-
-					if( !result[keys] ){
-						result[keys] = [];
-					}
-					return result[keys].push( value );
-
+                                if( domNode.checked ){
+                                    return result[keys] = value;
 				} else {
 					return;
 				}
-
 			}
 
 			// Multiple select is a special case.
