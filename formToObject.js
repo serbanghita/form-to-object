@@ -2,7 +2,7 @@
 
 (function(){
 
-    // Constructor.
+	// Constructor.
 	var formToObject = function( formRef ){
 
 		if( !formRef ){ return false; }
@@ -71,7 +71,7 @@
 
 	}
 
-    // Recursive method that adds keys and values of the corresponding fields.
+	// Recursive method that adds keys and values of the corresponding fields.
 	formToObject.prototype.addChild = function( result, domNode, keys, value ){
 
 		// #1 - Single dimensional array.
@@ -157,9 +157,9 @@
 
 	// AMD/requirejs: Define the module
 	if( typeof define === 'function' && define.amd ) {
-	    define(function () {
-	    	return formToObject;
-    	});
+		define(function () {
+			return formToObject;
+		});
 	}
 	// Browser: Expose to window
 	else {
