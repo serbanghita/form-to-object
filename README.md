@@ -12,7 +12,7 @@ Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 <tr>
 	<td>jQuery</td>
 	<td><code>$('#form').serializeArray()</code></td>
-	<td>Creates a <i>JavaScript array of objects</i>, ready to be encoded as a JSON string. It takes in account the W3C rules for <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.2">successful controls</a>. 
+	<td>Creates a <i>JavaScript array of objects</i>, ready to be encoded as a JSON string. It takes in account the W3C rules for <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.2">successful controls</a>.
 	Output is like <code>[Object, Object, Object ...]</code></td>
 </tr>
 <tr>
@@ -56,6 +56,15 @@ IE 8, Firefox 3.5, Chrome, Safari, Opera 10, every mobile browser.
 ```html
 <!-- Include the method in your library. -->
 <script src="/js/formToObject.js"></script>
+```
+
+Alternatively, if you are using require.js, you can load the module like this:
+```html
+<script>
+	require(['formToObject'], function (formToObject) {
+		// your code here
+	});
+</script>
 ```
 
 Using the form's id value:
