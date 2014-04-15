@@ -155,7 +155,15 @@
 
 	}
 
-    // Expose the method.
-	window.formToObject = formToObject;
+	// AMD/requirejs: Define the module
+	if( typeof define === 'function' && define.amd ) {
+	    define(function () {
+	    	return formToObject;
+    	});
+	}
+	// Browser: Expose to window
+	else {
+		window.formToObject = formToObject;
+	}
 
 })();
