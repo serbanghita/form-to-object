@@ -94,9 +94,8 @@ DEALINGS IN THE SOFTWARE.
 
 	}
 
-    // Recursive method that adds keys and values of the corresponding fields.
-	formToObject.prototype.addChild = function( result, domNode, keys, value ){
-
+        // Recursive method that adds keys and values of the corresponding fields.
+	formToObject.prototype.addChild = function( result, domNode, keys, value, isArray ){
 		// #1 - Single dimensional array.
 		if(keys.length === 1){
 
@@ -109,21 +108,22 @@ DEALINGS IN THE SOFTWARE.
 				}
 			}
 
-			// Checkboxes are a special case. We have to grab each checked values
-			// and put them into an array.
+			// Checkboxes are a special case.
+			// Multiple checkboxes : we have to grab each checked values and put them into an array.
+			// Single   checkboxe  : return the value of the checkbox checked
 			if( domNode.nodeName === 'INPUT' && domNode.type === 'checkbox' ) {
-
 				if( domNode.checked ){
-
-					if( !result[keys] ){
-						result[keys] = [];
+					if (isArray) {
+						if( !result[keys] ){
+							result[keys] = [];
+						}
+						return result[keys].push( value );
+					} else {
+						return result[keys] = value;
 					}
-					return result[keys].push( value );
-
 				} else {
 					return;
 				}
-
 			}
 
 			// Multiple select is a special case.
@@ -153,7 +153,7 @@ DEALINGS IN THE SOFTWARE.
 				result[keys[0]] = {};
 			}
 
-			return this.addChild(result[keys[0]], domNode, keys.splice(1, keys.length), value);
+			return this.addChild(result[keys[0]], domNode, keys.splice(1, keys.length), value, isArray);
 
 		}
 
@@ -163,14 +163,15 @@ DEALINGS IN THE SOFTWARE.
 
 	formToObject.prototype.setFormObj = function(){
 
-		var test, i = 0;
+		var test, i = 0, isArray = false;
 
 		for(i = 0; i < this.$formElements.length; i++){
 			// Ignore the element if the 'name' attribute is empty.
 			// Ignore the 'disabled' elements.
 			if( this.$formElements[i].name && !this.$formElements[i].disabled ) {
 				test = this.$formElements[i].name.match( this.keyRegex );
-				this.addChild( this.formObj, this.$formElements[i], test, this.$formElements[i].value );
+				isArray = this.endsWith(this.$formElements[i].name, '[]');
+				this.addChild( this.formObj, this.$formElements[i], test, this.$formElements[i].value, isArray );
 			}
 		}
 
@@ -178,7 +179,11 @@ DEALINGS IN THE SOFTWARE.
 
 	}
 
-    // Expose the method.
+        formToObject.prototype.endsWith = function(string, suffix) {
+            return string.indexOf(suffix, this.length - suffix.length) !== -1;
+        }
+
+        // Expose the method.
 	window.formToObject = formToObject;
 
 })();
