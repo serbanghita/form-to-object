@@ -2,7 +2,7 @@
     "name": "formToObject",
     "title": "formToObject",
     "description": "Plain JavaScript method to convert a HTML form (fields and values) to JavaScript (multidimensional) object.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "main": "src/formToObject.js",
     "homepage": "https://github.com/serbanghita/formToObject",
     "author": {
