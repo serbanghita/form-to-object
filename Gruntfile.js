@@ -28,6 +28,14 @@ module.exports = function(grunt) {
         grunt: {
           src: 'Gruntfile.js'
         }
+      },
+      jasmine: {
+        src: 'src/*.js',
+        options: {
+          specs: ['test/test.js'],
+          outfile: 'test/SpecRunner.html',
+          keepRunner: true
+        }
       }
     });
 
@@ -36,9 +44,9 @@ module.exports = function(grunt) {
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  // @todo Add tests
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'uglify', 'jasmine']);
 
 };
