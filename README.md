@@ -42,7 +42,7 @@ Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 </tr>
 <tr>
 	<td>plain JavaScript</td>
-	<td><code>new formToObject('form')</code></td>
+	<td><code>formToObject('form')</code></td>
 	<td>Creates a <i>multi-dimensional JavaScript object</i> with all the field names and values.</td>
 </tr>
 </table>
@@ -71,14 +71,14 @@ Using the form's id value:
 
 ```javascript
 // console.log(myFormObj);
-var myFormObj = new formToObject('myFormId');
+var myFormObj = formToObject('myFormId');
 ```
 
 Using the actual DOM Node:
 
 ```javascript
 var formNode  = document.getElementById('myFormId');
-var myFormObj = new formToObject(formNode);
+var myFormObj = formToObject(formNode);
 ```
 
 ##### Screenshot
