@@ -1,7 +1,13 @@
 {
   "globals": {
     "define": true,
-    "module": true
+    "module": true,
+    "formToObject": true,
+    "describe": true,
+    "expect": true,
+    "it": true,
+    "beforeEach": true,
+    "afterEach": true
   },
 
   /*
@@ -40,7 +46,7 @@
   "latedef": true,
 
   // Require capitalized names for constructor functions.
-  "newcap": true,
+  "newcap": false,
 
   // Enforce use of single quotation marks for strings.
   "quotmark": "single",
