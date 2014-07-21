@@ -9,15 +9,15 @@
 			return test.init.call(test, Array.prototype.slice.call(arguments));
 		}
 
-		var formRef = null,
-			keyRegex = /[^\[\]]+/g,
-			$form = null,
+		var formRef   = null,
+			keyRegex      = /[^\[\]]+/g,
+			$form         = null,
 			$formElements = [],
-			formObj = {};
+			formObj       = {};
 
 		this.init = function(options){
 
-			if(!options || typeof options !== 'object'){
+			if(!options || typeof options !== 'object' || !options[0]){
 				return false;
 			}
 
