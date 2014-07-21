@@ -42,6 +42,6 @@
         "grunt-contrib-jasmine": "^0.6.4"
     },
     "scripts": {
-        "test": "grunt test"
+        "test": "grunt jasmine"
       }
 }
