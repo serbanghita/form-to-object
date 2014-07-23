@@ -1,5 +1,49 @@
-Ever wanted to convert a HTML <b>form</b> with all it's <b>fields</b> and <b>values</b> to a <b>multi-dimensional JavaScript</b> object?<br>
+# formToObject.js
+
+> Convert a HTML forms to JavaScript objects.
+
+> Ever wanted to convert a HTML <b>form</b> with all it's <b>fields</b> and <b>values</b> to a <b>multi-dimensional JavaScript</b> object?<br>
 Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
+
+##### How to use
+
+```html
+<!-- Include script (4.12kb) -->
+<script src="src/formToObject.js"></script>
+```
+
+```html
+<!-- Include minified script (1.49kb) -->
+<script src="build/formToObject.min.js"></script>
+```
+
+Using the form's id value:
+
+```javascript
+var myFormObj = formToObject('myFormId');
+console.log(myFormObj);
+```
+
+Using the actual DOM Node:
+
+```javascript
+var $formNode = document.getElementById('myFormId');
+var myFormObj = formToObject($formNode);
+console.log(myFormObj);
+```
+
+Real case scenario with jQuery AJAX:
+
+```javascript
+$.ajax({
+  'url': '/app/settings/save/',
+  'type': 'post',
+  'data': formToObject('saveSettingsForm'),
+  'success': function(r){
+  	console.log(r);
+  }
+});
+```
 
 ##### Comparison with other solutions
 
@@ -50,36 +94,6 @@ Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 ##### Browser support
 
 IE 8, Firefox 3.5, Chrome, Safari, Opera 10, every mobile browser.
-
-##### Example
-
-```html
-<!-- Include the method in your library. -->
-<script src="/js/formToObject.js"></script>
-```
-
-Alternatively, if you are using require.js, you can load the module like this:
-```html
-<script>
-	require(['formToObject'], function (formToObject) {
-		// your code here
-	});
-</script>
-```
-
-Using the form's id value:
-
-```javascript
-// console.log(myFormObj);
-var myFormObj = formToObject('myFormId');
-```
-
-Using the actual DOM Node:
-
-```javascript
-var formNode  = document.getElementById('myFormId');
-var myFormObj = formToObject(formNode);
-```
 
 ##### Screenshot
 
