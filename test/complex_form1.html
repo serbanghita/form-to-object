@@ -1,0 +1,82 @@
+<body>
+<form action="signup.php" id="signupForm" method="post">
+
+  <fieldset>
+    <legend>First level elements</legend>
+
+    <div class="element">
+      <label>Name:</label> <input type="text" name="name" value="Serban">
+    </div>
+
+    <div class="element">
+      <label>Address:</label> <textarea name="address">Place du Casino, 98000 Monaco</textarea>
+    </div>
+
+  </fieldset>
+
+  <fieldset>
+    <legend>Second level elements</legend>
+
+    <div class="element">
+      <label>Eyes color:</label>
+      <select name="settings[eyesColor]">
+        <option value="brown" selected>brown</option>
+        <option value="black">black</option>
+        <option value="blue">blue</option>
+        <option value="green">green</option>
+      </select>
+    </div>
+
+    <div class="element">
+      <label>Hair color:</label>
+      <select name="settings[hairColor]">
+        <option value="black">black</option>
+        <option value="red">red</option>
+        <option value="blond" selected>blond</option>
+      </select>
+    </div>
+
+    <div class="element">
+      <label>Gender:</label>
+      <label>Female:</label> <input type="radio" name="settings[gender]" value="female">
+      <label>Male:</label> <input type="radio" name="settings[gender]" value="male" checked>
+    </div>
+
+    <div class="element">
+      <label>Age</label> <input type="number" name="settings[age]" value="100">
+    </div>
+
+  </fieldset>
+
+  <fieldset>
+      <legend>Third level elements</legend>
+
+      <div class="element">
+        <label>Input devices</label>
+        <labe>Mouse:</label> <input type="checkbox" name="preferences[input][devices]" value="mouse" checked>
+        <labe>Keyboard:</label> <input type="checkbox" name="preferences[input][devices]" value="keyboard" checked>
+        <labe>Touch:</label> <input type="checkbox" name="preferences[input][devices]" value="touch">
+      </div>
+
+      <div class="element">
+        <label>Game difficulty</label>
+        <select name="preferences[game][difficulty]">
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard" selected>Hard</option>
+        </select>
+      </div>
+
+      <div class="element">
+        <label>Upgrades</label>
+        <select name="preferences[game][upgrades]" multiple>
+          <option name="free_amo" select>Free amo</option>
+          <option name="infinite_life" select>Infinite life</option>
+          <option name="dump_npcs">Dump NPCs</option>
+        </select>
+      </div>
+
+  </fieldset>
+
+</form>
+</body>
