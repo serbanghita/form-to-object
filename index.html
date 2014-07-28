@@ -7,7 +7,7 @@
 <script id="widget">
 (function(w, d, tagName, sUrl){
 
-  var $where = d.getElementsByTagName(tagName)[0],
+  var $where = d.getElementsByTagName(tagName)[0] || document.body,
       $script = d.createElement('script');
       $script.id = 'formToObjectScript';
       $script.src = sUrl;
