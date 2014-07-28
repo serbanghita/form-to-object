@@ -1,4 +1,8 @@
-<a href="https://github.com/serbanghita/formToObject.js">View the Project on GitHub</a>
+<ul>
+  <li><a href="https://github.com/serbanghita/formToObject.js">View the Project on GitHub</a>
+  <li><a href="#" id="widgetLink" title="formToObject.js">formToObject.js</a> - drag this to your bookmark bar
+</ul>
+
 
 <script id="widget">
 (function(w, d, tagName, sUrl){
@@ -11,4 +15,14 @@
       $where.parentNode.insertBefore($script, $where);
 
 })(window, document, 'script', '//serbanghita.github.io/formToObject.js/javascripts/formToObject.min.js');
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var $widget = document.getElementById('widget'),
+        $widgetLink = document.getElementById('widgetLink');
+
+        $widgetLink.setAttribute('href', 'javascript:' + $widget.innerText);
+
+});
 </script>
