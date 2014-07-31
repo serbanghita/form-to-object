@@ -29,20 +29,29 @@ module.exports = function(grunt) {
           src: 'Gruntfile.js'
         }
       },
-      jasmine: {
-        src: 'src/*.js',
-        options: {
-          specs: ['test/test.js'],
-          outfile: 'test/SpecRunner.html',
-          keepRunner: true
+      karma: {
+        continuous: {
+            configFile: 'test/karma.conf.js',
+            singleRun: true,
+            browsers: ['PhantomJS']
+          },
+        },
+        jasmine: {
+          src: 'src/*.js',
+          options: {
+            specs: ['test/test.js'],
+            outfile: 'test/SpecRunner.html',
+            keepRunner: true
+          }
         }
-      }
-    });
+      });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-uglify');
+
+  grunt.loadNpmTasks('grunt-karma');
 
   grunt.loadNpmTasks('grunt-contrib-jasmine');
 
