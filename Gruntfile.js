@@ -29,22 +29,17 @@ module.exports = function(grunt) {
           src: 'Gruntfile.js'
         }
       },
-      karma: {
-        continuous: {
-            configFile: 'test/karma.conf.js',
-            singleRun: true,
-            browsers: ['PhantomJS']
-          },
-        },
-        jasmine: {
-          src: 'src/*.js',
-          options: {
-            specs: ['test/test.js'],
-            outfile: 'test/SpecRunner.html',
-            keepRunner: true
-          }
+      jasmine: {
+        src: 'src/*.js',
+        options: {
+          specs: ['test/test.js'],
+          vendor: ['vendor/jquery/jquery.js', 'vendor/jquery/jasmine-jquery.js'],
+          outfile: 'test/SpecRunner.html',
+          keepRunner: true,
+          '--web-security': 'no'
         }
-      });
+      }
+    });
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
 

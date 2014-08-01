@@ -1,11 +1,11 @@
 <body>
 <form action="signup.php" id="signupForm" method="post">
 
-  <fieldset>
+  <fieldset id="firstLevelElements">
     <legend>First level elements</legend>
 
     <div class="element">
-      <label>Name:</label> <input type="text" name="name" value="Serban">
+      <label>Name:</label> <input type="text" name="name" id="name" value="Serban">
     </div>
 
     <div class="element">
@@ -14,7 +14,7 @@
 
   </fieldset>
 
-  <fieldset>
+  <fieldset id="secondLevelElements">
     <legend>Second level elements</legend>
 
     <div class="element">
@@ -48,7 +48,7 @@
 
   </fieldset>
 
-  <fieldset>
+  <fieldset id="thirdLevelElements">
       <legend>Third level elements</legend>
 
       <div class="element">
@@ -70,9 +70,9 @@
       <div class="element">
         <label>Upgrades</label>
         <select name="preferences[game][upgrades]" multiple>
-          <option name="free_amo" selected>Free amo</option>
-          <option name="infinite_life" selected>Infinite life</option>
-          <option name="dump_npcs">Dump NPCs</option>
+          <option value="free_amo" selected>Free amo</option>
+          <option value="infinite_life" selected>Infinite life</option>
+          <option value="dump_npcs">Dump NPCs</option>
         </select>
       </div>
 
