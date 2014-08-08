@@ -32,7 +32,14 @@ module.exports = function(grunt) {
       jasmine: {
         src: 'src/*.js',
         options: {
-          specs: ['test/test.js'],
+          specs: [
+            'test/testInput.js',
+            'test/testTextarea.js',
+            'test/testSelect.js',
+            'test/testUnexpected.js',
+            'test/testExceptions.js',
+            'test/testComplexForms.js'
+          ],
           vendor: ['vendor/jquery/jquery.js', 'vendor/jquery/jasmine-jquery.js'],
           outfile: 'test/SpecRunner.html',
           keepRunner: true,

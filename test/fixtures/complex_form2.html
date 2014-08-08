@@ -1,0 +1,43 @@
+<script src="../../src/formToObject.js"></script>
+
+<body>
+  <form action="test.php" id="matrixForm" method="post">
+
+    <input type="text" name="matrix[a][]" value="a">
+    <input type="text" name="matrix[a][]" value="a">
+    <input type="text" name="matrix[a][]" value="a">
+    <input type="text" name="matrix[a][]" value="a">
+
+    <br>
+
+    <input type="text" name="matrix[b][]" value="b">
+    <input type="text" name="matrix[b][]" value="b">
+    <input type="text" name="matrix[b][]" value="b">
+    <input type="text" name="matrix[b][]" value="b">
+
+    <br>
+
+    <input type="text" name="matrix[c][]" value="c">
+    <input type="text" name="matrix[c][]" value="c">
+    <input type="text" name="matrix[c][]" value="c">
+    <input type="text" name="matrix[c][]" value="c">
+
+    <br>
+
+    <input type="text" name="matrix[d][]" value="d">
+    <input type="text" name="matrix[d][]" value="d">
+    <input type="text" name="matrix[d][]" value="d">
+    <input type="text" name="matrix[d][]" value="d">
+
+    <br>
+<!--
+    <input type="text" name="matrix[][]" value="x">
+    <input type="text" name="matrix[][]" value="y">
+    <input type="text" name="matrix[][]" value="z">
+-->
+  </form>
+</body>
+
+<script>
+console.log(formToObject('matrixForm'));
+</script>
