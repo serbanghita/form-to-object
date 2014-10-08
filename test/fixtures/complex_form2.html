@@ -3,6 +3,23 @@
 <body>
   <form action="test.php" id="matrixForm" method="post">
 
+    <input type="text" name="matrix_one" value="a">
+
+    <input type="text" name="matrix_two[]" value="a">
+    <input type="text" name="matrix_two[]" value="b">
+    <input type="text" name="matrix_two[]" value="c">
+    <input type="text" name="matrix_two[]" value="d">
+
+
+    <input type="text" name="matrix_three[x][a]" value="xa">
+    <input type="text" name="matrix_three[x][b]" value="xb">
+    <input type="text" name="matrix_three[x][c]" value="xc">
+    <input type="text" name="matrix_three[x][d]" value="xd">
+    <input type="text" name="matrix_three[y][a]" value="ya">
+    <input type="text" name="matrix_three[y][b]" value="yb">
+
+
+<!--
     <input type="text" name="matrix[a][]" value="a">
     <input type="text" name="matrix[a][]" value="a">
     <input type="text" name="matrix[a][]" value="a">
@@ -30,6 +47,7 @@
     <input type="text" name="matrix[d][]" value="d">
 
     <br>
+-->
 <!--
     <input type="text" name="matrix[][]" value="x">
     <input type="text" name="matrix[][]" value="y">
@@ -39,5 +57,6 @@
 </body>
 
 <script>
-console.log(formToObject('matrixForm'));
+var result = formToObject('matrixForm');
+console.log(result);
 </script>

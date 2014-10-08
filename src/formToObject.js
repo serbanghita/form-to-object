@@ -10,7 +10,7 @@
 		}
 
 		var formRef   = null,
-			keyRegex      = /[^\[\]]+/g,
+			keyRegex      = /[^\[\]]+|\[\]/g,
 			$form         = null,
 			$formElements = [],
 			formObj       = {};
@@ -86,16 +86,17 @@
 		};
 
 		// Recursive method that adds keys and values of the corresponding fields.
-		this.addChild = function( result, domNode, keys, value ){
+		this.addChild = function( result, $domNode, elementNameArray, value, parentKeyName ){
 
 			// #1 - Single dimensional array.
-			if(keys.length === 1){
+			if(elementNameArray.length === 1){
 
+				/*
 				// We're only interested in the radio that is checked.
-				if( domNode.nodeName === 'INPUT' &&
-					domNode.type === 'radio' ) {
-					if( domNode.checked ){
-						result[keys] = value;
+				if( $domNode.nodeName === 'INPUT' &&
+					$domNode.type === 'radio' ) {
+					if( $domNode.checked ){
+						result[elementNameArray] = value;
 						return value;
 					} else {
 						return;
@@ -104,15 +105,15 @@
 
 				// Checkboxes are a special case. We have to grab each checked values
 				// and put them into an array.
-				if( domNode.nodeName === 'INPUT' &&
-					domNode.type === 'checkbox' ) {
+				if( $domNode.nodeName === 'INPUT' &&
+					$domNode.type === 'checkbox' ) {
 
-					if( domNode.checked ){
+					if( $domNode.checked ){
 
-						if( !result[keys] ){
-							result[keys] = [];
+						if( !result[elementNameArray] ){
+							result[elementNameArray] = [];
 						}
-						return result[keys].push( value );
+						return result[elementNameArray].push( value );
 
 					} else {
 						return;
@@ -122,37 +123,53 @@
 
 				// Multiple select is a special case.
 				// We have to grab each selected option and put them into an array.
-				if( domNode.nodeName === 'SELECT' &&
-					domNode.type === 'select-multiple' ) {
+				if( $domNode.nodeName === 'SELECT' &&
+					$domNode.type === 'select-multiple' ) {
 
-					result[keys] = [];
-					var DOMchilds = domNode.querySelectorAll('option[selected]');
+					result[elementNameArray] = [];
+					var DOMchilds = $domNode.querySelectorAll('option[selected]');
 					if( DOMchilds ){
 						this.forEach(DOMchilds, function(child){
-							result[keys].push( child.value );
+							result[elementNameArray].push( child.value );
 						});
 					}
 					return;
 
 				}
+				*/
 
-				// Fallback. The default one to one assign.
-				result[keys] = value;
+				if(elementNameArray[0] === '[]') {
+					//console.log(elementNameArray[0], result);
+					if( !(result instanceof Array) ){
+						console.log('here', result);
+						result = [];
+					}
+					result.push( value );
+
+					return result;
+				} else {
+					// Fallback. The default one to one assign.
+					result[elementNameArray[0]] = value;
+					return result;
+				}
 
 			}
 
 			// #2 - Multi dimensional array.
-			if(keys.length > 1) {
+			if(elementNameArray.length > 1) {
 
-				if(!result[keys[0]]){
-					result[keys[0]] = {};
+				if(!result[elementNameArray[0]]){
+					result[elementNameArray[0]] = [];
 				}
 
+				var nextelementNameArray = elementNameArray.splice(1, elementNameArray.length);
+
 				return this.addChild(
-										result[keys[0]],
-										domNode,
-										keys.splice(1, keys.length),
-										value
+										result[elementNameArray[0]],
+										$domNode,
+										nextelementNameArray,
+										value,
+										parentKeyName
 									);
 
 			}
@@ -163,18 +180,20 @@
 
 		this.setFormObj = function(){
 
-			var test, i = 0;
+			var elementNameArray, i = 0;
 
 			for(i = 0; i < $formElements.length; i++){
 				// Ignore the element if the 'name' attribute is empty.
 				// Ignore the 'disabled' elements.
 				if( $formElements[i].name && !$formElements[i].disabled ) {
-					test = $formElements[i].name.match( keyRegex );
+					elementNameArray = $formElements[i].name.match( keyRegex );
+					console.log(elementNameArray);
 					this.addChild(
 									formObj,
 									$formElements[i],
-									test,
-									$formElements[i].value
+									elementNameArray,
+									$formElements[i].value,
+									null
 								);
 				}
 			}
