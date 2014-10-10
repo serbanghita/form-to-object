@@ -1,3 +1,5 @@
+<script src="../../src/formToObject.js"></script>
+
 <body>
 <form action="signup.php" id="signupForm" method="post">
 
@@ -80,3 +82,9 @@
 
 </form>
 </body>
+
+
+<script>
+var result = formToObject('signupForm');
+console.log(result);
+</script>

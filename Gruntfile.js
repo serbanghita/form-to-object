@@ -19,12 +19,7 @@ module.exports = function(grunt) {
         options: {
           jshintrc: true
         },
-        core: {
-          src: 'src/<%= pkg.name %>.js'
-        },
-        test: {
-          src: 'test/*.js'
-        },
+        all: ['src/<%= pkg.name %>.js'],
         grunt: {
           src: 'Gruntfile.js'
         }

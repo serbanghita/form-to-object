@@ -1,0 +1,127 @@
+<script type="text/javascript">
+
+/*
+var o  = [];
+o[1]   = 'a';
+o[2]   = 'b';
+o['x'] = 'd';
+o[5]   = 'c';
+o['t'] = 'e';
+
+o.map(function(value,i){
+    if (i != undefined && !isNaN(parseFloat(i)) && isFinite(i)) return i; })
+.reduce(function(prev, item){
+    if (item) return item;
+})
+
+ */
+
+'use strict';
+
+function isNumeric( obj ) {
+	return !isNaN( parseFloat(obj) ) && isFinite( obj );
+}
+
+function length(o){
+
+	var l, k;
+
+	if( typeof Object.keys === 'function' ) {
+		l = Object.keys(o).length;
+	} else {
+		for (k in o) {
+		  if (o.hasOwnProperty(k)) { 
+		  	l++;
+		  }
+		}		
+	}
+
+	return l;
+
+}
+
+function getObjectKeys(o){
+	var r = [], k;
+
+	for (k in o) {
+	  if (o.hasOwnProperty(k)) { 
+	  	r.push(k);
+	  }
+	}
+
+	return r;
+
+}
+
+function getLastKey(o){
+	return Object.keys(o).slice(-1)[0];
+}
+
+function getLastNumericKey(o){
+	return Object.keys(o).filter(function(elem){ 
+		return !isNaN(parseInt(elem,10)); 
+	}).splice(-1)[0];
+}
+
+function abc(arr, value, result){
+
+	var keyName = arr[0];
+
+	if(arr.length > 1){
+		if( keyName === '[]' ){ 
+			result.push([]);
+			return abc(arr.splice(1, arr.length), value, result[getLastNumericKey(result)]);
+		} else {
+
+			if( result[keyName] && length(result[keyName]) > 0 ) {
+				//result[keyName].push(null);
+				return abc(arr.splice(1, arr.length), value, result[keyName]); 
+			} else {
+				result[keyName] = [];				
+			}	
+			return abc(arr.splice(1, arr.length), value, result[keyName]);		
+		}
+		
+	}
+
+	// Last key, attach the original value.
+	if(arr.length === 1){
+		if( keyName === '[]' ){
+			result.push(value);
+			return result;
+		} else {
+			result[keyName] = value;
+			return result;
+		}
+	}
+
+}
+
+var result = [];
+abc(['name'], 'Serban Ghita', result);
+
+/*
+//	name="matrix[][a][b][c]" value="Like abc!"
+//	name="matrix[][d][e][f]" value="Like def!"
+//	name="matrix[][]" value="Like 2 0!"
+//	name="matrix[2][]" value="Like 2 1!"
+
+var result = [];
+abc(['[]', 'a','b','c'], 'Like 0abc!', result);
+abc(['[]', 'd','e','f'], 'Like 1def!', result);
+abc(['0', 'a','b','d'], 'Like 0abd!', result);
+abc(['[]', '[]'], 'Like 2 0!', result);
+abc(['2', '1'], 'Like 2 1!', result);
+abc(['2', '[]'], 'Like 2 2!', result);
+abc(['2', '4'], 'Like 2 4!', result);
+abc(['x', '2'], 'Like x 2!', result);
+abc(['x', '3'], 'Like x 3!', result);
+abc(['x', '5'], 'Like x 5!', result);
+abc(['[]', '[]', '[]'], 'Like ?00!', result);
+abc(['[]', '[]', '[]'], 'Like ?10!', result);
+abc(['[]', '[]', '[]'], 'Like ?20!', result);
+*/
+console.log('final result:', result);
+	
+
+</script>

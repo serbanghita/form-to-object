@@ -9,13 +9,53 @@
 			return test.init.call(test, Array.prototype.slice.call(arguments));
 		}
 
+		/**
+		* Defaults
+		*/
 		var formRef   = null,
 			keyRegex      = /[^\[\]]+|\[\]/g,
 			$form         = null,
-			$formElements = [],
-			formObj       = {};
+			$formElements = [];
 
-		this.init = function(options){
+		/**
+		 * Private methods
+		 */
+		
+		// Check to see if the object is a HTML node.
+		function isDomNode( node ){
+			return typeof node === 'object' &&
+					'nodeType' in node &&
+					node.nodeType === 1;
+		}
+
+		// Get last numeric key from an object.
+		function getLastNumericKey(o){
+			return Object.keys(o).filter(function(elem){ 
+				return !isNaN(parseInt(elem,10)); 
+			}).splice(-1)[0];
+		}	
+
+		// Get the real number of properties from an object.
+		function getObjLength(o){
+
+			var l, k;
+
+			if( typeof Object.keys === 'function' ) {
+				l = Object.keys(o).length;
+			} else {
+				for (k in o) {
+				  if (o.hasOwnProperty(k)) { 
+				  	l++;
+				  }
+				}		
+			}
+
+			return l;
+
+		}			
+
+		// Constructor
+		function init(options){
 
 			if(!options || typeof options !== 'object' || !options[0]){
 				return false;
@@ -23,18 +63,18 @@
 
 			formRef = options[0];
 
-			if( !this.setForm() ){
+			if( !setForm() ){
 				return false;
 			}
-			if( !this.setFormElements() ){
+			if( !setFormElements() ){
 				return false;
 			}
 
-			return this.setFormObj();
-		};
+			return convertToObj();
+		}
 
 		// Set the main form object we are working on.
-		this.setForm = function(){
+		function setForm(){
 
 			switch( typeof formRef ){
 			case 'string':
@@ -42,7 +82,7 @@
 				break;
 
 			case 'object':
-				if( this.isDomNode(formRef) ){
+				if( isDomNode(formRef) ){
 					$form = formRef;
 				}
 				break;
@@ -50,160 +90,84 @@
 
 			return $form;
 
-		};
+		}
 
 		// Set the elements we need to parse.
-		this.setFormElements = function(){
+		function setFormElements(){
+
 			$formElements = $form.querySelectorAll('input, textarea, select');
 			return $formElements.length;
-		};
 
-		// Check to see if the object is a HTML node.
-		this.isDomNode = function( node ){
-			return typeof node === 'object' &&
-					'nodeType' in node &&
-					node.nodeType === 1;
-		};
+		}
 
-		// Iteration through arrays and objects. Compatible with IE.
-		this.forEach = function( arr, callback ){
+		function processNode(arr, value, result){
 
-			if([].forEach){
-				return [].forEach.call(arr, callback);
+			var keyName = arr[0];
+
+			if(arr.length > 1){
+				if( keyName === '[]' ){ 
+					result.push([]);
+					return processNode(arr.splice(1, arr.length), value, result[getLastNumericKey(result)]);
+				} else {
+
+					if( result[keyName] && getObjLength(result[keyName]) > 0 ) {
+						//result[keyName].push(null);
+						return processNode(arr.splice(1, arr.length), value, result[keyName]); 
+					} else {
+						result[keyName] = [];				
+					}	
+					return processNode(arr.splice(1, arr.length), value, result[keyName]);		
+				}
+				
 			}
 
-			var i;
-			for(i in arr){
-				// Using Object.prototype.hasOwnProperty instead of
-				// arr.hasOwnProperty for IE8 compatibility.
-				if( Object.prototype.hasOwnProperty.call(arr,i) ){
-					callback.call(arr, arr[i]);
-				}
-			}
-
-			return;
-
-		};
-
-		// Recursive method that adds keys and values of the corresponding fields.
-		this.addChild = function( result, $domNode, elementNameArray, value, parentKeyName ){
-
-			// #1 - Single dimensional array.
-			if(elementNameArray.length === 1){
-
-				/*
-				// We're only interested in the radio that is checked.
-				if( $domNode.nodeName === 'INPUT' &&
-					$domNode.type === 'radio' ) {
-					if( $domNode.checked ){
-						result[elementNameArray] = value;
-						return value;
-					} else {
-						return;
-					}
-				}
-
-				// Checkboxes are a special case. We have to grab each checked values
-				// and put them into an array.
-				if( $domNode.nodeName === 'INPUT' &&
-					$domNode.type === 'checkbox' ) {
-
-					if( $domNode.checked ){
-
-						if( !result[elementNameArray] ){
-							result[elementNameArray] = [];
-						}
-						return result[elementNameArray].push( value );
-
-					} else {
-						return;
-					}
-
-				}
-
-				// Multiple select is a special case.
-				// We have to grab each selected option and put them into an array.
-				if( $domNode.nodeName === 'SELECT' &&
-					$domNode.type === 'select-multiple' ) {
-
-					result[elementNameArray] = [];
-					var DOMchilds = $domNode.querySelectorAll('option[selected]');
-					if( DOMchilds ){
-						this.forEach(DOMchilds, function(child){
-							result[elementNameArray].push( child.value );
-						});
-					}
-					return;
-
-				}
-				*/
-
-				if(elementNameArray[0] === '[]') {
-					//console.log(elementNameArray[0], result);
-					if( !(result instanceof Array) ){
-						console.log('here', result);
-						result = [];
-					}
-					result.push( value );
-
+			// Last key, attach the original value.
+			if(arr.length === 1){
+				if( keyName === '[]' ){
+					result.push(value);
 					return result;
 				} else {
-					// Fallback. The default one to one assign.
-					result[elementNameArray[0]] = value;
+					result[keyName] = value;
 					return result;
 				}
-
 			}
 
-			// #2 - Multi dimensional array.
-			if(elementNameArray.length > 1) {
+		}
 
-				if(!result[elementNameArray[0]]){
-					result[elementNameArray[0]] = [];
-				}
+		function convertToObj(){
 
-				var nextelementNameArray = elementNameArray.splice(1, elementNameArray.length);
-
-				return this.addChild(
-										result[elementNameArray[0]],
-										$domNode,
-										nextelementNameArray,
-										value,
-										parentKeyName
-									);
-
-			}
-
-			return result;
-
-		};
-
-		this.setFormObj = function(){
-
-			var elementNameArray, i = 0;
+			var i = 0, 
+				objKeyNames, 
+				result = [];
 
 			for(i = 0; i < $formElements.length; i++){
 				// Ignore the element if the 'name' attribute is empty.
 				// Ignore the 'disabled' elements.
 				if( $formElements[i].name && !$formElements[i].disabled ) {
-					elementNameArray = $formElements[i].name.match( keyRegex );
-					console.log(elementNameArray);
-					this.addChild(
-									formObj,
-									$formElements[i],
-									elementNameArray,
-									$formElements[i].value,
-									null
-								);
+					objKeyNames = $formElements[i].name.match( keyRegex );
+					if( objKeyNames.length > 0 ){
+						processNode(objKeyNames, $formElements[i].value, result);
+					}
 				}
 			}
 
-			return formObj;
+			return result;
 
+		}
+
+		/**
+		 * Expose public methods.
+		 */
+		return {
+			init: init
 		};
 
 	};
 
+	/**
+	 * Expose the final class.
+	 * @type Function
+	 */
 	window.formToObject = formToObject;
 
 })(window, document);
