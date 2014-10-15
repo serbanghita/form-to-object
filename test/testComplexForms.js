@@ -60,4 +60,79 @@
 	});
 
 
+	describe('A complex matrix form', function(){
+
+		beforeEach(function(done) {
+			jasmine.getFixtures().fixturesPath = 'fixtures';
+			loadFixtures('complex_form2.html');
+			done();
+		});	
+
+		it('should return a multi-level object when the form container is selected', function(done){
+			expect(formToObject('matrixForm')).toEqual({
+				'matrix_one': 'a',
+				'matrix_two': {
+					0: 'a',
+					1: 'b',
+					2: 'c',
+					3: 'd'
+				},
+				'matrix_three': {
+					'x': {
+						'a': 'xa',
+						'b': 'xb',
+						'c': 'xc',
+						'd': 'xd'
+					},
+					'y': {
+						'a': 'ya',
+						'b': 'yb'
+					}
+				},
+				'matrix': {
+					'a': {
+						0: 'a0',
+						1: 'a1',
+						2: 'a2',
+						3: 'a3',
+					},
+					'b': {
+						0: 'b0',
+						1: 'b1',
+						2: 'b2',
+						3: 'b3',
+					},
+					'c': {
+						0: 'c0',
+						1: 'c1',
+						2: 'c2',
+						3: 'c3',
+					},
+					'd': {
+						0: 'd0',
+						1: 'd1',
+						2: 'd2',
+						3: 'd3',
+					}															
+				},
+				'matrix_loose': {
+					0: {
+						0: '00'
+					},
+					1: {
+						0: '10'
+					},
+					2: {
+						0: '20'
+					}
+				}
+			});
+
+			done();
+			
+		});
+
+	});
+
+
 })();

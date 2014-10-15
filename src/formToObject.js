@@ -211,11 +211,21 @@
 				if( keyName === '[]' ){ 
 					//result.push({});
 					result[getNextIntegerKey(result)] = {};
-					return processMultiLevelNode($domNode, arr.splice(1, arr.length), value, result[getLastIntegerKey(result)]);
+					return processMultiLevelNode(
+													$domNode, 
+													arr.splice(1, arr.length), 
+													value, 
+													result[getLastIntegerKey(result)]
+												);
 				} else {
 					if( result[keyName] && getObjLength(result[keyName]) > 0 ) {
 						//result[keyName].push(null);
-						return processMultiLevelNode($domNode, arr.splice(1, arr.length), value, result[keyName]);
+						return processMultiLevelNode(
+														$domNode, 
+														arr.splice(1, arr.length), 
+														value, 
+														result[keyName]
+													);
 					} else {
 						result[keyName] = {};				
 					}	
@@ -230,11 +240,8 @@
 					result[getNextIntegerKey(result)] = value;
 					return result;
 				} else {
-					//if(keyName==='upgrades' || keyName==='devices'){
-						processSingleLevelNode($domNode, arr, value, result);
-					//} else {
+					processSingleLevelNode($domNode, arr, value, result);
 					//	result[keyName] = value;
-					//}
 					return result;
 				}
 			}
