@@ -28,12 +28,41 @@
 					node.nodeType === 1;
 		}
 
-		// Get last numeric key from an object.
-		function getLastNumericKey(o){
-			return parseInt(Object.keys(o).filter(function(elem){ 
+		/**
+		 * Check for last numeric key.
+		 * 
+		 * @param  Object o
+		 * @return mixed (string|undefined)
+		 */
+		function checkForLastNumericKey(o){
+			return Object.keys(o).filter(function(elem){ 
 				return !isNaN(parseInt(elem,10)); 
-			}).splice(-1)[0], 10) || 0;
+			}).splice(-1)[0];
+		}
+
+		/**
+		 * Get last numeric key from an object.
+		 * @param  Object o
+		 * @return integer
+		 */
+		function getLastIntegerKey(o){
+			var lastKeyIndex = checkForLastNumericKey(o);
+			return parseInt(lastKeyIndex,10);
 		}	
+
+		/**
+		 * Get the next numeric key (like the index from a PHP array)
+		 * @param  Object o
+		 * @return integer
+		 */
+		function getNextIntegerKey(o){
+			var lastKeyIndex = checkForLastNumericKey(o);
+			if(typeof lastKeyIndex === 'undefined'){
+				return 0;
+			} else {
+				return parseInt(lastKeyIndex,10) + 1;
+			}
+		}
 
 		// Get the real number of properties from an object.
 		function getObjLength(o){
@@ -121,9 +150,10 @@
 
 		}
 
-		function processSingleLevelNode($domNode, value, result){
+		function processSingleLevelNode($domNode, arr, value, result){
 
-			var key = $domNode.name;
+			// Get the last remaining key.
+			var key = arr[0];
 
 			// We're only interested in the radio that is checked.
 			if( $domNode.nodeName === 'INPUT' &&
@@ -171,38 +201,40 @@
 			// Fallback. The default one to one assign.
 			result[key] = value;
 
-
 		}
 
-		function processMultiLevelNode(arr, value, result){
+		function processMultiLevelNode($domNode, arr, value, result){
 
 			var keyName = arr[0];
 
 			if(arr.length > 1){
 				if( keyName === '[]' ){ 
-					result.push({});
-					return processMultiLevelNode(arr.splice(1, arr.length), value, result[getLastNumericKey(result)]);
+					//result.push({});
+					result[getNextIntegerKey(result)] = {};
+					return processMultiLevelNode($domNode, arr.splice(1, arr.length), value, result[getLastIntegerKey(result)]);
 				} else {
-
 					if( result[keyName] && getObjLength(result[keyName]) > 0 ) {
 						//result[keyName].push(null);
-						return processMultiLevelNode(arr.splice(1, arr.length), value, result[keyName]); 
+						return processMultiLevelNode($domNode, arr.splice(1, arr.length), value, result[keyName]);
 					} else {
 						result[keyName] = {};				
 					}	
-					return processMultiLevelNode(arr.splice(1, arr.length), value, result[keyName]);		
-				}
-				
+					return processMultiLevelNode($domNode, arr.splice(1, arr.length), value, result[keyName]);
+				}				
 			}
 
 			// Last key, attach the original value.
 			if(arr.length === 1){
 				if( keyName === '[]' ){
 					//result.push(value);
-					result[getLastNumericKey(result) + 1] = value;
+					result[getNextIntegerKey(result)] = value;
 					return result;
 				} else {
-					result[keyName] = value;
+					//if(keyName==='upgrades' || keyName==='devices'){
+						processSingleLevelNode($domNode, arr, value, result);
+					//} else {
+					//	result[keyName] = value;
+					//}
 					return result;
 				}
 			}
@@ -225,10 +257,10 @@
 				if( $domNode.name && !$domNode.disabled ) {
 					objKeyNames = $domNode.name.match( keyRegex );
 					if( objKeyNames.length === 1 ) {
-						processSingleLevelNode($domNode, $domNode.value, result);
+						processSingleLevelNode($domNode, objKeyNames, $domNode.value, result);
 					}
 					if( objKeyNames.length > 1 ){												
-						processMultiLevelNode(objKeyNames, $domNode.value, result);
+						processMultiLevelNode($domNode, objKeyNames, $domNode.value, result);
 					}
 				}
 
