@@ -83,7 +83,6 @@
 
 		}
 
-
 		// Iteration through arrays and objects. Compatible with IE.
 		function forEach( arr, callback ){
 
