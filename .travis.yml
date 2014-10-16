@@ -1,6 +1,15 @@
+branches:
+  only:
+    - devel
+
 language: node_js
+
 node_js:
   - "0.11"
 
-before_install: npm install -g grunt-cli
+before_install: 
+  
+  - npm install -g browserstack-runner
+  - npm install -g grunt-cli
+  
 install: npm install
