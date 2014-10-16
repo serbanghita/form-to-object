@@ -39,7 +39,8 @@
         "grunt-contrib-copy": "~0.5.0",
         "grunt-contrib-clean": "~0.5.0",
         "grunt-usemin": "~2.1.1",
-        "grunt-contrib-jasmine": "^0.6.4"
+        "grunt-contrib-jasmine": "^0.6.4",
+        "browserstack-runner": "^0.2.0"
     },
     "scripts": {
         "test": "grunt jasmine"
