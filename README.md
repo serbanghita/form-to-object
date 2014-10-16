@@ -1,5 +1,7 @@
 # formToObject.js
 
+[![Build Status](https://travis-ci.org/serbanghita/formToObject.js.svg?branch=devel)](https://travis-ci.org/serbanghita/formToObject.js)
+
 > Convert a HTML forms to JavaScript objects.
 
 > Ever wanted to convert a HTML <b>form</b> with all it's <b>fields</b> and <b>values</b> to a <b>multi-dimensional JavaScript</b> object?<br>
