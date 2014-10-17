@@ -2,22 +2,22 @@
 
 [![Build Status](https://travis-ci.org/serbanghita/formToObject.js.svg?branch=devel)](https://travis-ci.org/serbanghita/formToObject.js)
 
-> Convert a HTML forms to JavaScript objects.
+> Ever wanted to convert a **HTML form** with all it's **fields** and **values** to a **multi-dimensional JavaScript** object?
 
-> Ever wanted to convert a HTML <b>form</b> with all it's <b>fields</b> and <b>values</b> to a <b>multi-dimensional JavaScript</b> object?<br>
-Here is the easiest way, no 3rd party libraries, only vanilla JavaScript.
 
-##### How to use
+##### Include
 
 ```html
-<!-- Include script (4.12kb) -->
+<!-- Include script (~6kb) -->
 <script src="src/formToObject.js"></script>
 ```
 
 ```html
-<!-- Include minified script (1.49kb) -->
+<!-- Include minified script (~2kb) -->
 <script src="build/formToObject.min.js"></script>
 ```
+
+##### Usage
 
 Using the form's id value:
 
@@ -49,49 +49,69 @@ $.ajax({
 
 ##### Comparison with other solutions
 
-<table>
-<tr>
-	<td>Prototype.js</td>
-	<td><code>Form.serialize($('test'), true);</code></td>
-	<td>Creates a <i>JavaScript object</i> but it's not multi-dimensional. In <code>"settings[theme][type]": "dark"</code> the key is a string. Tested with the latest built version from git, 1.7.1 throws errors.</td>
-</tr>
-<tr>
-	<td>jQuery</td>
-	<td><code>$('#form').serializeArray()</code></td>
-	<td>Creates a <i>JavaScript array of objects</i>, ready to be encoded as a JSON string. It takes in account the W3C rules for <a href="http://www.w3.org/TR/html401/interact/forms.html#h-17.13.2">successful controls</a>.
-	Output is like <code>[Object, Object, Object ...]</code></td>
-</tr>
-<tr>
-	<td>Backbone.Syphon</td>
-	<td><code>Backbone.Syphon.serialize(this);</code> called in a <code>Backbone.View</code></td>
-	<td>Creates a <i>multi-dimensional JavaScript object</i> with only a <a href="https://github.com/derickbailey/backbone.syphon#current-limitations">few limitations</a>. Has the ability to include/exclude fields.</td>
-</tr>
-<tr>
-	<td><a href="https://dojotoolkit.org/reference-guide/1.9/dojo/dom-form.html#dojo-dom-form-toobject">dojo.formToObject</a></td>
-	<td><code>domForm.toObject("myId")</code></td>
-	<td>Depends on dojo framework. Disabled form elements, buttons, elements with just an id attribute but no name attribute, and other non-valued HTML elements are skipped.</td>
-</tr>
-<tr>
-	<td><a href="https://github.com/hongymagic/jQuery.serializeObject">jQuery.serializeObject</a></td>
-	<td><code>$('form').serializeObject();</code></td>
-	<td>Plugin for jQuery.</td>
-</tr>
-<tr>
-	<td><a href="https://github.com/danheberden/jquery-serializeForm">jQuery.serializeForm</a></td>
-	<td><code>$('#test').serializeForm();</code></td>
-	<td>Plugin for jQuery.</td>
-</tr>
-<tr>
-	<td><a href="https://github.com/marioizquierdo/jquery.serializeJSON">jQuery.serializeJSON</a></td>
-	<td><code>$('#test').serializeJSON()</code></td>
-	<td>Adds the method <code>.serializeJSON()</code> to jQuery, that serializes a form into a JavaScript Object with the same format as the default Ruby on Rails request params hash.</td>
-</tr>
-<tr>
-	<td>plain JavaScript</td>
-	<td><code>formToObject('form')</code></td>
-	<td>Creates a <i>multi-dimensional JavaScript object</i> with all the field names and values.</td>
-</tr>
-</table>
+*Prototype.js* - Creates a *JavaScript object* but it's not multi-dimensional. In `"settings[theme][type]": "dark"` the key is a string. Tested with the latest built version from git, 1.7.1 throws errors.
+
+```javascript
+Form.serialize($('test'), true);
+```
+---
+
+*jQuery core* - Creates a *JavaScript array of objects*, ready to be encoded as a JSON string. It takes in account the W3C rules for [successful controls](http://www.w3.org/TR/html401/interact/forms.html#h-17.13.2). Output is like `[Object, Object, Object ...]`
+
+```javascript
+$('#form').serializeArray()
+```
+
+---
+
+*Backbone.Syphon* - Creates a *multi-dimensional JavaScript object* with only a [few limitations](https://github.com/derickbailey/backbone.syphon#current-limitations). Has the ability to include/exclude fields.
+
+```javascript
+Backbone.Syphon.serialize(this); // called in a Backbone.View
+```
+
+---
+
+*[dojo.formToObject](https://dojotoolkit.org/reference-guide/1.9/dojo/dom-form.html#dojo-dom-form-toobject)* - Depends on dojo framework. Disabled form elements, buttons, elements with just an id attribute but no name attribute, and other non-valued HTML elements are skipped.
+
+```javascript
+domForm.toObject("myId")
+```
+
+---
+
+*[jQuery.serializeObject](https://github.com/hongymagic/jQuery.serializeObject)* - Plugin for jQuery.
+
+```javascript
+$('form').serializeObject();
+```
+
+---
+
+*[jQuery.serializeForm](https://github.com/danheberden/jquery-serializeForm)* - Plugin for jQuery.
+
+```javascript
+$('#test').serializeForm();
+```
+
+---
+
+*[jQuery.serializeJSON](https://github.com/marioizquierdo/jquery.serializeJSON)* - Adds the method `serializeJSON()` to jQuery, that serializes a form into a JavaScript Object with the same format as the default Ruby on Rails request params hash.
+
+```javascript
+$('#test').serializeJSON()
+```
+
+---
+
+*plain JavaScript*
+
+```javascript
+formToObject('form')
+```
+
+Creates a *multi-dimensional JavaScript object* with all the field names and values.
+
 
 ##### Browser support
 
@@ -99,12 +119,11 @@ IE 8, Firefox 3.5, Chrome, Safari, Opera 10, every mobile browser.
 
 ##### Screenshot
 
-<img src="http://ghita.org/sites/default/files/articles_imgs/formToObject.png">
+![](http://ghita.org/sites/default/files/articles_imgs/formToObject.png)
 
 ##### Contribute
 
-<a href="https://github.com/serbanghita/formToObject/issues/new">Add an issue</a> or fork the project and submit a pull request. <br>
+[Add an issue](https://github.com/serbanghita/formToObject/issues/new) or fork the project and submit a pull request. 
+
 If this script helped you save a lot of developing time, I really appreciate any donations
-<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=serbanghita%40gmail%2ecom&lc=US&item_name=Serban%20Ghita%20%28GitHub%29&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"><img src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0"></a>.
-
-
+[![](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=serbanghita%40gmail%2ecom&lc=US&item_name=Serban%20Ghita%20%28GitHub%29&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
