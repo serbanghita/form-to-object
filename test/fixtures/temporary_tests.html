@@ -1,0 +1,14 @@
+<body>
+	<div id="someFieldsWrapper">
+		<input type="checkbox" name="single" value="value1">
+		<input type="checkbox" name="many[]" value="value2">
+		<input type="checkbox" name="many[]" value="value3">
+	</div>
+</body>
+
+
+<script src="../../src/formToObject.js"></script>
+<script>
+var result = formToObject('someFieldsWrapper');
+console.log(result);
+</script>
