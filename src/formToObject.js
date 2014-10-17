@@ -149,6 +149,35 @@
 
 		}
 
+		function checkNodeHasValues($domNode){
+
+			switch($domNode.nodeName){
+				case 'INPUT':
+					switch($domNode.type){
+						case 'radio':
+							break;
+						case 'checkbox':
+							break;
+						default:
+							
+					}
+				break;
+
+				case 'TEXTAREA':
+				break;
+
+				case 'SELECT':
+					switch($domNode.type){
+						case 'select-multiple':
+							break;
+						default:
+
+					}
+				break;
+			}
+
+		}
+
 		function processSingleLevelNode($domNode, arr, value, result){
 
 			// Get the last remaining key.
