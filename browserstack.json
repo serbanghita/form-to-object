@@ -9,5 +9,6 @@
       "ie_9",
       "opera_latest",
       "safari_latest"
-  ]
+  ],
+  "timeout": 10
 }
