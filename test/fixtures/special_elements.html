@@ -1,0 +1,16 @@
+<body>
+	<form id="specialElementsForm">
+		<input type="hidden" name="CSR_check" value="i9dsFbYVfFiKdxsyCfym">
+		<button type="submit" name="logout">Logout</button>
+		<button type="submit" name="register">Register <b>button</b></button>
+		<button>First dummy button</button>
+		<button name="dummyButton">Second dummy button</button>
+		<input type="image" src="http://ghita.org/ux/slideshow/demo/serban_face_small.png" name="imgBtn" value="Img button value" alt="Ghita" title="Ghita">
+	</form>
+</body>
+
+<script src="../../src/formToObject.js"></script>
+<script>
+	var result = formToObject('matrixForm');
+	console.log(result);
+</script>
