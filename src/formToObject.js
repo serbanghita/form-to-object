@@ -149,43 +149,62 @@
 
 		}
 
-		function checkNodeHasValues($domNode){
+		function getNodeValues($domNode){
 
-			switch($domNode.nodeName){
-				case 'INPUT':
-					switch($domNode.type){
-						case 'radio':
-							break;
-						case 'checkbox':
-							break;
-						default:
-							
-					}
-				break;
-
-				case 'TEXTAREA':
-				break;
-
-				case 'SELECT':
-					switch($domNode.type){
-						case 'select-multiple':
-							break;
-						default:
-
-					}
-				break;
+			// We're only interested in the radio that is checked.
+			if( $domNode.nodeName === 'INPUT' && $domNode.type === 'radio' ){
+				return $domNode.checked ? $domNode.value : false;
 			}
+
+			// We're only interested in the checkbox that is checked.
+			if( $domNode.nodeName === 'INPUT' && $domNode.type === 'checkbox' ){
+				return $domNode.checked ? $domNode.value : false;
+			}			
+
+			// We're only interested in textarea fields that have values.
+			if( $domNode.nodeName === 'TEXTAREA' ){
+				return ($domNode.value && $domNode.value !== '' ? $domNode.value : false);
+			}
+
+			// We're only interested in multiple selects that have at least one option selected.
+			if( $domNode.nodeName === 'SELECT' && $domNode.type === 'select-multiple' ){
+				if($domNode.options && $domNode.options.length > 0) {
+					var values = [];
+					forEach($domNode.options, function($option){
+						if($option.selected){
+							values.push($option.value);
+						}
+					});
+					return (values.length ? values : false);
+				} else {
+					return false;
+				}
+			}
+
+			// We're only interested if the button is type="submit"
+			if( $domNode.nodeName === 'BUTTON' && $domNode.type === 'submit' ){
+				if($domNode.value && $domNode.value !== ''){
+					return $domNode.value;
+				}
+				if($domNode.innerText && $domNode.innerText !== ''){
+					return $domNode.innerText;
+				}
+				return false;
+			}
+
+			// Fallback.
+			return ($domNode.value && $domNode.value !== '' ? $domNode.value : false);
 
 		}
 
 		function processSingleLevelNode($domNode, arr, value, result){
 
 			// Get the last remaining key.
-			var key = arr[0];
+			var key = arr[0],
+				hasValues = getNodeValues($domNode); // pending!
 
 			// We're only interested in the radio that is checked.
-			if( $domNode.nodeName === 'INPUT' &&
-				$domNode.type === 'radio' ) {
+			if( $domNode.nodeName === 'INPUT' && $domNode.type === 'radio' ) {
 				if( $domNode.checked ){
 					result[key] = value;
 					return value;
