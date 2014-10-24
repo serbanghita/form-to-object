@@ -31,6 +31,7 @@ module.exports = function(grunt) {
             'test/testInput.js',
             'test/testTextarea.js',
             'test/testSelect.js',
+            'test/testCheckbox.js',
             'test/testUnexpected.js',
             'test/testExceptions.js',
             'test/testComplexForms.js'
