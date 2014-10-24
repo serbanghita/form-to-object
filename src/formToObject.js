@@ -13,6 +13,12 @@
 		* Defaults
 		*/
 		var formRef   = null,
+			// @todo Experimental. Don't rely on them yet.
+			settings = {
+				includeEmptyValuedElements: false,
+				w3cSuccesfulControlsOnly: false
+			},
+			// Currently matching only '[]'.
 			keyRegex      = /[^\[\]]+|\[\]/g,
 			$form         = null,
 			$formElements = [];
@@ -149,25 +155,45 @@
 
 		}
 
+		function isRadio($domNode){
+			return $domNode.nodeName === 'INPUT' && $domNode.type === 'radio';
+		}
+
+		function isCheckbox($domNode){
+			return $domNode.nodeName === 'INPUT' && $domNode.type === 'checkbox';
+		}
+
+		function isTextarea($domNode){
+			return $domNode.nodeName === 'TEXTAREA';
+		}
+
+		function isSelectMultiple($domNode){
+			return $domNode.nodeName === 'SELECT' && $domNode.type === 'select-multiple';
+		}
+
+		function isSubmitButton($domNode){
+			return $domNode.nodeName === 'BUTTON' && $domNode.type === 'submit';
+		}
+
 		function getNodeValues($domNode){
 
 			// We're only interested in the radio that is checked.
-			if( $domNode.nodeName === 'INPUT' && $domNode.type === 'radio' ){
+			if( isRadio($domNode) ){
 				return $domNode.checked ? $domNode.value : false;
 			}
 
 			// We're only interested in the checkbox that is checked.
-			if( $domNode.nodeName === 'INPUT' && $domNode.type === 'checkbox' ){
+			if( isCheckbox($domNode) ){
 				return $domNode.checked ? $domNode.value : false;
 			}			
 
 			// We're only interested in textarea fields that have values.
-			if( $domNode.nodeName === 'TEXTAREA' ){
+			if( isTextarea($domNode) ){
 				return ($domNode.value && $domNode.value !== '' ? $domNode.value : false);
 			}
 
 			// We're only interested in multiple selects that have at least one option selected.
-			if( $domNode.nodeName === 'SELECT' && $domNode.type === 'select-multiple' ){
+			if( isSelectMultiple($domNode) ){
 				if($domNode.options && $domNode.options.length > 0) {
 					var values = [];
 					forEach($domNode.options, function($option){
@@ -175,14 +201,19 @@
 							values.push($option.value);
 						}
 					});
-					return (values.length ? values : false);
+					if( settings.includeEmptyValuedElements ){
+						return values;
+					} else {
+						return (values.length ? values : false);
+					}
+					
 				} else {
 					return false;
 				}
 			}
 
 			// We're only interested if the button is type="submit"
-			if( $domNode.nodeName === 'BUTTON' && $domNode.type === 'submit' ){
+			if( isSubmitButton($domNode) ){
 				if($domNode.value && $domNode.value !== ''){
 					return $domNode.value;
 				}
@@ -192,61 +223,63 @@
 				return false;
 			}
 
-			// Fallback.
-			return ($domNode.value && $domNode.value !== '' ? $domNode.value : false);
+			// Fallback or other non special fields.
+			if( typeof $domNode.value !== 'undefined' ){
+				if( settings.includeEmptyValuedElements ){
+					return $domNode.value;
+				} else {
+					return ($domNode.value !== '');
+				}
+			} else {
+				return false;
+			}
 
 		}
 
-		function processSingleLevelNode($domNode, arr, value, result){
+		function processSingleLevelNode($domNode, arr, domNodeValue, result){
 
 			// Get the last remaining key.
-			var key = arr[0],
-				hasValues = getNodeValues($domNode); // pending!
+			var key = arr[0];
 
 			// We're only interested in the radio that is checked.
-			if( $domNode.nodeName === 'INPUT' && $domNode.type === 'radio' ) {
-				if( $domNode.checked ){
-					result[key] = value;
-					return value;
+			if( isRadio($domNode) ){
+				if( domNodeValue !== false ){
+					result[key] = domNodeValue;
+					return domNodeValue;
 				} else {
 					return;
 				}
 			}
 
-			// Checkboxes are a special case. We have to grab each checked values
+			// Checkboxes are a special case. 
+			// We have to grab each checked values
 			// and put them into an array.
-			if( $domNode.nodeName === 'INPUT' &&
-				$domNode.type === 'checkbox' ) {
-
-				if( $domNode.checked ){
+			if( isCheckbox($domNode) ){
+				if( domNodeValue !== false ){
 					if( !result[key] ){
 						result[key] = [];
 					}
-					return result[key].push( value );
+					return result[key].push( domNodeValue );
 				} else {
 					return;
-				}
-
+				}			
 			}
 
 			// Multiple select is a special case.
 			// We have to grab each selected option and put them into an array.
-			if( $domNode.nodeName === 'SELECT' &&
-				$domNode.type === 'select-multiple' ) {
-
-				result[key] = [];
-				var $domNodeChilds = $domNode.querySelectorAll('option[selected]');
-				if( $domNodeChilds ){
-					forEach($domNodeChilds, function(child){
-						result[key].push( child.value );
-					});
+			if( isSelectMultiple($domNode) ){
+				if( domNodeValue !== false ){
+					result[key] = domNodeValue;
+				} else {
+					return;
 				}
-				return;
-
 			}
 
-			// Fallback. The default one to one assign.
-			result[key] = value;
+			// Fallback or other cases that don't
+			// need special treatment of the value.
+			result[key] = domNodeValue;
+
+			return domNodeValue;
 
 		}
 
@@ -300,7 +333,9 @@
 			var i = 0, 
 				objKeyNames,
 				$domNode,
-				result = {};
+				domNodeValue,
+				result = {},
+				resultLength = 0;
 
 			for(i = 0; i < $formElements.length; i++){
 				
@@ -309,18 +344,33 @@
 				// Ignore the element if the 'name' attribute is empty.
 				// Ignore the 'disabled' elements.
 				if( $domNode.name && !$domNode.disabled ) {
+
+					// Get the final processed domNode value.
+					domNodeValue = getNodeValues($domNode);
+
+					// Exclude empty valued nodes if the settings allow it.
+					if( domNodeValue === false && !settings.includeEmptyValuedElements ){
+						continue;
+					}
+
+					// Extract all possible keys 
+					// Eg. name="firstName", name="settings[a][b]", name="settings[0][a]"
 					objKeyNames = $domNode.name.match( keyRegex );
+
 					if( objKeyNames.length === 1 ) {
-						processSingleLevelNode($domNode, objKeyNames, $domNode.value, result);
+						processSingleLevelNode($domNode, objKeyNames, (domNodeValue ? domNodeValue : ''), result);
 					}
 					if( objKeyNames.length > 1 ){												
-						processMultiLevelNode($domNode, objKeyNames, $domNode.value, result);
+						processMultiLevelNode($domNode, objKeyNames, (domNodeValue ? domNodeValue : ''), result);
 					}
 				}
 
 			}
 
-			return result;
+			// Check the legth of the result.
+			resultLength = getObjLength(result);
+
+			return resultLength > 0 ? result : false;
 
 		}
 
