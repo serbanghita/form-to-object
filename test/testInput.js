@@ -337,8 +337,13 @@
     });
 
     // Due to security reason in browsers.
-    it('should return an object with the file path', function(){
-      expect(formToObject('newForm')).toEqual({'photo':''});
+    it('should return false if empty valued option is set to false', function(){
+      expect(formToObject('newForm', {includeEmptyValuedElements:false})).toBe(false);
+    });
+
+    // Due to security reason in browsers.
+    it('should return an object with an empty file path if empty valued option is set to true', function(){
+      expect(formToObject('newForm', {includeEmptyValuedElements:true})).toEqual({'photo':''});
     });
 
   });

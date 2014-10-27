@@ -49,7 +49,7 @@
             	'<input type="checkbox" name="singleSecond" value="Single second" checked="checked">' +
             	// Normal checkbox. One value checked.
             	'<input type="checkbox" name="singleThird" value="First option value">' +
-            	'<input type="checkbox" name="singleThird" value="Second option value" checkbox>' +
+            	'<input type="checkbox" name="singleThird" value="Second option value" checked>' +
             	'<input type="checkbox" name="singleThird" value="Third option value">' +
             '</form>';
         var $newForm = document.createElement('div');
@@ -62,8 +62,19 @@
       document.body.removeChild(document.getElementById('fixtures'));
     });
 
-    it('searched by a valid element string should return false', function(){
-      expect(formToObject('newForm')).toBe(false);
+    it('searched by a valid element string should return an object', function(){
+      expect(formToObject('newForm')).toEqual({
+        'single': ['Serban'],
+        'many': {
+            '0': 'First' // @todo: Should be ['First']. Known bug. Don't know yet if this is worth the effort.
+        },
+        'more': {
+            'first': ['More First'],
+            'second': ['More Second First', 'More Second Second', 'More Second Third']
+        },
+        'singleSecond': ['Single second'],
+        'singleThird': ['Second option value']
+      });
     });
 
   });

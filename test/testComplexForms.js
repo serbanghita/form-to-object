@@ -144,7 +144,7 @@
 
 		it('should return a multi-level object when the form container is selected', function(done){
 
-			expect(formToObject('reg')).toEqual({
+			expect(formToObject('reg', {includeEmptyValuedElements: true})).toEqual({
 				'lsd': 'AVo2i6Gx',
 				'firstname': 'Serban',
 				'lastname': 'Ghita',

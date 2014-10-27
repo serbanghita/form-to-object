@@ -46,7 +46,7 @@
     });
 
     it('should return an empty object', function(){
-      expect(formToObject('newForm')).toEqual({});
+      expect(formToObject('newForm')).toBe(false);
     });
 
   });

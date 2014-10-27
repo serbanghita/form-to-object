@@ -89,6 +89,25 @@
 
 		}
 
+		/**
+		 * Simple extend for our settings.
+		 * WARNING: Here we don't care about passing by reference.
+		 * @todo Maybe use Object.create - depending on situations.
+		 * 
+		 * @param  {Object} oldObj The old object.
+		 * @param  {Object} newObj The new object with new properties and values.
+		 * @return {Object}        The new resulted object.
+		 */
+		function extend(oldObj, newObj){
+			var i;
+			for(i in newObj){
+				if(newObj.hasOwnProperty(i)){
+					oldObj[i] = newObj[i];
+				}
+			}
+			return oldObj;
+		}
+
 		// Iteration through arrays and objects. Compatible with IE.
 		function forEach( arr, callback ){
 
@@ -112,11 +131,20 @@
 		// Constructor
 		function init(options){
 
+			// Assign the current form reference.
 			if(!options || typeof options !== 'object' || !options[0]){
 				return false;
 			}
 
+			// The form refence is always the first parameter of the method.
+			// Eg: formToObject('myForm')
 			formRef = options[0];
+
+			// Override current settings.
+			// Eg. formToObject('myForm', {wassup: true})
+			if(typeof options[1] !== 'undefined' && getObjLength(options[1]) > 0 ){
+				extend(settings, options[1]);
+			}
 
 			if( !setForm() ){
 				return false;
@@ -228,7 +256,7 @@
 				if( settings.includeEmptyValuedElements ){
 					return $domNode.value;
 				} else {
-					return ($domNode.value !== '');
+					return ($domNode.value !== '' ? $domNode.value : false);
 				}
 			} else {
 				return false;
@@ -358,10 +386,20 @@
 					objKeyNames = $domNode.name.match( keyRegex );
 
 					if( objKeyNames.length === 1 ) {
-						processSingleLevelNode($domNode, objKeyNames, (domNodeValue ? domNodeValue : ''), result);
+						processSingleLevelNode(
+												$domNode, 
+												objKeyNames, 
+												(domNodeValue ? domNodeValue : ''), 
+												result
+											);
 					}
 					if( objKeyNames.length > 1 ){												
-						processMultiLevelNode($domNode, objKeyNames, (domNodeValue ? domNodeValue : ''), result);
+						processMultiLevelNode(
+												$domNode, 
+												objKeyNames, 
+												(domNodeValue ? domNodeValue : ''), 
+												result
+											);
 					}
 				}
 

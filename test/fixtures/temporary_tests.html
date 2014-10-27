@@ -1,14 +1,17 @@
 <body>
 	<div id="someFieldsWrapper">
-		<input type="checkbox" name="single" value="value1">
-		<input type="checkbox" name="many[]" value="value2">
-		<input type="checkbox" name="many[]" value="value3">
+		<input type="checkbox" name="first" value="value1">
+		<input type="checkbox" name="second[]" value="value2">
+		<input type="checkbox" name="second[]" value="value3">
+		<input type="checkbox" name="third" value="value1" checked>
+		<input type="checkbox" name="third" value="value2" checked>
 	</div>
 </body>
 
-
+<!--
 <script src="../../src/formToObject.js"></script>
 <script>
 var result = formToObject('someFieldsWrapper');
 console.log(result);
 </script>
+-->
