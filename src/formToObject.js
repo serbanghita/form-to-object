@@ -180,6 +180,19 @@
 				}
 
 			}
+			
+			// File inputs are a special case.
+			// We have to grab the .files property of the input, which is a FileList.
+			if( $domNode.nodeName === 'INPUT' &&
+				$domNode.type === 'file' ) {
+			
+				if( $domNode.files !== void (0) ) {
+					return result[key] = $domNode.files;
+				} else {
+					return;
+				}
+			
+			}
 
 			// Multiple select is a special case.
 			// We have to grab each selected option and put them into an array.
