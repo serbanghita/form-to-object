@@ -1,0 +1,19 @@
+<form id="test">
+    <span class="_5k_3" data-type="radio" data-name="gender_wrapper" id="u_0_g">
+        <span class="_5k_2 _5dba">
+            <input type="radio" name="sex" value="1" id="u_0_d" checked="">
+                <label class="_58mt" for="u_0_d">Female</label>
+        </span>
+        <span class="_5k_2 _5dba">
+                <input type="radio" name="sex" value="2" id="u_0_e">
+                    <label class="_58mt" for="u_0_e">Male</label>
+        </span>
+    </span>
+</form>
+
+
+<script src="../../src/formToObject.js"></script>
+<script>
+var result = formToObject('test', {includeEmptyValuedElements: true});
+console.log(result);
+</script>

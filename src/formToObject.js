@@ -37,7 +37,7 @@
 		/**
 		 * Check for last numeric key.
 		 * 
-		 * @param  Object o
+		 * @param o object
 		 * @return mixed (string|undefined)
 		 */
 		function checkForLastNumericKey(o){
@@ -48,8 +48,8 @@
 
 		/**
 		 * Get last numeric key from an object.
-		 * @param  Object o
-		 * @return integer
+		 * @param o object
+		 * @return int
 		 */
 		function getLastIntegerKey(o){
 			var lastKeyIndex = checkForLastNumericKey(o);
@@ -58,21 +58,20 @@
 
 		/**
 		 * Get the next numeric key (like the index from a PHP array)
-		 * @param  Object o
-		 * @return integer
+		 * @param o object
+		 * @return int
 		 */
 		function getNextIntegerKey(o){
 			var lastKeyIndex = checkForLastNumericKey(o);
 			if(typeof lastKeyIndex === 'undefined'){
 				return 0;
 			} else {
-				return parseInt(lastKeyIndex,10) + 1;
+				return parseInt(lastKeyIndex, 10) + 1;
 			}
 		}
 
 		// Get the real number of properties from an object.
 		function getObjLength(o){
-
 			var l, k;
 
 			if( typeof Object.keys === 'function' ) {
@@ -86,7 +85,6 @@
 			}
 
 			return l;
-
 		}
 
 		/**
@@ -136,12 +134,12 @@
 				return false;
 			}
 
-			// The form refence is always the first parameter of the method.
+			// The form reference is always the first parameter of the method.
 			// Eg: formToObject('myForm')
 			formRef = options[0];
 
 			// Override current settings.
-			// Eg. formToObject('myForm', {wassup: true})
+			// Eg. formToObject('myForm', {mySetting: true})
 			if(typeof options[1] !== 'undefined' && getObjLength(options[1]) > 0 ){
 				extend(settings, options[1]);
 			}
@@ -157,8 +155,7 @@
 		}
 
 		// Set the main form object we are working on.
-		function setForm(){
-
+		function setForm() {
 			switch( typeof formRef ){
 			case 'string':
 				$form = document.getElementById( formRef );
@@ -172,15 +169,12 @@
 			}
 
 			return $form;
-
 		}
 
 		// Set the elements we need to parse.
-		function setFormElements(){
-
+		function setFormElements() {
 			$formElements = $form.querySelectorAll('input, textarea, select');
 			return $formElements.length;
-
 		}
 
 		function isRadio($domNode){
@@ -203,16 +197,20 @@
 			return $domNode.nodeName === 'BUTTON' && $domNode.type === 'submit';
 		}
 
+        function isChecked($domNode){
+            return $domNode.checked;
+        }
+
 		function getNodeValues($domNode){
 
 			// We're only interested in the radio that is checked.
 			if( isRadio($domNode) ){
-				return $domNode.checked ? $domNode.value : false;
+				return isChecked($domNode) ? $domNode.value : false;
 			}
 
 			// We're only interested in the checkbox that is checked.
 			if( isCheckbox($domNode) ){
-				return $domNode.checked ? $domNode.value : false;
+				return isChecked($domNode) ? $domNode.value : false;
 			}			
 
 			// We're only interested in textarea fields that have values.
@@ -369,43 +367,51 @@
 				
 				$domNode = $formElements[i];
 
-				// Ignore the element if the 'name' attribute is empty.
-				// Ignore the 'disabled' elements.
-				if( $domNode.name && !$domNode.disabled ) {
+				// Skip the element if the 'name' attribute is empty.
+				// Skip the 'disabled' elements.
+                // Skip the non selected radio elements.
+				if(
+                    !$domNode.name ||
+                    $domNode.name === '' ||
+                    $domNode.disabled ||
+                    (isRadio($domNode) && !isChecked($domNode))
+                ) {
+                    continue;
+                }
 
-					// Get the final processed domNode value.
-					domNodeValue = getNodeValues($domNode);
+                // Get the final processed domNode value.
+                domNodeValue = getNodeValues($domNode);
 
-					// Exclude empty valued nodes if the settings allow it.
-					if( domNodeValue === false && !settings.includeEmptyValuedElements ){
-						continue;
-					}
+                // Exclude empty valued nodes if the settings allow it.
+                if( domNodeValue === false && !settings.includeEmptyValuedElements ){
+                    continue;
+                }
 
-					// Extract all possible keys 
-					// Eg. name="firstName", name="settings[a][b]", name="settings[0][a]"
-					objKeyNames = $domNode.name.match( keyRegex );
+                // Extract all possible keys
+                // Eg. name="firstName", name="settings[a][b]", name="settings[0][a]"
+                objKeyNames = $domNode.name.match( keyRegex );
 
-					if( objKeyNames.length === 1 ) {
-						processSingleLevelNode(
-												$domNode, 
-												objKeyNames, 
-												(domNodeValue ? domNodeValue : ''), 
-												result
-											);
-					}
-					if( objKeyNames.length > 1 ){												
-						processMultiLevelNode(
-												$domNode, 
-												objKeyNames, 
-												(domNodeValue ? domNodeValue : ''), 
-												result
-											);
-					}
-				}
+                if( objKeyNames.length === 1 ) {
+                    processSingleLevelNode(
+                                            $domNode,
+                                            objKeyNames,
+                                            (domNodeValue ? domNodeValue : ''),
+                                            result
+                                        );
+                }
+                if( objKeyNames.length > 1 ){
+                    processMultiLevelNode(
+                                            $domNode,
+                                            objKeyNames,
+                                            (domNodeValue ? domNodeValue : ''),
+                                            result
+                                        );
+                }
+
 
 			}
 
-			// Check the legth of the result.
+			// Check the length of the result.
 			resultLength = getObjLength(result);
 
 			return resultLength > 0 ? result : false;
