@@ -1,0 +1,77 @@
+<style>
+    body {
+        font-family: Arial, Helvetica, Sans-Serif, serif;
+        font-size: 12px;
+    }
+    .fieldWrap {
+        margin-bottom: 5px;
+    }
+    .fieldsWrap {
+        border: 1px solid #ccc;
+        margin-bottom:5px;
+        padding:5px;
+    }
+    .fieldsWrap > label {
+        font-weight: bold;
+
+    }
+</style>
+
+<form id="settingsForm" method="post">
+    <div class="fieldsWrap">
+        <div class="fieldWrap">
+            <label>Username</label>
+            <input type="text" name="settings[username]" value="serbanghita">
+        </div>
+        <div class="fieldWrap">
+            <label>Race</label>
+            <select name="settings[race]">
+                <option name="human">Human</option>
+                <option name="orc" selected>Orc</option>
+                <option name="protoss">Protoss</option>
+            </select>
+        </div>
+    </div>
+    <div class="fieldsWrap">
+        <label>Input type</label>
+        <div class="fieldWrap">
+            <label>Mouse</label>
+            <input type="radio" name="settings[input]" value="mouse">
+        </div>
+        <div class="fieldWrap">
+            <label>Touch</label>
+            <input type="radio" name="settings[input]" value="touch" checked>
+        </div>
+        <div class="fieldWrap">
+            <label>Keyboard</label>
+            <input type="radio" name="settings[input]" value="keyboard">
+        </div>
+    </div>
+    <div class="fieldsWrap">
+        <label>Video settings</label>
+        <div class="fieldWrap">
+            <label>Resolution</label>
+            <select name="settings[video][resolution]">
+                <option value="320x240">320 x 240</option>
+                <option value="640x480" selected>640 x 480</option>
+                <option value="1024x768">1024 x 768</option>
+            </select>
+        </div>
+        <div class="fieldWrap">
+            <label>Vertical sync</label>
+            ON <input type="radio" name="settings[video][vsync]" value="on" checked>
+            OFF <input type="radio" name="settings[video][vsync]" value="off">
+        </div>
+    </div>
+    <div class="fieldWrap">
+        <input type="submit" name="saveSettings" value="Save">
+    </div>
+</form>
+
+
+
+<script src="../../src/formToObject.js"></script>
+<script>
+var result = formToObject('settingsForm');
+console.log(result);
+</script>
