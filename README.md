@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/serbanghita/formToObject.js.svg?branch=devel)](https://travis-ci.org/serbanghita/formToObject.js)
 
-> Ever wanted to convert a **HTML form** with all it's **fields** and **values** to a **multi-dimensional JavaScript** object?
+> Convert **HTML forms** with all their **fields** and **values** to **multi-dimensional JavaScript** objects
 
 
 ##### Include
