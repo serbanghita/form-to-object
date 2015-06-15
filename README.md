@@ -8,11 +8,6 @@
 ##### Include
 
 ```html
-<!-- Include script (~6kb) -->
-<script src="src/formToObject.js"></script>
-```
-
-```html
 <!-- Include minified script (~2kb) -->
 <script src="build/formToObject.min.js"></script>
 ```
