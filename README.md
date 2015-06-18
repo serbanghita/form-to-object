@@ -1,6 +1,6 @@
 # formToObject.js
 
-[![Build Status](https://travis-ci.org/serbanghita/formToObject.js.svg?branch=devel)](https://travis-ci.org/serbanghita/formToObject.js)
+[![Build Status](https://travis-ci.org/serbanghita/formToObject.js.svg?branch=master)](https://travis-ci.org/serbanghita/formToObject.js) [![Dependency Status](https://www.versioneye.com/user/projects/5446a74944a5254346000085/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5446a74944a5254346000085)
 
 > Convert **HTML forms** with all their **fields** and **values** to **multi-dimensional JavaScript** objects
 
