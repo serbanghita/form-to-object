@@ -2,6 +2,10 @@ module.exports = function(grunt) {
 
   'use strict';
 
+  //var globals = {};
+  //globals.PWD = process.env.PWD;
+  console.log(process.env.PWD);
+
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -25,25 +29,30 @@ module.exports = function(grunt) {
         }
       },
       jasmine: {
-        src: 'src/*.js',
-        options: {
-          specs: [
-            'test/testInput.js',
-            'test/testTextarea.js',
-            'test/testSelect.js',
-            'test/testCheckbox.js',
-            'test/testRadio.js',
-            'test/testUnexpected.js',
-            'test/testExceptions.js',
-            'test/testComplexForms.js'
-          ],
-          vendor: ['vendor/jquery/jquery.js', 'vendor/jquery/jasmine-jquery.js'],
-          outfile: 'test/SpecRunner.html',
-          keepRunner: true,
-          '--web-security': 'no'
-        }
+          'default': {
+            src: 'src/*.js',
+            options: {
+              specs: [
+                'test/testInput.js',
+                'test/testInputFile.js',
+                'test/testTextarea.js',
+                'test/testSelect.js',
+                'test/testCheckbox.js',
+                'test/testRadio.js',
+                'test/testUnexpected.js',
+                'test/testExceptions.js',
+                'test/testComplexForms.js'
+              ],
+              vendor: ['vendor/jquery/jquery.js', 'vendor/jquery/jasmine-jquery.js'],
+              outfile: 'test/SpecRunner.html',
+              keepRunner: true,
+              '--web-security': 'no'
+            }
+          }
       }
     });
+
+
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
@@ -55,6 +64,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'uglify', 'jasmine']);
+  grunt.registerTask('default', ['uglify', 'jasmine']); // 'jshint',
 
 };

@@ -185,6 +185,10 @@
 			return $domNode.nodeName === 'INPUT' && $domNode.type === 'checkbox';
 		}
 
+        function isFileField($domNode) {
+            return $domNode.nodeName === 'INPUT' && $domNode.type === 'file';
+        }
+
 		function isTextarea($domNode){
 			return $domNode.nodeName === 'TEXTAREA';
 		}
@@ -211,7 +215,13 @@
 			// We're only interested in the checkbox that is checked.
 			if( isCheckbox($domNode) ){
 				return isChecked($domNode) ? $domNode.value : false;
-			}			
+			}
+
+            // File inputs are a special case.
+            // We have to grab the .files property of the input, which is a FileList.
+            if( isFileField($domNode) ) {
+                return ($domNode.files !== void (0) ) ? $domNode.files : false;
+            }
 
 			// We're only interested in textarea fields that have values.
 			if( isTextarea($domNode) ){

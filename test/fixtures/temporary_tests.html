@@ -6,12 +6,22 @@
 		<input type="checkbox" name="third" value="value1" checked>
 		<input type="checkbox" name="third" value="value2" checked>
 	</div>
+    <div id="fileFieldWrapper">
+        <input type="file" name="photo">
+    </div>
+    <div id="fileFieldsWrapper">
+        <input type="file" name="photos[]">
+        <input type="file" name="photos[]">
+        <input type="file" name="photos[]">
+    </div>
+    <div id="fileFieldsWrapper2">
+        <input type="file" name="photos" multiple>
+    </div>
 </body>
 
-<!--
+
 <script src="../../src/formToObject.js"></script>
 <script>
-var result = formToObject('someFieldsWrapper');
-console.log(result);
+//var result = formToObject('fileFieldWrapper');
+//console.log(result);
 </script>
--->
