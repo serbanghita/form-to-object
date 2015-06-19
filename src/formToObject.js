@@ -171,6 +171,10 @@
 			return $form;
 		}
 
+        function isUploadForm() {
+            return ($form.enctype && $form.enctype === 'multipart/form-data' ? true : false);
+        }
+
 		// Set the elements we need to parse.
 		function setFormElements() {
 			$formElements = $form.querySelectorAll('input, textarea, select');
@@ -205,6 +209,14 @@
             return $domNode.checked;
         }
 
+        //function isMultiple($domNode){
+        //    return ($domNode.multiple ? true : false);
+        //}
+
+        function isFileList($domNode){
+            return (window.FileList && $domNode.files instanceof window.FileList);
+        }
+
 		function getNodeValues($domNode){
 
 			// We're only interested in the radio that is checked.
@@ -220,7 +232,17 @@
             // File inputs are a special case.
             // We have to grab the .files property of the input, which is a FileList.
             if( isFileField($domNode) ) {
-                return ($domNode.files !== void (0) ) ? $domNode.files : false;
+                // Ignore input file fields if the form is not encoded properly.
+                if (isUploadForm()) {
+                   // HTML5 compatible browser.
+                   if (isFileList($domNode) && $domNode.files.length > 0) {
+                       return $domNode.files;
+                   } else {
+                       return ($domNode.value && $domNode.value !== '' ? $domNode.value : false);
+                   }
+                } else {
+                    return false;
+                }
             }
 
 			// We're only interested in textarea fields that have values.

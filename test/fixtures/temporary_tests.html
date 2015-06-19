@@ -1,22 +1,13 @@
 <body>
-	<div id="someFieldsWrapper">
-		<input type="checkbox" name="first" value="value1">
-		<input type="checkbox" name="second[]" value="value2">
-		<input type="checkbox" name="second[]" value="value3">
-		<input type="checkbox" name="third" value="value1" checked>
-		<input type="checkbox" name="third" value="value2" checked>
-	</div>
-    <div id="fileFieldWrapper">
-        <input type="file" name="photo">
-    </div>
-    <div id="fileFieldsWrapper">
-        <input type="file" name="photos[]">
-        <input type="file" name="photos[]">
-        <input type="file" name="photos[]">
-    </div>
-    <div id="fileFieldsWrapper2">
-        <input type="file" name="photos" multiple>
-    </div>
+    <form id="testForm" enctype="multipart/form-data">
+        <div id="someFieldsWrapper">
+            <input type="checkbox" name="first" value="value1">
+            <input type="checkbox" name="second[]" value="value2">
+            <input type="checkbox" name="second[]" value="value3">
+            <input type="checkbox" name="third" value="value1" checked>
+            <input type="checkbox" name="third" value="value2" checked>
+        </div>
+    </form>
 </body>
 
 

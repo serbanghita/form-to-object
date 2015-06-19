@@ -2,9 +2,7 @@ module.exports = function(grunt) {
 
   'use strict';
 
-  //var globals = {};
-  //globals.PWD = process.env.PWD;
-  console.log(process.env.PWD);
+  // window.serban = process.env.PWD;
 
   // Project configuration.
   grunt.initConfig({
@@ -31,7 +29,7 @@ module.exports = function(grunt) {
       jasmine: {
           'default': {
             src: 'src/*.js',
-            options: {
+              options: {
               specs: [
                 'test/testInput.js',
                 'test/testInputFile.js',
@@ -64,6 +62,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
 
   // Default task(s).
-  grunt.registerTask('default', ['uglify', 'jasmine']); // 'jshint',
+  grunt.registerTask('default', ['jshint', 'uglify', 'jasmine']); // 'jshint',
 
 };

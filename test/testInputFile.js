@@ -2,7 +2,7 @@ describe('An HTML form with a file field', function(){
 
     beforeEach(function () {
         var html = '<form id="newForm" enctype="multipart/form-data">' +
-            '<input type="file" name="photo" id="photo" value="e:/webserver/www/git/test/formToObject/fixtures/test.jpg">' +
+            '<input type="file" name="photo" id="photo" value="./fixtures/test.jpg">' +
             '</form>';
         var $newForm = document.createElement('div');
         $newForm.id = 'fixtures';
@@ -15,14 +15,14 @@ describe('An HTML form with a file field', function(){
     });
 
     // Due to security reason in browsers.
-    it('should return false if empty valued option is set to false', function(){
-        expect(formToObject('newForm', {includeEmptyValuedElements:false})).toBe(false);
-    });
+    //it('should return false if empty valued option is set to false', function(){
+    //    expect(formToObject('newForm', {includeEmptyValuedElements:false})).toBe(false);
+    //});
 
     // Due to security reason in browsers.
-    it('should return an object with an empty file path if empty valued option is set to true', function(){
-        expect(formToObject('newForm', {includeEmptyValuedElements:true})).toEqual({'photo':''});
-    });
+    //it('should return an object with an empty file path if empty valued option is set to true', function(){
+    //    expect(formToObject('newForm', {includeEmptyValuedElements:true})).toEqual({'photo':''});
+    //});
 
     //it('serban test', function(){
     //    var test = formToObject('newForm');

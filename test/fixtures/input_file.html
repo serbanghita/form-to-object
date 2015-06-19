@@ -1,0 +1,21 @@
+<body>
+<form id="testForm" enctype="multipart/form-data">
+    <div id="fileFieldWrapper">
+        <input type="file" name="photo">
+    </div>
+    <div id="fileFieldsWrapper">
+        <input type="file" name="photos[]">
+        <input type="file" name="photos[]">
+        <input type="file" name="photos[]">
+    </div>
+    <div id="fileFieldsWrapper2">
+        <input type="file" name="photos2" multiple>
+    </div>
+</form>
+</body>
+
+<script src="../../src/formToObject.js"></script>
+<script>
+    var testForm = formToObject('testForm');
+    console.log('testForm', testForm);
+</script>
