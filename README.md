@@ -5,23 +5,35 @@
 > Convert **HTML forms** with all their **fields** and **values** to **multi-dimensional JavaScript** objects
 
 
-##### Include
+##### How to use
 
 ```html
 <!-- Include minified script (~2kb) -->
 <script src="build/formToObject.min.js"></script>
 ```
 
-##### Usage
-
-Using the form's id value:
+**Using the DOM node id**
 
 ```javascript
 var myFormObj = formToObject('myFormId');
-console.log(myFormObj);
+/* 
+  console.log(myFormObj);
+  {
+    saveSettings: 'Save',
+    name: 'Serban',
+    race: 'orc',
+    settings: {
+       input: 'keyboard',
+       video: {
+          resolution: '1024x768',
+          vsync: 'on'
+       }
+    }
+  }
+*/
 ```
 
-Using the actual DOM Node:
+**Using the actual DOM Node**
 
 ```javascript
 var $formNode = document.getElementById('myFormId');
@@ -29,7 +41,7 @@ var myFormObj = formToObject($formNode);
 console.log(myFormObj);
 ```
 
-Real case scenario with jQuery AJAX:
+Sending form data server-side
 
 ```javascript
 $.ajax({
