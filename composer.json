@@ -1,5 +1,5 @@
 {
-  "name": "serbanghita/formToObject.js",
+  "name": "serbanghita/form-to-object.js",
   "description": "Plain JavaScript method to convert a HTML form (fields and values) to JavaScript (multidimensional) object.",
   "keywords": [
     "js",
