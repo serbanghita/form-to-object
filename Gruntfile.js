@@ -14,8 +14,8 @@ module.exports = function(grunt) {
             },
             build: {
                 src: 'src/<%= pkg.name %>.js',
-                dest: 'build/<%= pkg.name %>.min.js',
-            },
+                dest: 'build/<%= pkg.name %>.min.js'
+            }
         },
         jshint: {
             options: {
@@ -24,7 +24,7 @@ module.exports = function(grunt) {
             all: ['src/<%= pkg.name %>.js'],
             grunt: {
                 src: 'Gruntfile.js'
-            },
+            }
         },
         jasmine: {
           default: {
@@ -39,18 +39,18 @@ module.exports = function(grunt) {
                     'test/testRadio.js',
                     'test/testUnexpected.js',
                     'test/testExceptions.js',
-                    'test/testComplexForms.js',
+                    'test/testComplexForms.js'
                   ],
                   vendor: [
                     'vendor/jquery/jquery.js',
-                    'vendor/jquery/jasmine-jquery.js',
+                    'vendor/jquery/jasmine-jquery.js'
                   ],
                   outfile: 'test/SpecRunner.html',
                   keepRunner: true,
-                  '--web-security': 'no',
-              },
+                  '--web-security': 'no'
+              }
           }
-      },
+      }
     });
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
