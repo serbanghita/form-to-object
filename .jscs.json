@@ -1,5 +1,6 @@
 {
-    "maxErrors": -1,
+    "maxErrors": null,
+    "fix": true,
     "esnext": false,
     "disallowSpacesInNamedFunctionExpression": {
         "beforeOpeningRoundBrace": true
@@ -75,5 +76,5 @@
     "safeContextKeyword": "_this",
     "validateLineBreaks": "LF",
     "validateQuoteMarks": { "mark": "'", "escape": true, "ignoreJSX": true },
-    "validateIndentation": 4
+    "validateIndentation": 2
 }

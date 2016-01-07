@@ -1,68 +1,122 @@
 module.exports = function(grunt) {
 
-    'use strict';
+  'use strict';
 
-    // window.serban = process.env.PWD;
-
-    // Project configuration.
-    grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        uglify: {
-            options: {
-                banner: '/*! <%= pkg.name %> ' +
-                        '<%= grunt.template.today("yyyy-mm-dd") %> */\n'
-            },
-            build: {
-                src: 'src/<%= pkg.name %>.js',
-                dest: 'build/<%= pkg.name %>.min.js'
-            }
-        },
-        jshint: {
-            options: {
-                jshintrc: true
-            },
-            all: ['src/<%= pkg.name %>.js'],
-            grunt: {
-                src: 'Gruntfile.js'
-            }
-        },
-        jasmine: {
-          default: {
-              src: 'src/*.js',
-              options: {
-                  specs: [
-                    'test/testInput.js',
-                    'test/testInputFile.js',
-                    'test/testTextarea.js',
-                    'test/testSelect.js',
-                    'test/testCheckbox.js',
-                    'test/testRadio.js',
-                    'test/testUnexpected.js',
-                    'test/testExceptions.js',
-                    'test/testComplexForms.js'
-                  ],
-                  vendor: [
-                    'vendor/jquery/jquery.js',
-                    'vendor/jquery/jasmine-jquery.js'
-                  ],
-                  outfile: 'test/SpecRunner.html',
-                  keepRunner: true,
-                  '--web-security': 'no'
-              }
-          }
+  // Project configuration.
+  grunt.initConfig({
+    pkg: grunt.file.readJSON('package.json'),
+    concat: {
+      js: {
+        src: [
+          'src/intro.js',
+          'src/intro.class.js',
+          'src/core.js',
+          'src/outro.class.js',
+          'src/outro.export.js',
+          'src/outro.js'
+        ],
+        dest: 'dist/<%= pkg.title %>.js'
       }
-    });
+    },
+    jscs: {
+      main: {
+        src: 'dist/<%= pkg.title %>.js',
+        options: {
+          config: '.jscs.json',
+          fix: true,
+          force: true
+        }
+      }
+    },
+    jshint: {
+      all: {
+        src: [
+          'Gruntfile.js', 'dist/<%= pkg.title %>.js'
+        ],
+        options: {
+          jshintrc: true
+        }
+      },
+      dist: {
+        src: 'dist/<%= pkg.title %>.js',
+        options: {
+          jshintrc: true
+        }
+      }
+    },
+    jsbeautifier: {
+      rewrite: {
+        src: 'dist/<%= pkg.title %>.js'
+      },
+      options: {
+        js: {
+          indentSize: 2,
+          jslintHappy: true
+        }
+      }
+    },
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= pkg.version %> ' +
+                '<%= grunt.template.today("yyyy-mm-dd") %> */\n'
+      },
+      build: {
+        src: 'dist/<%= pkg.title %>.js',
+        dest: 'dist/<%= pkg.title %>.min.js'
+      }
+    },
+    jasmine: {
+      acceptance: {
+        src: 'dist/<%= pkg.title %>.js',
+        options: {
+          specs: [
+            'test/acceptance/testInput.js',
+            'test/acceptance/testInputFile.js',
+            'test/acceptance/testTextarea.js',
+            'test/acceptance/testSelect.js',
+            'test/acceptance/testCheckbox.js',
+            'test/acceptance/testRadio.js',
+            'test/acceptance/testUnexpected.js',
+            'test/acceptance/testExceptions.js',
+            'test/acceptance/testComplexForms.js'
+          ],
+          vendor: [
+            'vendor/jquery/jquery.js',
+            'vendor/jquery/jasmine-jquery.js'
+          ],
+          outfile: 'test/acceptance/SpecRunner.html',
+          keepRunner: true,
+          '--web-security': 'no'
+        }
+      },
+      unit: {
+        src: ['src/core.js'],
+        options: {
+          specs: [
+            'test/unit/isDomElementNode.js',
+            'test/unit/checkForLastNumericKey.js'
+          ],
+          outfile: 'test/unit/SpecRunner.html',
+          keepRunner: true
+        }
+      }
+    }
+  });
 
-    grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-jscs');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-jsbeautifier');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-jasmine');
 
-    // Load the plugin that provides the "uglify" task.
-    grunt.loadNpmTasks('grunt-contrib-uglify');
+  // Default task(s).
+  grunt.registerTask('default',
+      ['concat', 'jshint', 'jscs', 'jsbeautifier', 'uglify', 'jasmine:acceptance', 'jasmine:unit']
+  );
 
-    //grunt.loadNpmTasks('grunt-karma');
-
-    grunt.loadNpmTasks('grunt-contrib-jasmine');
-
-    // Default task(s).
-    grunt.registerTask('default', ['jshint', 'uglify', 'jasmine']); // 'jshint',
+  grunt.registerTask('unit',
+      ['concat', 'jshint', 'jscs', 'jsbeautifier', 'jasmine:unit']
+  );
 
 };

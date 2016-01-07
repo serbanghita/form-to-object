@@ -8,11 +8,17 @@
             <input type="checkbox" name="third" value="value2" checked>
         </div>
     </form>
+
+    <form id="testForm2">
+        <input type="hidden" name="a[arr][0]" value="12" />
+        <input type="hidden" name="a[arr][1]" value="34" />
+        <input type="hidden" name="a[arr][serban]" value="1337" />
+    </form>
 </body>
 
 
 <script src="../../src/formToObject.js"></script>
 <script>
-//var result = formToObject('fileFieldWrapper');
-//console.log(result);
+var result = formToObject('testForm2');
+console.log(result);
 </script>
