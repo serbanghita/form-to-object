@@ -1,6 +1,6 @@
 {
     "maxErrors": -1,
-    "esnext": true,
+    "esnext": false,
     "disallowSpacesInNamedFunctionExpression": {
         "beforeOpeningRoundBrace": true
     },
