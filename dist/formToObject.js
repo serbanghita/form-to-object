@@ -44,6 +44,10 @@
      * @return mixed (string|undefined)
      */
     function checkForLastNumericKey(o) {
+      if (!o || typeof o !== 'object') {
+        return undefined;
+      }
+
       return Object.keys(o).filter(function (elem) {
         return !isNaN(parseInt(elem, 10));
       }).splice(-1)[0];
@@ -56,7 +60,11 @@
      */
     function getLastIntegerKey(o) {
       var lastKeyIndex = checkForLastNumericKey(o);
-      return parseInt(lastKeyIndex, 10);
+      if (typeof lastKeyIndex === 'string') {
+        return parseInt(lastKeyIndex, 10);
+      } else {
+        return 0;
+      }
     }
 
     /**
@@ -66,10 +74,10 @@
      */
     function getNextIntegerKey(o) {
       var lastKeyIndex = checkForLastNumericKey(o);
-      if (typeof lastKeyIndex === 'undefined') {
-        return 0;
-      } else {
+      if (typeof lastKeyIndex === 'string') {
         return parseInt(lastKeyIndex, 10) + 1;
+      } else {
+        return 0;
       }
     }
 

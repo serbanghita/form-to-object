@@ -69,17 +69,7 @@ module.exports = function(grunt) {
       acceptance: {
         src: 'dist/<%= pkg.title %>.js',
         options: {
-          specs: [
-            'test/acceptance/testInput.js',
-            'test/acceptance/testInputFile.js',
-            'test/acceptance/testTextarea.js',
-            'test/acceptance/testSelect.js',
-            'test/acceptance/testCheckbox.js',
-            'test/acceptance/testRadio.js',
-            'test/acceptance/testUnexpected.js',
-            'test/acceptance/testExceptions.js',
-            'test/acceptance/testComplexForms.js'
-          ],
+          specs: ['test/acceptance/*.js'],
           vendor: [
             'vendor/jquery/jquery.js',
             'vendor/jquery/jasmine-jquery.js'
@@ -92,10 +82,7 @@ module.exports = function(grunt) {
       unit: {
         src: ['src/core.js'],
         options: {
-          specs: [
-            'test/unit/isDomElementNode.js',
-            'test/unit/checkForLastNumericKey.js'
-          ],
+          specs: ['test/unit/*.js'],
           outfile: 'test/unit/SpecRunner.html',
           keepRunner: true
         }
