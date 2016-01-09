@@ -29,7 +29,12 @@
      * Private methods
      */
 
-    // Check to see if the object is a HTML node.
+    /**
+     * Check to see if the object is a HTML node.
+     *
+     * @param {object} node
+     * @returns {boolean}
+     */
     function isDomElementNode(node) {
       return !!(node &&
         typeof node === 'object' &&
@@ -81,8 +86,17 @@
       }
     }
 
-    // Get the real number of properties from an object.
+    /**
+     * Get the real number of properties from an object.
+     *
+     * @param {object} o
+     * @returns {number}
+     */
     function getObjLength(o) {
+      if (typeof o !== 'object' || o === null) {
+        return 0;
+      }
+
       var l = 0;
       var k;
 
@@ -100,23 +114,22 @@
     }
 
     /**
-     * Simple extend for our settings.
-     * WARNING: Here we don't care about passing by reference.
-     * @todo Maybe use Object.create - depending on situations.
+     * Simple extend of own properties.
+     * Needed for our settings.
      *
-     * @param  {Object} oldObj The old object.
-     * @param  {Object} newObj The new object with new properties and values.
-     * @return {Object}        The new resulted object.
+     * @param  {object} destination The object we want to extend.
+     * @param  {object} sources The object with new properties that we want to add the the destination.
+     * @return {object}
      */
-    function extend(oldObj, newObj) {
+    function extend(destination, sources) {
       var i;
-      for (i in newObj) {
-        if (newObj.hasOwnProperty(i)) {
-          oldObj[i] = newObj[i];
+      for (i in sources) {
+        if (sources.hasOwnProperty(i)) {
+          destination[i] = sources[i];
         }
       }
 
-      return oldObj;
+      return destination;
     }
 
     // Iteration through arrays and objects. Compatible with IE.
