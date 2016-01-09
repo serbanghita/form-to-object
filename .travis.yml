@@ -1,7 +1,3 @@
-branches:
-  only:
-    - devel
-
 language: node_js
 
 node_js:
@@ -13,3 +9,12 @@ before_install:
   - npm install -g grunt-cli
   
 install: npm install
+
+notifications:
+  email: false
+  irc:
+    channels:
+      - "asimov.freenode.net#mobiledetect"
+    template:
+      - "%{repository} (%{commit}): %{message}. Build details: %{build_url}"
+      - "%{author} said %{commit_subject}. See %{compare_url}"
