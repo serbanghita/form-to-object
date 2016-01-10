@@ -1,6 +1,9 @@
 # formToObject.js
 
-[![Build Status](https://travis-ci.org/serbanghita/formToObject.js.svg)](https://travis-ci.org/serbanghita/formToObject.js) [![Dependency Status](https://www.versioneye.com/user/projects/5446a74944a5254346000085/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5446a74944a5254346000085)
+[![Build Status][build-status-img]]([build-status-url]) 
+[![NPM package][npm-img]]([npm-url])
+[![NPM downloads][npm-downloads-img]]([npm-downloads-url])
+[![Dependency Status][dependencies-status-img]]([dependencies-status-url])
 
 > Convert **HTML forms** with all their **fields** and **values** to **multi-dimensional JavaScript** objects
 
@@ -59,3 +62,12 @@ IE 8, Firefox 3.5, Chrome, Safari, Opera 10, every mobile browser.
 ##### Screenshot
 
 ![](http://serbanghita.github.io/formToObject.js/formToObj-demo.png)
+
+[build-status-img]:https://travis-ci.org/serbanghita/formToObject.js.svg?style=flat
+[build-status-url]:https://travis-ci.org/serbanghita/formToObject.js
+[npm-img]:https://img.shields.io/npm/v/form_to_object.svg?style=flat-square
+[npm-url]:https://www.npmjs.com/package/form_to_object
+[npm-downloads-img]: http://img.shields.io/npm/dm/form_to_object.svg?style=flat-square
+[npm-downloads-url]: https://www.npmjs.com/package/form_to_object
+[dependencies-status-img]:https://www.versioneye.com/user/projects/5446a74944a5254346000085/badge.svg?style=flat
+[dependencies-status-url]:https://www.versioneye.com/user/projects/5446a74944a5254346000085
