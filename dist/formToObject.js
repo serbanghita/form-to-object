@@ -146,8 +146,6 @@
           callback.call(arr, arr[i]);
         }
       }
-
-      return;
     }
 
     // Constructor

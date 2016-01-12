@@ -136,8 +136,6 @@ function forEach(arr, callback) {
       callback.call(arr, arr[i]);
     }
   }
-
-  return;
 }
 
 // Constructor
