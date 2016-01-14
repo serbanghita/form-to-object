@@ -122,7 +122,12 @@ function extend(destination, sources) {
   return destination;
 }
 
-// Iteration through arrays and objects. Compatible with IE.
+/**
+ * Iteration through arrays and objects. Compatible with IE.
+ * @todo The callback scope is non-standard.
+ * @param {Array} arr
+ * @param callback
+ */
 function forEach(arr, callback) {
   if ([].forEach) {
     return [].forEach.call(arr, callback);
