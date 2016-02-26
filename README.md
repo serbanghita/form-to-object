@@ -9,11 +9,13 @@
 
 
 ##### How to use
+ > Supports Traditional, RequireJS / AWD and CommonJS / Browserfy style imports.
 
 ```html
 <!-- Include minified script (~2kb) -->
 <script src="build/formToObject.min.js"></script>
 ```
+
 
 **Using the DOM node id**
 
