@@ -8,6 +8,8 @@
     define(function() {
       return formToObject;
     });
+  } else if (typeof module === 'object' && module.exports) {
+    module.exports = formToObject;
   } else {
     // Browser: Expose to window
     window.formToObject = formToObject;
