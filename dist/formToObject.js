@@ -463,7 +463,8 @@
         if (objKeyNames.length === 1) {
           processSingleLevelNode(
             $domNode,
-            objKeyNames, (domNodeValue ? domNodeValue : ''),
+            objKeyNames,
+            (domNodeValue ? domNodeValue : ''),
             result
           );
         }
@@ -471,7 +472,8 @@
         if (objKeyNames.length > 1) {
           processMultiLevelNode(
             $domNode,
-            objKeyNames, (domNodeValue ? domNodeValue : ''),
+            objKeyNames,
+            (domNodeValue ? domNodeValue : ''),
             result
           );
         }
@@ -503,6 +505,8 @@
     define(function () {
       return formToObject;
     });
+  } else if (typeof module === 'object' && module.exports) {
+    module.exports = formToObject;
   } else {
     // Browser: Expose to window
     window.formToObject = formToObject;
