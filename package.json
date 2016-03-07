@@ -1,8 +1,8 @@
 {
   "name": "form_to_object",
   "title": "formToObject",
-  "description": "Convert a form to an object, includin multi-dimensional name fields.",
-  "version": "1.0.7",
+  "description": "Convert a form to an object, including multi-dimensional name fields.",
+  "version": "1.0.8",
   "homepage": "https://github.com/serbanghita/formToObject",
   "author": "Serban Ghita <serbanghita@gmail.com>",
   "main": "dist/formToObject.js",
