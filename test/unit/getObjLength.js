@@ -12,4 +12,22 @@ describe('getObjLength', function() {
     expect(getObjLength([])).toBe(0);
     expect(getObjLength({name: 'Serban', job: 'programmer'})).toBe(2);
   });
+
+  describe('polyfill', function() {
+      var objKey = Object.keys;
+
+      beforeEach(function(){
+          Object.keys = null;
+      });
+
+    afterEach(function() {
+        Object.keys = objKey;
+    });
+
+    it('when provided with valid objects then it return the correct length', function() {
+      expect(getObjLength({})).toBe(0);
+      expect(getObjLength([])).toBe(0);
+      expect(getObjLength({name: 'Serban', job: 'programmer'})).toBe(2);
+    });
+  });
 });

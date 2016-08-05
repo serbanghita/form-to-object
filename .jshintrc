@@ -16,7 +16,7 @@
   "camelcase": true,
   "eqeqeq": true,
   "eqnull": true,
-  "indent": 2,
+  "indent": 4,
   "latedef": true,
   "newcap": false,
   "quotmark": "single",

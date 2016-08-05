@@ -14,4 +14,12 @@ describe('extend', function() {
     expect(me.name).toBe('Bob');
     expect(me.job).toBe('artist');
   });
+
+  it('when given a source that have more fields that the destination then the destination will inherit new source fields', function() {
+    var me = {name: 'Serban', age: 32, sex: 'male'};
+    var him = {name: 'Serban', age: 33};
+    extend(him, me);
+    expect(him.sex).toBeDefined();
+    expect(him.sex).toBe('male');
+  });
 });
