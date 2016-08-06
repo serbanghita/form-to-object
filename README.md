@@ -1,7 +1,5 @@
 # formToObject.js
 
-[![Foo](http://www.google.com.au/images/nav_logo7.png)](http://google.com.au/)
-
 [![Build Status][build-status-img]](https://travis-ci.org/serbanghita/formToObject.js)
 [![NPM package][npm-img]](https://www.npmjs.com/package/form_to_object)
 [![NPM downloads][npm-downloads-img]](https://www.npmjs.com/package/form_to_object)
