@@ -4,20 +4,27 @@ var jscs = require('gulp-jscs');
 var rename = require('gulp-rename');
 var util = require('gulp-util');
 var uglify = require('gulp-uglify');
-var jasmine = require('gulp-jasmine-phantom');
 var runSequence = require('run-sequence');
+var ts = require('gulp-typescript');
+var tsProject = ts.createProject('tsconfig.json');
 
-// npm install phantomjs -g
+
+gulp.task('ts', function() {
+  var tsResult = tsProject.src()
+    .pipe(tsProject());
+
+  return tsResult.js.pipe(gulp.dest('lib'));
+});
 
 gulp.task('js:concat', function () {
     return gulp.src(
         [
-            'src/intro.js',
-            'src/intro.class.js',
-            'src/core.js',
-            'src/outro.class.js',
-            'src/outro.export.js',
-            'src/outro.js'
+            'lib/intro.js',
+            'lib/intro.class.js',
+            'lib/core.js',
+            'lib/outro.class.js',
+            'lib/outro.export.js',
+            'lib/outro.js'
         ])
         .pipe(concat('formToObject.js'))
         .pipe(gulp.dest('dist'));
@@ -60,7 +67,7 @@ gulp.task('js:watch', function() {
 
 
 gulp.task('build', function(cb) {
-    runSequence('js:concat', 'js:fix', 'js:minify', cb);
+    runSequence('ts', 'js:concat', 'js:fix', 'js:minify', cb);
 });
 
 gulp.task('test', function(cb) {

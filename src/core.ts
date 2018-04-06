@@ -1,19 +1,29 @@
+interface Window {
+    FileList: FileList|null;
+}
+
+type HTMLFormField = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | HTMLButtonElement;
+
+interface ISettings {
+  [key: string]: boolean;
+}
+
 /**
  * Defaults
  */
 
-var formRef = null;
+let formRef: string | HTMLFormElement = null;
 
 // Experimental. Don't rely on them yet.
-var settings = {
+let settings = {
     includeEmptyValuedElements: false,
     w3cSuccessfulControlsOnly: false
 };
 
 // Currently matching only '[]'.
-var keyRegex = /[^\[\]]+|\[\]/g;
-var $form = null;
-var $formElements = [];
+const keyRegex = /[^\[\]]+|\[\]/g;
+let $form: HTMLFormElement = null;
+let $formElements: NodeListOf<HTMLFormField>;
 
 /**
  * Private methods
@@ -22,25 +32,19 @@ var $formElements = [];
 /**
  * Check to see if the object is a HTML node.
  *
- * @param {object} node
+ * @param {HTMLFormElement} node
  * @returns {boolean}
  */
-function isDomElementNode(node) {
-    return !!(node &&
-    typeof node === 'object' &&
-    'nodeType' in node &&
-    node.nodeType === 1);
+function isDomElementNode(node: HTMLFormElement): boolean {
+    return !!(node && typeof node === 'object' && 'nodeType' in node && node.nodeType === 1);
 }
 
 /**
  * Check for last numeric key.
- *
- * @param o object
- * @return mixed (string|undefined)
  */
-function checkForLastNumericKey(o) {
+function checkForLastNumericKey(o: {}): string | undefined {
     if (!o || typeof o !== 'object') {
-        return undefined;
+        return;
     }
 
     return Object.keys(o).filter(function (elem) {
@@ -53,7 +57,7 @@ function checkForLastNumericKey(o) {
  * @param o object
  * @return int
  */
-function getLastIntegerKey(o) {
+function getLastIntegerKey(o: {}) {
     var lastKeyIndex = checkForLastNumericKey(o);
     if (typeof lastKeyIndex === 'string') {
         return parseInt(lastKeyIndex, 10);
@@ -67,7 +71,7 @@ function getLastIntegerKey(o) {
  * @param o object
  * @return int
  */
-function getNextIntegerKey(o) {
+function getNextIntegerKey(o: {}) {
     var lastKeyIndex = checkForLastNumericKey(o);
     if (typeof lastKeyIndex === 'string') {
         return parseInt(lastKeyIndex, 10) + 1;
@@ -82,7 +86,7 @@ function getNextIntegerKey(o) {
  * @param {object} o
  * @returns {number}
  */
-function getObjLength(o) {
+function getObjLength(o: {}) {
 
     if (typeof o !== 'object' || o === null) {
         return 0;
@@ -109,37 +113,36 @@ function getObjLength(o) {
  * Needed for our settings.
  *
  * @param  {object} destination The object we want to extend.
- * @param  {object} sources The object with new properties that we want to add the the destination.
+ * @param  {object} source The object with new properties that we want to add the the destination.
  * @return {object}
  */
-function extend(destination, sources) {
-    var i;
-    for (i in sources) {
-        if (sources.hasOwnProperty(i)) {
-            destination[i] = sources[i];
-        }
+function extend(settings: ISettings, source: ISettings) {
+  let i: any;
+  for (i in source) {
+    if (source.hasOwnProperty(i)) {
+      settings[i] = source[i];
     }
-
-    return destination;
+  }
+  return settings;
 }
 
-// Iteration through arrays.
+// Iteration through collections.
 // Compatible with IE.
-function forEach(arr, callback) {
-    if ([].forEach) {
-        return [].forEach.call(arr, callback);
-    }
+function forEach(arr: HTMLCollection, callback: (params: any) => void) {
+  if ([].forEach) {
+    return [].forEach.call(arr, callback);
+  }
 
-    var i;
-    for (i = 0; i < arr.length; i++) {
-        callback.call(arr, arr[i], i);
-    }
+  let i;
+  for (i = 0; i < arr.length; i++) {
+    callback.call(arr, arr[i], i);
+  }
 
-    return;
+  return;
 }
 
 // Constructor
-function init(options) {
+function init(options: string | [HTMLFormElement]) {
     // Assign the current form reference.
     if (!options || typeof options !== 'object' || !options[0]) {
         return false;
@@ -152,7 +155,7 @@ function init(options) {
     // Override current settings.
     // Eg. formToObject('myForm', {mySetting: true})
     if (typeof options[1] !== 'undefined' && getObjLength(options[1]) > 0) {
-        extend(settings, options[1]);
+      extend(settings, options[1]);
     }
 
     if (!setForm()) {
@@ -170,12 +173,12 @@ function init(options) {
 function setForm() {
     switch (typeof formRef) {
         case 'string':
-            $form = document.getElementById(formRef);
+            $form = document.getElementById(formRef as string) as HTMLFormElement;
             break;
 
         case 'object':
-            if (isDomElementNode(formRef)) {
-                $form = formRef;
+            if (isDomElementNode(formRef as HTMLFormElement)) {
+                $form = formRef as HTMLFormElement;
             }
 
             break;
@@ -184,8 +187,8 @@ function setForm() {
     return $form;
 }
 
-function isUploadForm() {
-    return ($form.enctype && $form.enctype === 'multipart/form-data' ? true : false);
+function isUploadForm(): boolean {
+    return $form.enctype && $form.enctype === 'multipart/form-data';
 }
 
 // Set the elements we need to parse.
@@ -194,35 +197,35 @@ function setFormElements() {
     return $formElements.length;
 }
 
-function isRadio($domNode) {
+function isRadio($domNode: HTMLInputElement) {
     return $domNode.nodeName === 'INPUT' && $domNode.type === 'radio';
 }
 
-function isCheckbox($domNode) {
+function isCheckbox($domNode: HTMLInputElement) {
     return $domNode.nodeName === 'INPUT' && $domNode.type === 'checkbox';
 }
 
-function isFileField($domNode) {
+function isFileField($domNode: HTMLInputElement) {
     return $domNode.nodeName === 'INPUT' && $domNode.type === 'file';
 }
 
-function isTextarea($domNode) {
+function isTextarea($domNode: HTMLTextAreaElement) {
     return $domNode.nodeName === 'TEXTAREA';
 }
 
-function isSelectSimple($domNode) {
+function isSelectSimple($domNode: HTMLSelectElement) {
     return $domNode.nodeName === 'SELECT' && $domNode.type === 'select-one';
 }
 
-function isSelectMultiple($domNode) {
+function isSelectMultiple($domNode: HTMLSelectElement) {
     return $domNode.nodeName === 'SELECT' && $domNode.type === 'select-multiple';
 }
 
-function isSubmitButton($domNode) {
+function isSubmitButton($domNode: HTMLButtonElement) {
     return $domNode.nodeName === 'BUTTON' && $domNode.type === 'submit';
 }
 
-function isChecked($domNode) {
+function isChecked($domNode: HTMLInputElement) {
     return $domNode.checked;
 }
 
@@ -230,31 +233,35 @@ function isChecked($domNode) {
 //  return ($domNode.multiple ? true : false);
 //}
 
-function isFileList($domNode) {
-    return (window.FileList && $domNode.files instanceof window.FileList);
+function isFileList($domNode: HTMLInputElement) {
+    return (window.FileList && ($domNode.files instanceof <any>window.FileList));
 }
 
-function getNodeValues($domNode) {
+function getNodeValues($domNode: HTMLFormField) {
     // We're only interested in the radio that is checked.
-    if (isRadio($domNode)) {
-        return isChecked($domNode) ? $domNode.value : false;
+    if (isRadio($domNode as HTMLInputElement)) {
+        return isChecked($domNode as HTMLInputElement) ? ($domNode as HTMLInputElement).value : false;
     }
 
     // We're only interested in the checkbox that is checked.
-    if (isCheckbox($domNode)) {
-        return isChecked($domNode) ? $domNode.value : false;
+    if (isCheckbox($domNode as HTMLInputElement)) {
+        return isChecked($domNode as HTMLInputElement) ? ($domNode as HTMLInputElement).value : false;
     }
 
     // File inputs are a special case.
     // We have to grab the .files property of the input, which is a FileList.
-    if (isFileField($domNode)) {
+    if (isFileField($domNode as HTMLInputElement)) {
         // Ignore input file fields if the form is not encoded properly.
         if (isUploadForm()) {
             // HTML5 compatible browser.
-            if (isFileList($domNode) && $domNode.files.length > 0) {
-                return $domNode.files;
+            if (isFileList($domNode as HTMLInputElement) && ($domNode as HTMLInputElement).files.length > 0) {
+                return ($domNode as HTMLInputElement).files;
             } else {
-                return ($domNode.value && $domNode.value !== '' ? $domNode.value : false);
+                return (
+                  ($domNode as HTMLInputElement).value && ($domNode as HTMLInputElement).value !== '' ?
+                  ($domNode as HTMLInputElement).value :
+                  false
+                );
             }
         } else {
             return false;
@@ -262,72 +269,79 @@ function getNodeValues($domNode) {
     }
 
     // We're only interested in textarea fields that have values.
-    if (isTextarea($domNode)) {
-        return ($domNode.value && $domNode.value !== '' ? $domNode.value : false);
+    if (isTextarea($domNode as HTMLTextAreaElement)) {
+        return (
+          ($domNode as HTMLTextAreaElement).value && ($domNode as HTMLTextAreaElement).value !== '' ?
+          ($domNode as HTMLTextAreaElement).value :
+          false
+        );
     }
 
-    if (isSelectSimple($domNode)) {
-        if ($domNode.value && $domNode.value !== '') {
-            return $domNode.value;
-        } else if ($domNode.options && $domNode.options.length && $domNode.options[0].value !== '') {
-            return $domNode.options[0].value;
+    if (isSelectSimple($domNode as HTMLSelectElement)) {
+        if (($domNode as HTMLSelectElement).value && ($domNode as HTMLSelectElement).value !== '') {
+            return ($domNode as HTMLSelectElement).value;
+        } else if (
+          ($domNode as HTMLSelectElement).options &&
+          ($domNode as HTMLSelectElement).options.length &&
+          ($domNode as HTMLSelectElement).options[0].value !== ''
+        ) {
+            return ($domNode as HTMLSelectElement).options[0].value;
         } else {
             return false;
         }
     }
 
     // We're only interested in multiple selects that have at least one option selected.
-    if (isSelectMultiple($domNode)) {
-        if ($domNode.options && $domNode.options.length > 0) {
-            var values = [];
-            forEach($domNode.options, function ($option) {
-                if ($option.selected) {
-                    values.push($option.value);
-                }
-            });
-
-            if (settings.includeEmptyValuedElements) {
-                return values;
-            } else {
-                return (values.length ? values : false);
+    if (isSelectMultiple($domNode as HTMLSelectElement)) {
+        if (($domNode as HTMLSelectElement).options && ($domNode as HTMLSelectElement).options.length > 0) {
+          var values: any[] = [];
+          forEach(($domNode as HTMLSelectElement).options, function ($option: HTMLOptionElement) {
+            if ($option.selected) {
+                values.push($option.value);
             }
+          });
 
+          if (settings.includeEmptyValuedElements) {
+              return values;
+          } else {
+              return (values.length ? values : false);
+          }
         } else {
             return false;
         }
     }
 
     // We're only interested if the button is type="submit"
-    if (isSubmitButton($domNode)) {
-        if ($domNode.value && $domNode.value !== '') {
-            return $domNode.value;
+    if (isSubmitButton($domNode as HTMLButtonElement)) {
+        if (($domNode as HTMLButtonElement).value && ($domNode as HTMLButtonElement).value !== '') {
+            return ($domNode as HTMLButtonElement).value;
         }
 
-        if ($domNode.innerText && $domNode.innerText !== '') {
-            return $domNode.innerText;
+        if (($domNode as HTMLButtonElement).innerText && ($domNode as HTMLButtonElement).innerText !== '') {
+            return ($domNode as HTMLButtonElement).innerText;
         }
 
         return false;
     }
 
     // Fallback or other non special fields.
-    if (typeof $domNode.value !== 'undefined') {
+    if (typeof ($domNode as HTMLButtonElement).value !== 'undefined') {
         if (settings.includeEmptyValuedElements) {
-            return $domNode.value;
+            return ($domNode as HTMLButtonElement).value;
         } else {
-            return ($domNode.value !== '' ? $domNode.value : false);
+            return (($domNode as HTMLButtonElement).value !== '' ? ($domNode as HTMLButtonElement).value : false);
         }
     } else {
         return false;
     }
 }
 
-function processSingleLevelNode($domNode, arr, domNodeValue, result) {
+function processSingleLevelNode($domNode: HTMLFormField, arr: any[], domNodeValue: any, result: any) {
     // Get the last remaining key.
     var key = arr[0];
 
     // We're only interested in the radio that is checked.
-    if (isRadio($domNode)) {
+    if (isRadio($domNode as HTMLInputElement)) {
         if (domNodeValue !== false) {
             result[key] = domNodeValue;
             return domNodeValue;
@@ -339,7 +353,7 @@ function processSingleLevelNode($domNode, arr, domNodeValue, result) {
     // Checkboxes are a special case.
     // We have to grab each checked values
     // and put them into an array.
-    if (isCheckbox($domNode)) {
+    if (isCheckbox($domNode as HTMLInputElement)) {
         if (domNodeValue !== false) {
             if (!result[key]) {
                 result[key] = [];
@@ -353,7 +367,7 @@ function processSingleLevelNode($domNode, arr, domNodeValue, result) {
 
     // Multiple select is a special case.
     // We have to grab each selected option and put them into an array.
-    if (isSelectMultiple($domNode)) {
+    if (isSelectMultiple($domNode as HTMLSelectElement)) {
         if (domNodeValue !== false) {
             result[key] = domNodeValue;
         } else {
@@ -368,13 +382,13 @@ function processSingleLevelNode($domNode, arr, domNodeValue, result) {
     return domNodeValue;
 }
 
-function processMultiLevelNode($domNode, arr, value, result) {
-    var keyName = arr[0];
+function processMultiLevelNode($domNode: HTMLFormField, arr: any[], value: any, result: any): any {
+    let keyName = arr[0];
 
     if (arr.length > 1) {
         if (keyName === '[]') {
             //result.push({});
-            result[getNextIntegerKey(result)] = {};
+            result[getNextIntegerKey(result) as number] = {};
             return processMultiLevelNode(
                 $domNode,
                 arr.splice(1, arr.length),
@@ -416,7 +430,7 @@ function processMultiLevelNode($domNode, arr, value, result) {
 function convertToObj() {
     var i = 0;
     var objKeyNames;
-    var $domNode;
+    var $domNode: HTMLFormField;
     var domNodeValue;
     var result = {};
     var resultLength;
@@ -432,13 +446,13 @@ function convertToObj() {
             !$domNode.name ||
             $domNode.name === '' ||
             $domNode.disabled ||
-            (isRadio($domNode) && !isChecked($domNode))
+            (isRadio($domNode as HTMLInputElement) && !isChecked($domNode as HTMLInputElement))
         ) {
             continue;
         }
 
         // Get the final processed domNode value.
-        domNodeValue = getNodeValues($domNode);
+        domNodeValue = getNodeValues($domNode as HTMLInputElement);
 
         // Exclude empty valued nodes if the settings allow it.
         if (domNodeValue === false && !settings.includeEmptyValuedElements) {

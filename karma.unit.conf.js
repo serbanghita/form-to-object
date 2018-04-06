@@ -2,12 +2,12 @@ module.exports = function(config) {
     config.set({
         frameworks: ['jasmine'],
         reporters: ['spec'],
-        browsers: ['PhantomJS'],
+        browsers: ['Chrome'],
         autoWatch: false,
         singleRun: true,
         debug: false,
         files: [
-            'src/core.js',
+            'lib/core.js',
             'test/unit/*.js'
         ]
     });
