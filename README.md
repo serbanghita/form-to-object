@@ -24,28 +24,26 @@
 
 > Using the DOM node id.
 
-
-    var result = formToObject('myFormId');
-    /* 
-      console.log(result);
-      {
-        saveSettings: 'Save',
-        name: 'Serban',
-        race: 'orc',
-        settings: {
-           input: 'keyboard',
-           video: {
-              resolution: '1024x768',
-              vsync: 'on'
-           }
-        }
-      }
-    */
-
+    formToObject('myFormId');
 
 > Using the actual DOM Node reference.
 
     formToObject(document.getElementById('myFormId'));
+
+*Result*    
+
+    {
+      saveSettings: 'Save',
+      name: 'Serban',
+      race: 'orc',
+      settings: {
+         input: 'keyboard',
+         video: {
+            resolution: '1024x768',
+            vsync: 'on'
+         }
+      }
+    }
 
 
 > XHR - sending form data
