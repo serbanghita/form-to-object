@@ -8,54 +8,54 @@
 > Convert **HTML forms** with all their **fields** and **values** to **multi-dimensional JavaScript** objects
 
 
-##### How to use
- > Supports Traditional, RequireJS / AWD and CommonJS / Browserfy style imports.
+## Install
 
-```html
-<!-- Include minified script (~2kb) -->
-<script src="build/formToObject.min.js"></script>
-```
+**Node.js**
+
+* `npm install form_to_object`
+
+**Browser**
+
+    <!-- Include minified script (~2kb) -->
+    <script src="dist/formToObject.min.js"></script>
 
 
-**Using the DOM node id**
+## Usage
 
-```javascript
-var myFormObj = formToObject('myFormId');
-/* 
-  console.log(myFormObj);
-  {
-    saveSettings: 'Save',
-    name: 'Serban',
-    race: 'orc',
-    settings: {
-       input: 'keyboard',
-       video: {
-          resolution: '1024x768',
-          vsync: 'on'
-       }
-    }
-  }
-*/
-```
+> Using the DOM node id.
 
-**Using the actual DOM Node**
 
-```javascript
-var $formNode = document.getElementById('myFormId');
-var myFormObj = formToObject($formNode);
-console.log(myFormObj);
-```
+    var result = formToObject('myFormId');
+    /* 
+      console.log(result);
+      {
+        saveSettings: 'Save',
+        name: 'Serban',
+        race: 'orc',
+        settings: {
+           input: 'keyboard',
+           video: {
+              resolution: '1024x768',
+              vsync: 'on'
+           }
+        }
+      }
+    */
 
-Sending form data server-side
 
-```javascript
-$.ajax({
-  'url': '/app/settings/save/',
-  'type': 'post',
-  'data': formToObject('saveSettingsForm'),
-  'success': function(r){}
-});
-```
+> Using the actual DOM Node reference.
+
+    formToObject(document.getElementById('myFormId'));
+
+
+> XHR - sending form data
+
+    $.ajax({
+      'url': '/app/settings/save/',
+      'type': 'post',
+      'data': formToObject('saveSettingsForm'),
+      'success': function(r){}
+    });
 
 ##### Browser support
 
