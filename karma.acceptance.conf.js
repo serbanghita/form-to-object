@@ -6,26 +6,10 @@ module.exports = function(config) {
         // you can define custom flags
         // http://karma-runner.github.io/1.0/config/browsers.html
         customLaunchers: {
-            'PhantomJS_custom': {
-                base: 'PhantomJS',
-                options: {
-                    windowName: 'my-window',
-                    settings: {
-                        webSecurityEnabled: false
-                    }
-                },
-                flags: ['--load-images=true'],
-                debug: true
-            },
             'Chrome_custom': {
                 base: 'Chrome',
                 flags: ['--allow-file-access-from-files', '--no-default-browser-check']
             }
-        },
-
-        phantomjsLauncher: {
-            // Have phantomjs exit if a ResourceError is encountered (useful if karma exits without killing phantom)
-           // exitOnResourceError: true
         },
         autoWatch: false,
         singleRun: true,

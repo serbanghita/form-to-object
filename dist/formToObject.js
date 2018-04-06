@@ -178,6 +178,11 @@ var formToObject = function () {
         return $formElements.length;
     }
 
+    function nodeHasSiblings($domNode) {
+        var name = $domNode.name;
+        return Array.prototype.filter.call($formElements, function (input) { return input.name === name; }).length > 1;
+    }
+
     function isRadio($domNode) {
         return $domNode.nodeName === 'INPUT' && $domNode.type === 'radio';
     }
@@ -320,11 +325,15 @@ var formToObject = function () {
         // and put them into an array.
         if (isCheckbox($domNode)) {
             if (domNodeValue !== false) {
-                if (!result[key]) {
-                    result[key] = [];
-                }
+                if (nodeHasSiblings($domNode)) {
+                    if (!result[key]) {
+                        result[key] = [];
+                    }
 
-                return result[key].push(domNodeValue);
+                    return result[key].push(domNodeValue);
+                } else {
+                    result[key] = domNodeValue;
+                }
             } else {
                 return;
             }

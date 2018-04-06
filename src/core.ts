@@ -197,6 +197,11 @@ function setFormElements() {
     return $formElements.length;
 }
 
+function nodeHasSiblings($domNode: HTMLFormField) {
+  let name = $domNode.name;
+  return Array.prototype.filter.call($formElements, (input: HTMLFormField) => { return input.name === name; }).length > 1;
+}
+
 function isRadio($domNode: HTMLInputElement) {
     return $domNode.nodeName === 'INPUT' && $domNode.type === 'radio';
 }
@@ -355,11 +360,15 @@ function processSingleLevelNode($domNode: HTMLFormField, arr: any[], domNodeValu
     // and put them into an array.
     if (isCheckbox($domNode as HTMLInputElement)) {
         if (domNodeValue !== false) {
+          if (nodeHasSiblings($domNode)) {
             if (!result[key]) {
-                result[key] = [];
+              result[key] = [];
             }
 
             return result[key].push(domNodeValue);
+          } else {
+            result[key] = domNodeValue;
+          }
         } else {
             return;
         }
