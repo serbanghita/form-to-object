@@ -3,7 +3,6 @@
 [![Build Status][build-status-img]](https://travis-ci.org/serbanghita/formToObject.js)
 [![NPM package][npm-img]](https://www.npmjs.com/package/form_to_object)
 [![NPM downloads][npm-downloads-img]](https://www.npmjs.com/package/form_to_object)
-[![Dependency Status][dependencies-status-img]](https://www.versioneye.com/user/projects/5446a74944a5254346000085)
 
 > Convert **HTML forms** with all their **fields** and **values** to **multi-dimensional JavaScript** objects
 
