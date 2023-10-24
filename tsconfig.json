@@ -1,16 +1,22 @@
 {
-"compilerOptions": {
-  "module": "commonjs",
-  "target": "es5",
-  "noImplicitAny": true,
-  "sourceMap": true,
-  "rootDir": "src",
-  "outDir": "lib",
-  "typeRoots": [
-    "types"
-  ]
+  "compilerOptions": {
+    "target": "es5",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "module": "commonjs",                                /* Specify what module code is generated. */
+    "esModuleInterop": true,                             /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+    "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+    "strict": true,                                      /* Enable all strict type-checking options. */
+    "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
+    "rootDirs": ["src", "test/unit"],
+    "baseUrl": "src",
+    "types": ["node", "jest"]
   },
   "include": [
-    "src"
+    "src/index.ts",
+    "src/expose-to-browser.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "lib"
   ]
 }

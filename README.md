@@ -1,72 +1,62 @@
 # formToObject.js
+> Convert **HTML forms** with all their **fields** and **values** to **multidimensional JavaScript** objects
 
-[![Build Status][build-status-img]](https://travis-ci.org/serbanghita/formToObject.js)
-[![NPM package][npm-img]](https://www.npmjs.com/package/form_to_object)
-[![NPM downloads][npm-downloads-img]](https://www.npmjs.com/package/form_to_object)
+![npm](https://img.shields.io/npm/v/form_to_object?style=flat-square)
+![npm](https://img.shields.io/npm/dm/form_to_object?style=flat-square)
 
-> Convert **HTML forms** with all their **fields** and **values** to **multi-dimensional JavaScript** objects
 
 
 ## Install
 
-**Node.js**
+As a npm package:
 
-* `npm install form_to_object`
+```shell
+npm install form_to_object
+```
 
-**Browser**
+Inside the HTML code:
 
-    <!-- Include minified script (~2kb) -->
-    <script src="dist/formToObject.min.js"></script>
-
+```html
+<!-- Include minified script (~2kb) -->
+<script src="dist/formToObject.min.js"></script>
+```
 
 ## Usage
 
-> Using the DOM node id.
+Using the DOM node id:
 
-    formToObject('myFormId');
+```js
+formToObject('myFormId');
+```
 
-> Using the actual DOM Node reference.
+Using the actual DOM Node reference:
 
-    formToObject(document.getElementById('myFormId'));
+```js
+formToObject(document.getElementById('myFormId'));
+```
 
-*Result*    
+Example result:    
 
-    {
-      saveSettings: 'Save',
-      name: 'Serban',
-      race: 'orc',
-      settings: {
-         input: 'keyboard',
-         video: {
-            resolution: '1024x768',
-            vsync: 'on'
-         }
-      }
-    }
+```js
+{
+  saveSettings: 'Save',
+  name: 'Serban',
+  race: 'orc',
+  settings: {
+     input: 'keyboard',
+     video: {
+        resolution: '1024x768',
+        vsync: 'on'
+     }
+  }
+}
+```
 
 
-> XHR - sending form data
-
-    $.ajax({
-      'url': '/app/settings/save/',
-      'type': 'post',
-      'data': formToObject('saveSettingsForm'),
-      'success': function(r){}
-    });
-
-##### Browser support
+## Browser support
 
 IE 8, Firefox 3.5, Chrome, Safari, Opera 10, every mobile browser.
 
-##### Screenshot
+## Example
 
 ![](http://serbanghita.github.io/formToObject.js/formToObj-demo.png)
-
-[build-status-img]:https://travis-ci.org/serbanghita/formToObject.js.svg?style=flat
-[build-status-url]:https://travis-ci.org/serbanghita/formToObject.js
-[npm-img]:https://img.shields.io/npm/v/form_to_object.svg?style=flat-square
-[npm-url]:https://www.npmjs.com/package/form_to_object
-[npm-downloads-img]:http://img.shields.io/npm/dm/form_to_object.svg?style=flat-square
-[npm-downloads-url]:https://www.npmjs.com/package/form_to_object
-[dependencies-status-img]:https://www.versioneye.com/user/projects/5446a74944a5254346000085/badge.svg?style=flat
-[dependencies-status-url]:https://www.versioneye.com/user/projects/5446a74944a5254346000085

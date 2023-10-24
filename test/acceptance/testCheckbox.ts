@@ -3,7 +3,7 @@
   'use strict';
 
   function appendFixtureToBody(htmlContent) {
-    var $newForm = document.createElement('div');
+    const $newForm = document.createElement('div');
     $newForm.id = 'fixtures';
     $newForm.innerHTML = htmlContent;
     document.body.appendChild($newForm);
@@ -16,7 +16,7 @@
     });
 
     it('A form with unchecked checkboxes searched by a valid element string should return false.', function() {
-      var html = '' +
+      const html = '' +
         '<form id="newForm">' +
         '<input type="checkbox" name="single" value="Serban">' +
         '<input type="checkbox" name="many[]" value="First">' +
@@ -31,7 +31,7 @@
 
 
     it('A form with a single checkbox without value attribute should return the default value "on" as a string.', function() {
-      var html = '<form id="newForm">' +
+      const html = '<form id="newForm">' +
         '<input type="text" name="name" value="Serban">' +
         '<input type="text" name="age" value="99">' +
         '<input type="checkbox" name="terms" checked> I agree with the terms and conditions' +
@@ -46,7 +46,7 @@
     });
 
     it('A form with two checkboxes with different values attributes should return the checked element value as an array', function() {
-      var html = '<form id="newForm">' +
+      const html = '<form id="newForm">' +
         '<input type="checkbox" name="subscribe" value="newsletter" checked> Subscribe for newsletter' +
         '<input type="checkbox" name="subscribe" value="announcements"> Subscribe for announcements' +
         '</form>';
@@ -59,7 +59,7 @@
 
 
     it('A form with various checkboxes should return the expected object.', function() {
-      var html = '' +
+      const html = '' +
         '<form id="newForm">' +
         // Should be ignored.
         '<input type="checkbox" name="single" value="Serban" checked>' +

@@ -1,3 +1,5 @@
+import {getNextIntegerKey} from "../../src/functions";
+
 describe('getNextIntegerKey', function() {
   it('when provided with invalid objects then it returns 0', function() {
     expect(getNextIntegerKey({})).toBe(0);
