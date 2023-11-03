@@ -1,7 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path");
 
 module.exports = {
-  entry: "./src/expose-to-browser.ts",
+  entry: "./src/index.exportToWindow.ts",
   output: {
     filename: "formToObject.js",
     path: path.resolve(__dirname, "build")

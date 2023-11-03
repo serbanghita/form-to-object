@@ -1,18 +1,4 @@
-/**
- * Private methods
- */
-
-import {ISettings} from "./types";
-
-/**
- * Check to see if the object is an HTML node.
- *
- * @param {HTMLFormElement | HTMLElement} node
- * @returns {boolean}
- */
-export function isDomElementNode(node: HTMLFormElement | HTMLElement): boolean {
-  return (node && typeof node === 'object' && 'nodeType' in node && node.nodeType === 1);
-}
+import {IFormToObjectOptions} from "./types";
 
 /**
  * Check for last numeric key.
@@ -87,11 +73,11 @@ export function getObjLength(o: object): number {
  * Simple extend of own properties.
  * Needed for our settings.
  *
- * @param {ISettings} settings
- * @param  {ISettings} source The object with new properties that we want to add the destination.
- * @return {ISettings}
+ * @param {IFormToObjectOptions} settings
+ * @param  {IFormToObjectOptions} source The object with new properties that we want to add the destination.
+ * @return {IFormToObjectOptions}
  */
-export function extend(settings: ISettings, source: ISettings): ISettings {
+export function extend(settings: IFormToObjectOptions, source: IFormToObjectOptions): IFormToObjectOptions {
   let i: string;
   for (i in source) {
     if (Object.prototype.hasOwnProperty.call(source, i)) {

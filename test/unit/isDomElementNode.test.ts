@@ -1,4 +1,4 @@
-import {isDomElementNode} from "../../src/functions";
+import {isDomElementNode} from "../../src/dom";
 
 describe('isDomElementNode', function() {
   it('returns true for real DOM element nodes', function() {

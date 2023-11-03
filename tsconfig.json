@@ -8,15 +8,15 @@
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
     "rootDirs": ["src", "test/unit"],
     "baseUrl": "src",
-    "types": ["node", "jest"]
+    "types": ["node", "jest", "mocha"]
   },
   "include": [
     "src/index.ts",
-    "src/expose-to-browser.ts"
+    "test/unit/*"
   ],
   "exclude": [
     "node_modules",
     "dist",
-    "lib"
+    "build"
   ]
 }

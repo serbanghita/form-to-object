@@ -1,10 +1,14 @@
-import {getNextIntegerKey} from "../../src/functions";
+import {getNextIntegerKey} from "../../src/utils";
 
 describe('getNextIntegerKey', function() {
   it('when provided with invalid objects then it returns 0', function() {
     expect(getNextIntegerKey({})).toBe(0);
     expect(getNextIntegerKey([])).toBe(0);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     expect(getNextIntegerKey(null)).toBe(0);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     expect(getNextIntegerKey(undefined)).toBe(0);
   });
 

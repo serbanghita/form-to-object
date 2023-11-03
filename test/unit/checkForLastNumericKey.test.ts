@@ -1,10 +1,14 @@
-import {checkForLastNumericKey} from '../../src/functions';
+import {checkForLastNumericKey} from "../../src/utils";
 
 describe('checkForLastNumericKey', () => {
   test('when provided with invalid objects then it returns undefined', function () {
     expect(checkForLastNumericKey({})).toBeUndefined();
     expect(checkForLastNumericKey([])).toBeUndefined();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     expect(checkForLastNumericKey(null)).toBeUndefined();
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     expect(checkForLastNumericKey(undefined)).toBeUndefined();
   });
 

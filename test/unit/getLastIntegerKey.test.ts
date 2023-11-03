@@ -1,10 +1,14 @@
-import {getLastIntegerKey} from "../../src/functions";
+import {getLastIntegerKey} from "../../src/utils";
 
 describe('getLastIntegerKey', () => {
   it('when provided with invalid objects then it returns 0', () => {
     expect(getLastIntegerKey({})).toBe(0);
     expect(getLastIntegerKey([])).toBe(0);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     expect(getLastIntegerKey(null)).toBe(0);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     expect(getLastIntegerKey(undefined)).toBe(0);
   });
 

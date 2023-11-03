@@ -3,16 +3,12 @@ export interface Window {
   formToObject: IFormToObject;
 }
 
+type IFormToObject = (selector: HTMLFormElement | string, options?: IFormToObjectOptions) => Record<string, never>;
+
 export type HTMLFormField = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | HTMLButtonElement;
 
-export interface ISettings {
+export interface IFormToObjectOptions {
   [key: string]: boolean | string | number;
-}
-
-export type IFormToObjectArgs = string | [string, HTMLFormElement] | undefined;
-
-export interface IFormToObject {
-  (options?: IFormToObjectArgs): Record<string, unknown>;
 }
 
 export interface IDefine {
@@ -23,3 +19,7 @@ export interface IDefine {
 export interface IModule {
   exports: IFormToObject;
 }
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+export type NodeResult = Record<string | number, NodeResult | string | number>;

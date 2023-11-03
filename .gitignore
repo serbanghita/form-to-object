@@ -2,3 +2,4 @@ node_modules/
 browserstack-run.pid
 .idea/
 /.tmp
+src/*.js
