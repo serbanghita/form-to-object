@@ -16,6 +16,7 @@ module.exports = {
   transform: {
     "\\.ts$": "ts-jest",
   },
-  testMatch: ["<rootDir>/test/unit/*.test.ts"],
-  verbose: true
+  testMatch: ["<rootDir>/test/unit/*.test.ts", "<rootDir>/test/acceptance/*.test.ts"],
+  verbose: true,
+  setupFilesAfterEnv: ['<rootDir>/jest-setup.js']
 };
