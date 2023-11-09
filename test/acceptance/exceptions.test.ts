@@ -1,0 +1,37 @@
+import {screen} from '@testing-library/dom'
+import formToObject from "../../src";
+import {readFixture} from "../helpers";
+
+describe('exceptions', () => {
+  describe('An invalid or non existing selector', () => {
+    it('should return false if null is passed as argument', () => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      expect(formToObject(null)).toBe(false);
+    });
+
+    it('should return false if an empty string is passed as argument', () => {
+      expect(formToObject('')).toBe(false);
+    });
+
+    it('should return false if undefined object is passed', () => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      expect(formToObject(undefined)).toBe(false);
+    });
+
+    it('should return false if the argument passed is invalid', () => {
+      expect(formToObject('newFormUndefined')).toBe(false);
+    });
+  });
+
+  describe('An empty HTML form', () => {
+    it('should return false if the form has no elements', () => {
+      document.body.innerHTML = readFixture("empty-form.html");
+      const $form = screen.queryByTestId('testForm') as HTMLFormElement;
+
+      expect(formToObject($form)).toBe(false);
+    });
+  });
+});
+

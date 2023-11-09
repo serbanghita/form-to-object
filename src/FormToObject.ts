@@ -20,7 +20,8 @@ export class FormToObject {
   // Experimental. Don't rely on them yet.
   public settings = {
     includeEmptyValuedElements: false,
-    w3cSuccessfulControlsOnly: false
+    w3cSuccessfulControlsOnly: false,
+    debug: true
   };
 
   constructor(selector: string | HTMLFormElement, options?: IFormToObjectOptions) {
