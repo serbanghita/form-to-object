@@ -1,4 +1,4 @@
-import {screen} from '@testing-library/dom'
+import {screen} from '@testing-library/dom';
 import formToObject from "../../src";
 import {readIntegrationFixture} from "../helpers";
 

@@ -15,14 +15,10 @@ module.exports = {
     libraryExport: ['default']
   },
 
-  // target: "web",
-
   // Enable sourcemaps for debugging webpack's output.
-  devtool: "inline-source-map",
+  // devtool: "inline-source-map",
 
-  // mode: "development",
-
-  watch: false,
+  // watch: false,
 
   resolve: {
     extensions: [".ts"]

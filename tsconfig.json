@@ -7,22 +7,19 @@
     "strict": true,                                      /* Enable all strict type-checking options. */
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
     "rootDirs": [
-      "src",
-      "test/unit",
-      "test/integration",
-      "test/e2e"
+      "src"
     ],
     "baseUrl": "src",
-    "types": ["node", "jest", "mocha", "@testing-library/jest-dom", "cypress", "@testing-library/cypress"]
+    "types": ["node", "jest", "mocha", "@testing-library/jest-dom"]
   },
   "include": [
     "src/index.ts",
     "test/unit/*",
-    "test/integration/*"
+    "test/integration/*",
+    "test/e2e/*"
   ],
   "exclude": [
     "node_modules",
-    "dist",
     "build"
   ]
 }

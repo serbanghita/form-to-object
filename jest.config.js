@@ -5,18 +5,17 @@ module.exports = {
   collectCoverage: true,
   collectCoverageFrom: [
     "<rootDir>/src/**/*.ts",
-    "!<rootDir>/src/index.exportToWindow.ts",
     "<rootDir>/test/unit/*.test.ts",
     "!**/node_modules/**",
   ],
   coverageDirectory: ".tmp/coverage",
   coverageReporters: ["html", "json", "lcov", "text", "clover"],
   moduleFileExtensions: ["ts", "js"],
-  modulePaths: ['<rootDir>/src/', '<rootDir>/test/unit/'],
+  modulePaths: ['<rootDir>/src/'],
   transform: {
     "\\.ts$": "ts-jest",
   },
-  testMatch: ["<rootDir>/test/unit/*.test.ts", "<rootDir>/test/acceptance/*.test.ts", "<rootDir>/test/e2e/*.test.ts"],
+  testMatch: ["<rootDir>/test/unit/*.test.ts", "<rootDir>/test/integration/*.test.ts"],
   verbose: true,
   setupFilesAfterEnv: ['<rootDir>/jest-setup.js']
 };

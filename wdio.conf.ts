@@ -20,9 +20,9 @@ export const config: Options.Testrunner = {
     capabilities: [{
         browserName: 'chrome',
         acceptInsecureCerts: true,
-        // 'goog:chromeOptions': {
-        //   args: process.env.CI ? ['headless', 'disable-gpu'] : []
-        // }
+        'goog:chromeOptions': {
+          args: process.env.CI ? ['headless', 'disable-gpu'] : []
+        }
     }],
     logLevel: 'warn',
     bail: 1,

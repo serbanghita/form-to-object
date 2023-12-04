@@ -28,7 +28,7 @@ describe('smoke', () => {
     // await browser.debug(9999);
 
 
-    await expect(result).toBe(false);
+    await expect(result).toEqual({"checkboxGroup": ["option2", "option3"], "multiSelect": ["option2", "option3"]});
 
   })
 })

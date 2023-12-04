@@ -24,17 +24,17 @@
   "license": "MIT",
   "scripts": {
     "tsc": "tsc",
-    "build": "webpack --mode production",
-    "test": "jest",
-    "dev": "webpack --mode production --watch",
-    "wdio": "wdio run ./wdio.conf.ts"
+    "build:production": "webpack --mode production",
+    "dev": "webpack --mode development -d inline-source-map --watch",
+    "test:unit-and-acceptance": "jest",
+    "test:e2e": "wdio run ./wdio.conf.ts"
   },
   "devDependencies": {
-    "@jest/globals": "^29.7.0",
+    "@jest/globals": "29.5.0",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/user-event": "^14.5.1",
     "@testing-library/webdriverio": "^3.2.1",
-    "@types/jest": "^29.5.7",
+    "@types/jest": "29.5.10",
     "@types/mocha": "^10.0.3",
     "@typescript-eslint/eslint-plugin": "^6.8.0",
     "@typescript-eslint/parser": "^6.8.0",
@@ -53,6 +53,8 @@
     "typescript": "^5.2.2",
     "wdio-wait-for": "^3.0.7",
     "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0"
+    "webpack-cli": "^4.10.0",
+    "@types/testing-library__jest-dom": "^6.0.0",
+    "expect": "^29.7.0"
   }
 }
