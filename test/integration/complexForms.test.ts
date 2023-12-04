@@ -1,4 +1,4 @@
-import {readFixture} from "../helpers";
+import {readIntegrationFixture} from "../helpers";
 import {screen} from "@testing-library/dom";
 import formToObject from "../../src";
 
@@ -7,7 +7,7 @@ describe('complex forms', () => {
   describe('A complex multi-level form', ()=> {
 
     test('should return a normal object when first level elements container is selected', () => {
-      document.body.innerHTML = readFixture("other/complex_form1.html");
+      document.body.innerHTML = readIntegrationFixture("other/complex_form1.html");
       const $form = screen.queryByTestId('firstLevelElements') as HTMLFormElement;
 
       expect(formToObject($form)).toEqual({
@@ -17,7 +17,7 @@ describe('complex forms', () => {
     });
 
     test('should return an object with two levels of elements when second level elements container is selected', () => {
-      document.body.innerHTML = readFixture("other/complex_form1.html");
+      document.body.innerHTML = readIntegrationFixture("other/complex_form1.html");
       const $form = screen.queryByTestId('secondLevelElements') as HTMLFormElement;
 
         expect(formToObject($form)).toEqual({
@@ -31,7 +31,7 @@ describe('complex forms', () => {
     });
 
     test('should return an object with three levels of elements when third level elements container is selected', () => {
-      document.body.innerHTML = readFixture("other/complex_form1.html");
+      document.body.innerHTML = readIntegrationFixture("other/complex_form1.html");
       const $form = screen.queryByTestId('thirdLevelElements') as HTMLFormElement;
 
       expect(formToObject($form)).toEqual({
@@ -52,7 +52,7 @@ describe('complex forms', () => {
   describe('A complex matrix form', () => {
 
     it('should return a multi-level object when the form container is selected', () => {
-      document.body.innerHTML = readFixture("other/complex_form2.html");
+      document.body.innerHTML = readIntegrationFixture("other/complex_form2.html");
       const $form = screen.queryByTestId('testForm') as HTMLFormElement;
 
       expect(formToObject($form)).toEqual({
@@ -120,7 +120,7 @@ describe('complex forms', () => {
   describe('The Facebook signup form', () => {
 
     it('should return a multi-level object when the form container is selected', () => {
-      document.body.innerHTML = readFixture("other/facebook_signup.html");
+      document.body.innerHTML = readIntegrationFixture("other/facebook_signup.html");
       const $form = screen.queryByTestId('testForm') as HTMLFormElement;
 
       expect(formToObject($form, {includeEmptyValuedElements: true})).toEqual({

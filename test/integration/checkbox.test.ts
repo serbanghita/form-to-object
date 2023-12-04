@@ -1,10 +1,10 @@
 import {screen} from '@testing-library/dom'
 import formToObject from "../../src";
-import {readFixture} from "../helpers";
+import {readIntegrationFixture} from "../helpers";
 
 describe('checkbox', () => {
   test('A form with unchecked checkboxes searched by a valid element string should return false.', () => {
-    document.body.innerHTML = readFixture("checkbox/checkbox1.html");
+    document.body.innerHTML = readIntegrationFixture("checkbox/checkbox1.html");
     const $form = screen.queryByTestId('testForm') as HTMLFormElement;
 
     expect($form).not.toBeEmptyDOMElement();
@@ -12,7 +12,7 @@ describe('checkbox', () => {
   });
 
   test('A form with a single checkbox without value attribute, should return the default value "on" as a string.', () => {
-    document.body.innerHTML = readFixture("checkbox/checkbox2.html");
+    document.body.innerHTML = readIntegrationFixture("checkbox/checkbox2.html");
     const $form = screen.queryByTestId('testForm') as HTMLFormElement;
 
     expect(formToObject($form)).toEqual({
@@ -21,7 +21,7 @@ describe('checkbox', () => {
   });
 
   test('A form with two checkboxes with the same name and different values should return the checked element value as an array', () => {
-    document.body.innerHTML = readFixture("checkbox/checkbox3.html");
+    document.body.innerHTML = readIntegrationFixture("checkbox/checkbox3.html");
     const $form = screen.queryByTestId('testForm') as HTMLFormElement;
 
     expect(formToObject($form)).toEqual({
@@ -30,7 +30,7 @@ describe('checkbox', () => {
   });
 
   test('A form with various checkboxes should return the expected object.', () => {
-    document.body.innerHTML = readFixture("checkbox/checkbox4.html");
+    document.body.innerHTML = readIntegrationFixture("checkbox/checkbox4.html");
     const $form = screen.queryByTestId('testForm') as HTMLFormElement;
 
     expect(formToObject($form)).toEqual({

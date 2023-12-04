@@ -1,6 +1,6 @@
 import {screen} from '@testing-library/dom'
 import formToObject from "../../src";
-import {readFixture} from "../helpers";
+import {readIntegrationFixture} from "../helpers";
 
 describe('exceptions', () => {
   describe('An invalid or non existing selector', () => {
@@ -27,7 +27,7 @@ describe('exceptions', () => {
 
   describe('An empty HTML form', () => {
     test('should return false if the form has no elements', () => {
-      document.body.innerHTML = readFixture("other/exceptions/empty-form.html");
+      document.body.innerHTML = readIntegrationFixture("other/exceptions/empty-form.html");
       const $form = screen.queryByTestId('testForm') as HTMLFormElement;
 
       expect(formToObject($form)).toBe(false);

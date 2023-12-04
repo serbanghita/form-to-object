@@ -1,8 +1,8 @@
 import { expect, browser } from '@wdio/globals'
 import path from "path";
 
-describe('checkbox', () => {
-  it('A form with unchecked checkboxes searched by a valid element string should return false.', async () => {
+describe('smoke', () => {
+  it('multiple choice fields form', async () => {
     await browser.url(`form-multiple-choice-fields.html`);
 
     // await $('#testForm').waitForDisplayed();
