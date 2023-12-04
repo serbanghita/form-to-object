@@ -67,9 +67,7 @@ export class FormToObject {
 
   // Set the elements we need to parse.
   public initFormElements(): boolean {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    this.$formElements = [...(this.$form?.querySelectorAll('input, textarea, select') as NodeListOf<HTMLFormField> || [])];
+    this.$formElements = [...(this.$form?.querySelectorAll('input, textarea, select') as NodeListOf<HTMLFormField>)];
     return this.$formElements.length > 0;
   }
 

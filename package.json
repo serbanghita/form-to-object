@@ -5,7 +5,8 @@
   "version": "2.0.0",
   "homepage": "https://github.com/serbanghita/formToObject",
   "author": "Serban Ghita <serbanghita@gmail.com>",
-  "main": "dist/formToObject.js",
+  "main": "build/formToObject.js",
+  "module": "src/index.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/serbanghita/formToObject.git"
@@ -23,15 +24,16 @@
   "license": "MIT",
   "scripts": {
     "tsc": "tsc",
-    "build": "webpack --mode development",
+    "build": "webpack --mode production",
     "test": "jest",
+    "dev": "webpack --mode production --watch",
     "wdio": "wdio run ./wdio.conf.ts"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/webdriverio": "^3.2.1",
     "@testing-library/user-event": "^14.5.1",
+    "@testing-library/webdriverio": "^3.2.1",
     "@types/jest": "^29.5.7",
     "@types/mocha": "^10.0.3",
     "@typescript-eslint/eslint-plugin": "^6.8.0",

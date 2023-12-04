@@ -2,22 +2,27 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/index.exportToWindow.ts",
+  entry: "./src/index.ts",
   output: {
     filename: "formToObject.js",
-    path: path.resolve(__dirname, "build")
+    path: path.resolve(__dirname, "build"),
+    // https://webpack.js.org/guides/author-libraries/#expose-the-library
+    globalObject: 'this',
+    library: {
+      name: 'formToObject',
+      type: 'umd'
+    },
+    libraryExport: ['default']
   },
+
+  // target: "web",
 
   // Enable sourcemaps for debugging webpack's output.
   devtool: "inline-source-map",
 
-  mode: "development",
+  // mode: "development",
 
   watch: false,
-
-  node: {
-    __dirname: true
-  },
 
   resolve: {
     extensions: [".ts"]

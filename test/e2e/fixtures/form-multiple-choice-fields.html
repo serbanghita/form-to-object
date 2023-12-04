@@ -1,0 +1,31 @@
+<form action="/submit" enctype="multipart/form-data" method="post" data-testid="testForm" id="testForm">
+    <fieldset>
+        <legend>Select multiple options:</legend>
+
+        <select id="multiSelect" name="multiSelect" multiple>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+    </fieldset>
+
+    <fieldset>
+        <legend>Option group:</legend>
+
+        <label><input type="checkbox" name="checkboxGroup" value="option1" id="checkboxGroup-1"> Option 1</label>
+        <label><input type="checkbox" name="checkboxGroup" value="option2" id="checkboxGroup-2"> Option 2</label>
+        <label><input type="checkbox" name="checkboxGroup" value="option3" id="checkboxGroup-3"> Option 3</label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Upload files:</legend>
+        <label for="fileUpload">Upload files:</label>
+        <input type="file" id="fileUpload" name="fileUpload" multiple>
+    </fieldset>
+</form>
+
+<script src="./js/formToObject.js"></script>
+<!--<script>-->
+<!--    const a = formToObject('testForm');-->
+<!--    console.log(a);-->
+<!--</script>-->

@@ -14,7 +14,7 @@ export const config: Options.Testrunner = {
         }
     },
     specs: [
-        './test/specs/*.ts'
+        './test/e2e/*.ts'
     ],
     maxInstances: 10,
     capabilities: [{
@@ -40,7 +40,8 @@ export const config: Options.Testrunner = {
       ['static-server', {
         port: 8888,
         folders: [
-          { mount: '/', path: './test/acceptance/fixtures' },
+          { mount: '/', path: path.resolve(__dirname, 'test/e2e/fixtures') },
+          { mount: '/js', path: path.resolve(__dirname, 'build') },
         ]
       }]
     ],
