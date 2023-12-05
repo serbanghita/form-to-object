@@ -1,8 +1,10 @@
 # formToObject.js
 > Convert **HTML forms** with all their **fields** and **values** to **multidimensional JavaScript** objects
 
-![npm](https://img.shields.io/npm/v/form_to_object?style=flat-square)
-![npm](https://img.shields.io/npm/dm/form_to_object?style=flat-square)
+![Workflow status](https://img.shields.io/github/actions/workflow/status/serbanghita/formToObject/test.yml?style=flat-square)
+![Latest tag](https://img.shields.io/github/v/tag/serbanghita/formToObject?style=flat-square)
+![npm version](https://img.shields.io/npm/v/form_to_object?style=flat-square)
+![npm downloads](https://img.shields.io/npm/dm/form_to_object?style=flat-square)
 
 
 
