@@ -1,5 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path");
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.ts",
@@ -15,10 +17,10 @@ module.exports = {
     libraryExport: ['default']
   },
 
-  // Enable sourcemaps for debugging webpack's output.
-  // devtool: "inline-source-map",
-
-  // watch: false,
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()],
+  },
 
   resolve: {
     extensions: [".ts"]

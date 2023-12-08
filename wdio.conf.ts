@@ -1,4 +1,4 @@
-import type { Options } from '@wdio/types';
+import { Options } from '@wdio/types';
 import path from "path";
 
 export const config: Options.Testrunner = {

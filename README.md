@@ -7,8 +7,6 @@
 ![npm version](https://img.shields.io/npm/v/form_to_object?style=flat-square)
 ![npm downloads](https://img.shields.io/npm/dm/form_to_object?style=flat-square)
 
-
-
 ## Install
 
 As a npm package:
@@ -17,39 +15,36 @@ As a npm package:
 npm install form_to_object
 ```
 
-Inside the HTML code:
+```js
+import formToObject from 'form_to_object';
+// or
+const formToObject = require('form_to_object');
+```
+
+As a JS script:
 
 ```html
-<!-- Include minified script (~2kb) -->
-<script src="dist/formToObject.min.js"></script>
+<!-- Include minified script (~6kb) -->
+<script src="build/formToObject.js"></script>
 ```
 
-## Usage
+## Example
 
-Using the DOM node id:
+* Using the DOM node id: `formToObject('myFormId');`
+* Using the actual DOM Node reference: `formToObject(document.getElementById('myFormId'));`
 
-```js
-formToObject('myFormId');
-```
+Resulted value:
 
-Using the actual DOM Node reference:
-
-```js
-formToObject(document.getElementById('myFormId'));
-```
-
-Example result:    
-
-```js
+```json
 {
-  saveSettings: 'Save',
-  name: 'Serban',
-  race: 'orc',
-  settings: {
-     input: 'keyboard',
-     video: {
-        resolution: '1024x768',
-        vsync: 'on'
+  "saveSettings": "Save",
+  "name": "Serban",
+  "race": "orc",
+  "settings": {
+     "input": "keyboard",
+     "video": {
+        "resolution": "1024x768",
+        "vsync": "on"
      }
   }
 }
