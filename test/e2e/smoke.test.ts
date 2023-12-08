@@ -1,8 +1,9 @@
-import { expect, browser } from '@wdio/globals'
+import { expect, browser } from '@wdio/globals';
+import { Key } from 'webdriverio';
 import path from "path";
 
 describe('smoke', () => {
-  it.skip('all multiple choice fields form', async () => {
+  it('all multiple choice fields form', async () => {
     await browser.url(`form-multiple-choice-fields.html`);
 
     await $('#multiSelect').selectByAttribute('value', 'option2');
@@ -24,8 +25,11 @@ describe('smoke', () => {
     await $('#email').setValue('email@field.value');
     await $('#number').setValue(123456);
     await $('#date').setValue('12/09/2023');
-    await $('#time').setValue('00:16');
-    await $('#range').setValue(30);
+    await browser.executeScript('return document.getElementById("time").value = "08:16";', []);
+    await $('#range').click();
+    for (let i = 0; i < 10; i++) {
+      await browser.keys([Key.ArrowRight]);
+    }
     await $('#color').setValue('#703333');
     await $('#checkbox').click();
     await $('#radio2').click();
@@ -43,12 +47,13 @@ describe('smoke', () => {
       'email': 'email@field.value',
       'number': "123456",
       'date': '2023-12-09',
-      'time': '00:16',
-      'range': 30,
+      'time': '08:16',
+      'range': '60',
       'color': '#703333',
-      'checkbox': true,
+      'checkbox': 'on',
       'radio': 'option2',
-      'file': 'fixtures/files/a.txt',
+      // @todo: Add file contents feature.
+      // 'file': 'a.txt',
       'textarea': 'textarea value',
       'select': 'option2',
       'hidden': 'hidden value'
