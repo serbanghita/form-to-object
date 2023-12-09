@@ -24,8 +24,7 @@
   },
   "license": "MIT",
   "scripts": {
-    "build:ts": "tsc",
-    "build:bundle": "webpack --mode production",
+    "build": "webpack --mode production",
     "dev": "webpack --mode development -d inline-source-map --watch",
     "test:unit-and-acceptance": "jest",
     "test:e2e": "wdio run ./wdio.conf.ts"
