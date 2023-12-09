@@ -17,8 +17,8 @@ export declare class FormToObject {
     initForm(): boolean;
     initFormElements(): boolean;
     convertToObj(): any;
-    getNodeValues($domNode: HTMLFormField): string | false | FileList | string[] | null;
-    processSingleLevelNode($domNode: HTMLFormField, arr: Array<string | number>, domNodeValue: string | number | boolean | FileList | string[], result: Record<string, string | number | boolean | FileList | string[] | unknown[]>): string | number | boolean | FileList | string[] | undefined;
+    getNodeValues($domNode: HTMLFormField): string | false | string[] | FileList | null;
+    processSingleLevelNode($domNode: HTMLFormField, arr: Array<string | number>, domNodeValue: string | number | boolean | FileList | string[], result: Record<string, string | number | boolean | FileList | string[] | unknown[]>): string | number | boolean | string[] | FileList | undefined;
     processMultiLevelNode($domNode: HTMLFormField, arr: Array<string | number>, value: string | number | boolean | FileList | string[], result: NodeResult): void;
     formElementHasSiblings($domNode: HTMLFormField): boolean;
 }
