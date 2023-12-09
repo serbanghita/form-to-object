@@ -6,8 +6,8 @@ const TerserPlugin = require("terser-webpack-plugin");
 module.exports = {
   entry: "./src/index.ts",
   output: {
-    filename: "formToObject.js",
-    path: path.resolve(__dirname, "build"),
+    filename: "formToObject.min.js",
+    path: path.resolve(__dirname, "build/bundle"),
     // https://webpack.js.org/guides/author-libraries/#expose-the-library
     globalObject: 'this',
     library: {

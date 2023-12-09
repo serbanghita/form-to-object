@@ -6,17 +6,16 @@
     "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
     "strict": true,                                      /* Enable all strict type-checking options. */
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
+    "declaration": true,
     "rootDirs": [
       "src"
     ],
+    "outDir": "build",
     "baseUrl": "src",
     "types": ["node", "jest", "mocha", "@testing-library/jest-dom"]
   },
   "include": [
-    "src/index.ts",
-    "test/unit/*",
-    "test/integration/*",
-    "test/e2e/*"
+    "src/index.ts"
   ],
   "exclude": [
     "node_modules",
