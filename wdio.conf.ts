@@ -41,7 +41,7 @@ export const config: Options.Testrunner = {
         port: 8888,
         folders: [
           { mount: '/', path: path.resolve(__dirname, 'test/e2e/fixtures') },
-          { mount: '/js', path: path.resolve(__dirname, 'build') },
+          { mount: '/js', path: path.resolve(__dirname, 'build/bundle') },
         ]
       }]
     ],
