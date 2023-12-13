@@ -53,6 +53,17 @@ describe('select', () => {
 
       expect(formToObject($form)).toEqual({'countries':['RO', 'MC']});
     });
+
+    it('and name contains empty brackets []', async () => {
+      document.body.innerHTML = readIntegrationFixture("select/select6.html");
+      const $form = screen.queryByTestId('testForm') as HTMLFormElement;
+      const user = userEvent.setup();
+
+      const $countries = screen.queryByTestId('select') as HTMLSelectElement;
+      await user.selectOptions($countries, ['a', 'b']);
+
+      expect(formToObject($form)).toEqual({'select':['a', 'b']});
+    });
   });
 
   describe('A form with a select element and options dont have value attribute', () =>{

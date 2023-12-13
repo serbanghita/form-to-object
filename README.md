@@ -50,6 +50,8 @@ Resulted value:
 }
 ```
 
+In case of an error like non-existing form, invalid selector, or no elements `formToObject` will return `undefined` for every valid
+cases the method will return an object `{}`.
 
 ## Browser support
 
