@@ -1,3 +1,5 @@
+import {HTMLFormField} from "./types";
+
 /**
  * Check to see if the object is an HTML node.
  *
@@ -28,11 +30,11 @@ export function isTextarea($domNode: HTMLTextAreaElement) {
   return $domNode.nodeName === 'TEXTAREA';
 }
 
-export function isSelectSimple($domNode: HTMLSelectElement) {
+export function isSelectSimple($domNode: HTMLFormField) {
   return $domNode.nodeName === 'SELECT' && $domNode.type === 'select-one';
 }
 
-export function isSelectMultiple($domNode: HTMLSelectElement) {
+export function isSelectMultiple($domNode: HTMLFormField) {
   return $domNode.nodeName === 'SELECT' && $domNode.type === 'select-multiple';
 }
 

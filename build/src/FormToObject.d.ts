@@ -7,6 +7,27 @@ export declare class FormToObject {
     settings: {
         includeEmptyValuedElements: boolean;
         w3cSuccessfulControlsOnly: boolean;
+        /**
+         * In case of a multiple select, e.g. <select name="multiple[]" multiple>
+         * If true, we're going to mimic PHP POST payload behaviour,
+         * then the <select>'s value will be:
+         * ```
+         * {
+         *   "multiple": [111,222]
+         * }
+         * ```
+         *
+         * If false, then the <select>'s value will be:
+         *
+         * ```
+         * {
+         *    "multiple": [
+         *      0: [111, 222]
+         *    ]
+         * }
+         * ```
+          */
+        phpStyleMultipleSelects: boolean;
         debug: boolean;
     };
     constructor(selector: string | HTMLFormElement, options?: IFormToObjectOptions);

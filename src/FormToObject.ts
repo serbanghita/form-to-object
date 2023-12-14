@@ -21,6 +21,27 @@ export class FormToObject {
   public settings = {
     includeEmptyValuedElements: false,
     w3cSuccessfulControlsOnly: false,
+    /**
+     * In case of a multiple select, e.g. <select name="multiple[]" multiple>
+     * If true, we're going to mimic PHP POST payload behaviour,
+     * then the <select>'s value will be:
+     * ```
+     * {
+     *   "multiple": [111,222]
+     * }
+     * ```
+     *
+     * If false, then the <select>'s value will be:
+     *
+     * ```
+     * {
+     *    "multiple": [
+     *      0: [111, 222]
+     *    ]
+     * }
+     * ```
+      */
+    phpStyleMultipleSelects: true,
     debug: true
   };
 
@@ -106,21 +127,18 @@ export class FormToObject {
       objKeyNames = $domNode.name.match(FormToObject.keyRegex);
 
       if (objKeyNames && objKeyNames.length === 1) {
-        this.processSingleLevelNode(
-          $domNode,
-          objKeyNames,
-          (domNodeValue ? domNodeValue : ''),
-          result
-        );
+        this.processSingleLevelNode($domNode, objKeyNames, (domNodeValue ? domNodeValue : ''), result);
       }
 
       if (objKeyNames && objKeyNames.length > 1) {
-        this.processMultiLevelNode(
-          $domNode,
-          objKeyNames,
-          (domNodeValue ? domNodeValue : ''),
-          result
-        );
+        if (isSelectMultiple($domNode) && this.settings.phpStyleMultipleSelects) {
+          // Check for name in this format <select --> name="multiple[]" <--- multiple>
+          // Keep the name as "multiple" so it matches the PHP style POST payload format.
+          if (objKeyNames.length === 2 && objKeyNames[1] === '[]') {
+            objKeyNames = [objKeyNames[0]];
+          }
+        }
+        this.processMultiLevelNode($domNode, objKeyNames, (domNodeValue ? domNodeValue : ''), result);
       }
 
     }
@@ -313,7 +331,11 @@ export class FormToObject {
             result[keyName]
           );
         } else {
-          result[keyName] = Object.create(null);
+          if (isSelectMultiple($domNode) && arr.length >= 2 && arr[1] === '[]') {
+            result[keyName] = [];
+          } else {
+            result[keyName] = Object.create(null);
+          }
         }
 
         return this.processMultiLevelNode($domNode, arr.splice(1, arr.length), value, result[keyName]);
