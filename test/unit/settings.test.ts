@@ -1,7 +1,7 @@
 import {FormToObject} from "../../src/FormToObject";
 
 describe('settings', () => {
-  describe('phpStyleMultipleSelects', () => {
+  describe('selectNameWithEmptyBracketsReturnsArray', () => {
     it('when true, should return "multiple" key and array as value', () => {
       const $formEl = document.createElement('form');
       const $formInner = document.createElement('div');
@@ -13,7 +13,7 @@ describe('settings', () => {
     `;
       $formEl.appendChild($formInner);
 
-      const formToObject = new FormToObject($formEl, { phpStyleMultipleSelects: true });
+      const formToObject = new FormToObject($formEl, { selectNameWithEmptyBracketsReturnsArray: true });
       const result = formToObject.convertToObj();
 
       expect(result).toEqual({"multiple": ["a", "b"]});
@@ -30,7 +30,7 @@ describe('settings', () => {
     `;
       $formEl.appendChild($formInner);
 
-      const formToObject = new FormToObject($formEl, { phpStyleMultipleSelects: false });
+      const formToObject = new FormToObject($formEl, { selectNameWithEmptyBracketsReturnsArray: false });
       const result = formToObject.convertToObj();
 
       expect(result).toEqual({"multiple": [["a", "b"]]});
@@ -52,7 +52,7 @@ describe('settings', () => {
     `;
       $formEl.appendChild($formInner);
 
-      const formToObject = new FormToObject($formEl, { phpStyleMultipleSelects: false });
+      const formToObject = new FormToObject($formEl, { selectNameWithEmptyBracketsReturnsArray: false });
       const result = formToObject.convertToObj();
 
       expect(result).toEqual({"multiple": [["a", "b"], ["c", "d"]]});

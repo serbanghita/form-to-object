@@ -27,7 +27,8 @@ export declare class FormToObject {
          * }
          * ```
           */
-        phpStyleMultipleSelects: boolean;
+        selectNameWithEmptyBracketsReturnsArray: boolean;
+        checkBoxNameWithEmptyBracketsReturnsArray: boolean;
         debug: boolean;
     };
     constructor(selector: string | HTMLFormElement, options?: IFormToObjectOptions);

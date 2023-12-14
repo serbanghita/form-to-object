@@ -18,7 +18,7 @@ export function isRadio($domNode: HTMLInputElement) {
   return $domNode.nodeName === 'INPUT' && $domNode.type === 'radio';
 }
 
-export function isCheckbox($domNode: HTMLInputElement) {
+export function isCheckbox($domNode: HTMLFormField) {
   return $domNode.nodeName === 'INPUT' && $domNode.type === 'checkbox';
 }
 

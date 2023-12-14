@@ -8,7 +8,7 @@ import { HTMLFormField } from "./types";
 export declare function isDomElementNode(node: HTMLFormElement): boolean;
 export declare function isUploadForm($form: HTMLFormElement): boolean;
 export declare function isRadio($domNode: HTMLInputElement): boolean;
-export declare function isCheckbox($domNode: HTMLInputElement): boolean;
+export declare function isCheckbox($domNode: HTMLFormField): boolean;
 export declare function isFileField($domNode: HTMLInputElement): boolean;
 export declare function isTextarea($domNode: HTMLTextAreaElement): boolean;
 export declare function isSelectSimple($domNode: HTMLFormField): boolean;

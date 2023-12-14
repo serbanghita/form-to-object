@@ -41,7 +41,8 @@ export class FormToObject {
      * }
      * ```
       */
-    phpStyleMultipleSelects: true,
+    selectNameWithEmptyBracketsReturnsArray: true,
+    checkBoxNameWithEmptyBracketsReturnsArray: true,
     debug: true
   };
 
@@ -131,22 +132,27 @@ export class FormToObject {
       }
 
       if (objKeyNames && objKeyNames.length > 1) {
-        if (isSelectMultiple($domNode) && this.settings.phpStyleMultipleSelects) {
-          // Check for name in this format <select --> name="multiple[]" <--- multiple>
+        if (isSelectMultiple($domNode) && this.settings.selectNameWithEmptyBracketsReturnsArray) {
+          // Check for name in this format <select ---> name="multiple[]" <--- multiple />
           // Keep the name as "multiple" so it matches the PHP style POST payload format.
           if (objKeyNames.length === 2 && objKeyNames[1] === '[]') {
             objKeyNames = [objKeyNames[0]];
           }
         }
+
+        // Check for name in this format <input type="checkbox" ---> name="checkbox[]" <--- />
+        if (isCheckbox($domNode) && this.settings.checkBoxNameWithEmptyBracketsReturnsArray) {
+          if (objKeyNames.length === 2 && objKeyNames[1] === '[]') {
+            objKeyNames = [objKeyNames[0]];
+          }
+        }
+
         this.processMultiLevelNode($domNode, objKeyNames, (domNodeValue ? domNodeValue : ''), result);
       }
 
     }
 
-    // Check the length of the result.
-    const resultLength = getObjLength(result);
-
-    return resultLength > 0 ? result : false;
+    return result;
   }
 
   public getNodeValues($domNode: HTMLFormField) {
