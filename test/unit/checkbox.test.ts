@@ -11,7 +11,7 @@ describe('checkbox', () => {
         <input type="checkbox" name="more[second]" value="more second" />
     `;
 
-    const formToObject = new FormToObject($form)
+    const formToObject = new FormToObject($form);
 
     expect(formToObject.convertToObj()).toEqual({});
   });
