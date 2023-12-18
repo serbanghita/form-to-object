@@ -55,21 +55,13 @@ cases the method will return an object `{}`.
 
 ## Options
 
-`includeEmptyValuedElements` (`boolean`, default `false`)
+| Option name                                 | Default                     | Description                                                                                                                          |
+|---------------------------------------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| `includeEmptyValuedElements`                | `boolean` (default `false`) | Return field names as keys with empty value `""` instead of just ignoring them.                                                      | 
+| `w3cSuccessfulControlsOnly`                 | `boolean` (default `false`) | TBA, WIP                                                                                                                             |
+| `selectNameWithEmptyBracketsReturnsArray`   | `boolean` (default `true`)  | `<select>` field names like `name="select[]"` always return an array `[a,b]` instead or array of arrays `[0: [a,b]]`.                |
+| `checkBoxNameWithEmptyBracketsReturnsArray` | `boolean` (default `true`)  | `<input>` checkboxes with field names like `name=checkbox[]` always return an array `[a,b]` instead or array of arrays `[0: [a,b]]`. |
 
-Return field names as keys with empty value `""` instead of just ignoring them.
-
-`w3cSuccessfulControlsOnly` (`boolean`, default `false`)
-
-TBA
-
-`selectNameWithEmptyBracketsReturnsArray` (`boolean`, default `true`)
-
-`<select>` field names like `name="select[]"` always return an array `[a,b]` instead or array of arrays `[0: [a,b]]`.
-
-`checkBoxNameWithEmptyBracketsReturnsArray` (`boolean`, default `true`)
-
-`<input>` checkboxes with field names like `name=checkbox[]` always return an array `[a,b]` instead or array of arrays `[0: [a,b]]`.
 
 ## Browser support
 
