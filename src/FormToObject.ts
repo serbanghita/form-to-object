@@ -1,5 +1,6 @@
 import {HTMLFormField, IFormToObjectOptions, NodeResult} from "./types";
 import {
+  getAllFormElementsAsArray,
   isCheckbox,
   isChecked,
   isDomElementNode,
@@ -17,9 +18,18 @@ export class FormToObject {
   public $form: HTMLFormElement | null = null;
   public $formElements: HTMLFormField[] = [];
 
-  // Experimental. Don't rely on them yet.
   public settings = {
     includeEmptyValuedElements: false,
+    /**
+     * It doesn't make sense to include submit buttons,
+     * but if the use-case requires, we keep this option open.
+     */
+    includeSubmitButton: false,
+    /**
+     * By default, we don't include key:value pair from disabled fields.
+     *
+     */
+    includeDisabledFields: false,
     w3cSuccessfulControlsOnly: false,
     /**
      * In case of a multiple select, e.g. <select name="multiple[]" multiple>
@@ -79,7 +89,7 @@ export class FormToObject {
     if (typeof this.formSelector === 'string') {
       this.$form = document.getElementById(this.formSelector) as HTMLFormElement;
       return isDomElementNode(this.$form);
-    } else if (isDomElementNode(this.formSelector)) { // @todo: Should I check for DOM.nodeType?
+    } else if (isDomElementNode(this.formSelector)) {
       this.$form = this.formSelector as HTMLFormElement;
       return true;
     }
@@ -89,7 +99,8 @@ export class FormToObject {
 
   // Set the elements we need to parse.
   public initFormElements(): boolean {
-    this.$formElements = [...(this.$form?.querySelectorAll('input, textarea, select') as NodeListOf<HTMLFormField>)];
+    // Note: https://caniuse.com/?search=querySelectorAll
+    this.$formElements = getAllFormElementsAsArray(this.$form as HTMLFormElement);
     return this.$formElements.length > 0;
   }
 
@@ -109,7 +120,7 @@ export class FormToObject {
       if (
         !$domNode.name ||
         $domNode.name === '' ||
-        $domNode.disabled ||
+        ($domNode.disabled && !this.settings.includeDisabledFields) ||
         (isRadio($domNode as HTMLInputElement) && !isChecked($domNode as HTMLInputElement))
       ) {
         continue;
@@ -231,6 +242,9 @@ export class FormToObject {
 
     // We're only interested if the button is type="submit"
     if (isSubmitButton($domNode as HTMLButtonElement)) {
+      if (!this.settings.includeSubmitButton) {
+        return false;
+      }
       if (($domNode as HTMLButtonElement).value && ($domNode as HTMLButtonElement).value !== '') {
         return ($domNode as HTMLButtonElement).value;
       }

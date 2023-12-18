@@ -22,4 +22,26 @@ describe('getObjLength', function() {
     expect(getObjLength([])).toBe(0);
     expect(getObjLength({name: 'Serban', job: 'programmer'})).toBe(2);
   });
+
+  it('when provided an object with prototype, it only includes values from the object', function() {
+    const objParent = { p: 'p' };
+    const obj = { a: 'a' };
+    Object.setPrototypeOf(obj, objParent);
+
+    expect(getObjLength(obj)).toBe(1);
+  });
+
+  it.skip('when Object.keys is missing, it only includes values from the object', function() {
+    const objParent = { p: 'p' };
+    const obj = { a: 'a' };
+    Object.setPrototypeOf(obj, objParent);
+
+    const k = Object.keys;
+    // @ts-expect-error Exception test
+    delete Object.keys;
+
+    expect(getObjLength(obj)).toBe(1);
+
+    Object.keys = k;
+  });
 });
