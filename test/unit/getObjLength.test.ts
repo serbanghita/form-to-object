@@ -31,7 +31,7 @@ describe('getObjLength', function() {
     expect(getObjLength(obj)).toBe(1);
   });
 
-  it.skip('when Object.keys is missing, it only includes values from the object', function() {
+  it('when Object.keys is missing, it only includes values from the object', function() {
     const objParent = { p: 'p' };
     const obj = { a: 'a' };
     Object.setPrototypeOf(obj, objParent);
@@ -40,8 +40,11 @@ describe('getObjLength', function() {
     // @ts-expect-error Exception test
     delete Object.keys;
 
-    expect(getObjLength(obj)).toBe(1);
-
+    // expect is using Object.keys :D, that's why we have to restore it in advance.
+    // node_modules/expect/build/index.js:114
+    const result = getObjLength(obj);
     Object.keys = k;
+
+    expect(result).toBe(1);
   });
 });

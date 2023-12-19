@@ -1,5 +1,12 @@
 import { HTMLFormField } from "./types";
 /**
+ * Extract an array with all the DOM fields representing form fields.
+ * Make sure we are backward compatible with older browsers.
+ *
+ * @param $form
+ */
+export declare function getAllFormElementsAsArray($form: HTMLFormElement): any[];
+/**
  * Check to see if the object is an HTML node.
  *
  * @param {HTMLFormElement | HTMLElement} node

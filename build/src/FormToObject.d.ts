@@ -6,6 +6,16 @@ export declare class FormToObject {
     $formElements: HTMLFormField[];
     settings: {
         includeEmptyValuedElements: boolean;
+        /**
+         * It doesn't make sense to include submit buttons,
+         * but if the use-case requires, we keep this option open.
+         */
+        includeSubmitButton: boolean;
+        /**
+         * By default, we don't include key:value pair from disabled fields.
+         *
+         */
+        includeDisabledFields: boolean;
         w3cSuccessfulControlsOnly: boolean;
         /**
          * In case of a multiple select, e.g. <select name="multiple[]" multiple>

@@ -14,7 +14,7 @@ export function getAllFormElementsAsArray($form: HTMLFormElement) {
       // @ts-expect-error for older browsers
       ...$form.getElementsByTagName('input'),
       // @ts-expect-error for older browsers
-      [...$form.getElementsByTagName('textarea')],
+      ...$form.getElementsByTagName('textarea'),
       // @ts-expect-error for older browsers
       ...$form.getElementsByTagName('select')
     ];
