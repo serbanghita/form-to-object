@@ -1,4 +1,4 @@
-# formToObject.js
+# form-to-object
 > Convert **HTML forms** with all their **fields** and **values** to **multidimensional JavaScript** objects
 
 ![Workflow status](https://img.shields.io/github/actions/workflow/status/serbanghita/formToObject/test.yml?style=flat-square)
