@@ -6,6 +6,7 @@
 ![Latest tag](https://img.shields.io/github/v/tag/serbanghita/formToObject?style=flat-square)
 ![npm version](https://img.shields.io/npm/v/form_to_object?style=flat-square)
 ![npm downloads](https://img.shields.io/npm/dm/form_to_object?style=flat-square)
+[![](https://data.jsdelivr.com/v1/package/npm/form_to_object/badge)](https://www.jsdelivr.com/package/npm/form_to_object)
 
 ## Install
 
@@ -26,6 +27,11 @@ As a JS script:
 ```html
 <!-- Include minified script (~6kb) -->
 <script src="build/formToObject.js"></script>
+
+<!-- jsdelivr (CDN) -->
+<script src="
+https://cdn.jsdelivr.net/npm/form_to_object@3.0.0-rc.0/build/bundle/formToObject.min.js
+"></script>
 ```
 
 ## Example
