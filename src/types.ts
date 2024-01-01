@@ -8,7 +8,14 @@ type IFormToObject = (selector: HTMLFormElement | string, options?: IFormToObjec
 export type HTMLFormField = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | HTMLButtonElement;
 
 export interface IFormToObjectOptions {
-  [key: string]: boolean | string | number;
+  includeEmptyValuedElements?: boolean;
+  includeSubmitButton?: boolean;
+  includeDisabledFields?: boolean;
+  w3cSuccessfulControlsOnly?: boolean;
+  selectNameWithEmptyBracketsReturnsArray?: boolean;
+  checkBoxNameWithEmptyBracketsReturnsArray?: boolean;
+  debug?: boolean;
+  [key: string]: boolean | undefined;
 }
 
 export interface IDefine {

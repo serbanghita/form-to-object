@@ -11,6 +11,8 @@ import {
 } from "./dom";
 import {extend, forEach, getLastIntegerKey, getNextIntegerKey, getObjLength} from "./utils";
 
+
+
 export class FormToObject {
   // Currently matching only fields like 'fieldName[...] or fieldName[]'.
   public static keyRegex = /[^[\]]+|\[]/g;
@@ -18,7 +20,7 @@ export class FormToObject {
   public $form: HTMLFormElement | null = null;
   public $formElements: HTMLFormField[] = [];
 
-  public settings = {
+  public settings: IFormToObjectOptions = {
     includeEmptyValuedElements: false,
     /**
      * It doesn't make sense to include submit buttons,

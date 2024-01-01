@@ -56,8 +56,12 @@ Resulted value:
 }
 ```
 
-In case of an error like non-existing form, invalid selector, or no elements `formToObject` will return `undefined` for every valid
-cases the method will return an object `{}`.
+Good to know:
+
+1. If `<form>` fields are found, but they lack of `name` attribute property, the result will be `{}` (empty object).
+2. If `<form>` contains only `disabled` fields, the result will be `{}` (empty object). If you force `includeDisabledFields` then key:value pairs will be returned.
+3. An empty `<form>` will throw an Error.
+4. In case of an error like non-existing form or invalid selector, an Error will be thrown.
 
 ## Options
 

@@ -5,7 +5,14 @@ export interface Window {
 type IFormToObject = (selector: HTMLFormElement | string, options?: IFormToObjectOptions) => Record<string, never>;
 export type HTMLFormField = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement | HTMLButtonElement;
 export interface IFormToObjectOptions {
-    [key: string]: boolean | string | number;
+    includeEmptyValuedElements?: boolean;
+    includeSubmitButton?: boolean;
+    includeDisabledFields?: boolean;
+    w3cSuccessfulControlsOnly?: boolean;
+    selectNameWithEmptyBracketsReturnsArray?: boolean;
+    checkBoxNameWithEmptyBracketsReturnsArray?: boolean;
+    debug?: boolean;
+    [key: string]: boolean | undefined;
 }
 export interface IDefine {
     (arg: () => unknown): unknown;

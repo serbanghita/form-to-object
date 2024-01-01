@@ -3,3 +3,5 @@ browserstack-run.pid
 .idea/
 /.tmp
 src/*.js
+build/src
+build/test

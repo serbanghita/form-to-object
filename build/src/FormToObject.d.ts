@@ -4,43 +4,7 @@ export declare class FormToObject {
     formSelector: HTMLFormElement | string;
     $form: HTMLFormElement | null;
     $formElements: HTMLFormField[];
-    settings: {
-        includeEmptyValuedElements: boolean;
-        /**
-         * It doesn't make sense to include submit buttons,
-         * but if the use-case requires, we keep this option open.
-         */
-        includeSubmitButton: boolean;
-        /**
-         * By default, we don't include key:value pair from disabled fields.
-         *
-         */
-        includeDisabledFields: boolean;
-        w3cSuccessfulControlsOnly: boolean;
-        /**
-         * In case of a multiple select, e.g. <select name="multiple[]" multiple>
-         * If true, we're going to mimic PHP POST payload behaviour,
-         * then the <select>'s value will be:
-         * ```
-         * {
-         *   "multiple": [111,222]
-         * }
-         * ```
-         *
-         * If false, then the <select>'s value will be:
-         *
-         * ```
-         * {
-         *    "multiple": [
-         *      0: [111, 222]
-         *    ]
-         * }
-         * ```
-          */
-        selectNameWithEmptyBracketsReturnsArray: boolean;
-        checkBoxNameWithEmptyBracketsReturnsArray: boolean;
-        debug: boolean;
-    };
+    settings: IFormToObjectOptions;
     constructor(selector: string | HTMLFormElement, options?: IFormToObjectOptions);
     /**
      * An HTML <form> can be initialized with a string DOM selector e.g. '.myForm'
