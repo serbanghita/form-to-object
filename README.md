@@ -10,7 +10,7 @@
 
 ## Install
 
-As a npm package:
+As a [npm package](https://www.npmjs.com/package/form_to_object):
 
 ```shell
 npm install form_to_object
@@ -30,7 +30,7 @@ As a JS script:
 
 <!-- jsdelivr (CDN) -->
 <script src="
-https://cdn.jsdelivr.net/npm/form_to_object@3.0.0-rc.0/build/bundle/formToObject.min.js
+https://cdn.jsdelivr.net/npm/form_to_object@3.0.0/build/bundle/formToObject.min.js
 "></script>
 ```
 
