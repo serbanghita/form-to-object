@@ -79,4 +79,4 @@ IE 8, Firefox 3.5, Chrome, Safari, Opera 10, every mobile browser.
 
 ## Example
 
-![](http://serbanghita.github.io/form-to-object/formToObj-demo.png)
+![](demo.png)

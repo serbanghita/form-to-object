@@ -1,0 +1,64 @@
+<style>
+    form label { display: inline-block; width: 100%; clear: both; padding: 5px; }
+</style>
+
+<form method="post" action="test.php" data-testid="testForm" id="testForm">
+    <fieldset>
+        <legend>Player data</legend>
+
+        <label for="name">Username:
+        <input type="text" id="name" name="settings[player][name]" value="serbanghita" />
+        </label>
+
+        <label for="race">Race:
+            <select name="settings[player][race]" id="race">
+                <option>human</option>
+                <option selected>orc</option>
+            </select>
+        </label>
+
+        <label>Description:
+            <textarea name="settings[player][description]">This is a description.</textarea>
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Input settings</legend>
+        <label>
+            Mouse: <input type="radio" name="settings[input]" value="mouse">
+        </label>
+        <label>
+            Keyboard: <input type="radio" name="settings[input]" value="keyboard" checked>
+        </label>
+        <label>
+            Touch: <input type="radio" name="settings[input]" value="touch">
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <legend>Video settings</legend>
+
+        <label>
+            Resolution:
+            <select name="settings[video][resolution]">
+                <option value="640 x 480">640 x 480</option>
+                <option value="1280 x 720">1280 x 720</option>
+                <option value="1920 x 1080" selected>1920 x 1080</option>
+            </select>
+        </labeL>
+
+        <label>
+            Vertical sync:
+            <input type="checkbox" name="settings[video][vertical_sync]" checked />
+        </label>
+    </fieldset>
+</form>
+
+<!--<script src="../../build/bundle/formToObject.min.js"></script>-->
+<script src="
+https://cdn.jsdelivr.net/npm/form_to_object@3.0.0-rc.0/build/bundle/formToObject.min.js
+"></script>
+
+<script>
+    console.log(formToObject('testForm'));
+</script>

@@ -1,7 +1,7 @@
 import {checkForLastNumericKey} from "../../src/utils";
 
 describe('checkForLastNumericKey', () => {
-  test('when provided with invalid objects then it returns undefined', function () {
+  it('when provided with invalid objects then it returns undefined', () => {
     expect(checkForLastNumericKey({})).toBeUndefined();
     expect(checkForLastNumericKey([])).toBeUndefined();
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -12,13 +12,13 @@ describe('checkForLastNumericKey', () => {
     expect(checkForLastNumericKey(undefined)).toBeUndefined();
   });
 
-  test('when provided with an object with only numeric keys then it returns the last numeric key', () => {
+  it('when provided with an object with only numeric keys then it returns the last numeric key', () => {
     expect(checkForLastNumericKey({1: 'first', 2: 'second', 3: 'third'})).toBe('3');
     expect(checkForLastNumericKey({3: 'first', 2: 'second', 1: 'third'})).toBe('3');
     expect(checkForLastNumericKey({3: 'first', 2: 'second', 0: 'third'})).toBe('3');
   });
 
-  test('when provided with an object with mixed keys then it returns the last numeric key', () => {
+  it('when provided with an object with mixed keys then it returns the last numeric key', () => {
     expect(checkForLastNumericKey({1: 'first', 2: 'second', three: 'third'})).toBe('2');
     expect(checkForLastNumericKey({1: 'first', second: 'second', '3': 'third'})).toBe('3');
   });

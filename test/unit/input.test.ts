@@ -11,6 +11,109 @@ describe('input', () => {
 
       expect(formToObject.convertToObj()).toEqual({'text':'value'});
     });
+
+    it('multi-level', () => {
+      const $form = document.createElement('form');
+      $form.innerHTML = `
+        <input type="text" name="matrix_one" value="a">
+
+        <input type="text" name="matrix_two[]" value="a">
+        <input type="text" name="matrix_two[]" value="b">
+        <input type="text" name="matrix_two[]" value="c">
+        <input type="text" name="matrix_two[]" value="d">
+
+        <input type="text" name="matrix_three[x][a]" value="xa">
+        <input type="text" name="matrix_three[x][b]" value="xb">
+        <input type="text" name="matrix_three[x][c]" value="xc">
+        <input type="text" name="matrix_three[x][d]" value="xd">
+        <input type="text" name="matrix_three[y][a]" value="ya">
+        <input type="text" name="matrix_three[y][b]" value="yb">
+
+        <input type="text" name="matrix[a][]" value="a0">
+        <input type="text" name="matrix[a][]" value="a1">
+        <input type="text" name="matrix[a][]" value="a2">
+        <input type="text" name="matrix[a][]" value="a3">
+
+        <input type="text" name="matrix[b][]" value="b0">
+        <input type="text" name="matrix[b][]" value="b1">
+        <input type="text" name="matrix[b][]" value="b2">
+        <input type="text" name="matrix[b][]" value="b3">
+
+        <input type="text" name="matrix[c][]" value="c0">
+        <input type="text" name="matrix[c][]" value="c1">
+        <input type="text" name="matrix[c][]" value="c2">
+        <input type="text" name="matrix[c][]" value="c3">
+
+        <input type="text" name="matrix[d][]" value="d0">
+        <input type="text" name="matrix[d][]" value="d1">
+        <input type="text" name="matrix[d][]" value="d2">
+        <input type="text" name="matrix[d][]" value="d3">
+
+        <input type="text" name="matrix_loose[][]" value="00">
+        <input type="text" name="matrix_loose[][]" value="10">
+        <input type="text" name="matrix_loose[][]" value="20">
+    `;
+      const formToObject = new FormToObject($form);
+
+      expect(formToObject.convertToObj()).toEqual({
+        'matrix_one': 'a',
+        'matrix_two': {
+          0: 'a',
+          1: 'b',
+          2: 'c',
+          3: 'd'
+        },
+        'matrix_three': {
+          'x': {
+            'a': 'xa',
+            'b': 'xb',
+            'c': 'xc',
+            'd': 'xd'
+          },
+          'y': {
+            'a': 'ya',
+            'b': 'yb'
+          }
+        },
+        'matrix': {
+          'a': {
+            0: 'a0',
+            1: 'a1',
+            2: 'a2',
+            3: 'a3'
+          },
+          'b': {
+            0: 'b0',
+            1: 'b1',
+            2: 'b2',
+            3: 'b3'
+          },
+          'c': {
+            0: 'c0',
+            1: 'c1',
+            2: 'c2',
+            3: 'c3'
+          },
+          'd': {
+            0: 'd0',
+            1: 'd1',
+            2: 'd2',
+            3: 'd3'
+          }
+        },
+        'matrix_loose': {
+          0: {
+            0: '00'
+          },
+          1: {
+            0: '10'
+          },
+          2: {
+            0: '20'
+          }
+        }
+      });
+    });
   });
 
   describe('color field', () =>{
