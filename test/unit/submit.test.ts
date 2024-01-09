@@ -21,6 +21,20 @@ describe('submit', () => {
         expect(formToObject.convertToObj()).toEqual({});
     });
 
+    it('input with name a.b and includeSubmitButton: true', () => {
+      const $form = document.createElement('form');
+      $form.innerHTML = `
+            <input type="submit" name="a.b" value="go">
+          `;
+      const formToObject = new FormToObject($form, {includeSubmitButton: true});
+
+      expect(formToObject.convertToObj()).toEqual({
+        'a': {
+          'b': 'go'
+        }
+      });
+    });
+
     // Currently we don't support <button>. Should we?
     it('button', () => {
         expect(() => {

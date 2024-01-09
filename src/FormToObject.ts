@@ -9,13 +9,18 @@ import {
   isRadio, isSelectMultiple, isSelectSimple, isSubmitButton, isTextarea,
   isUploadForm
 } from "./dom";
-import {extend, forEach, getLastIntegerKey, getNextIntegerKey, getObjLength} from "./utils";
+import {
+  convertFieldNameToArrayOfKeys,
+  extend,
+  forEach,
+  getLastIntegerKey,
+  getNextIntegerKey,
+  getObjLength
+} from "./utils";
 
 
 
 export class FormToObject {
-  // Currently matching only fields like 'fieldName[...] or fieldName[]'.
-  public static keyRegex = /[^[\]]+|\[]/g;
   public formSelector: HTMLFormElement | string = '';
   public $form: HTMLFormElement | null = null;
   public $formElements: HTMLFormField[] = [];
@@ -137,8 +142,7 @@ export class FormToObject {
       }
 
       // Extract all possible keys
-      // E.g. name="firstName", name="settings[a][b]", name="settings[0][a]"
-      objKeyNames = $domNode.name.match(FormToObject.keyRegex);
+      objKeyNames = convertFieldNameToArrayOfKeys($domNode.name);
 
       if (objKeyNames && objKeyNames.length === 1) {
         this.processSingleLevelNode($domNode, objKeyNames, (domNodeValue ? domNodeValue : ''), result);

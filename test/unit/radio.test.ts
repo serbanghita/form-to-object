@@ -2,7 +2,7 @@ import {FormToObject} from "../../src/FormToObject";
 
 describe('radio', () => {
   describe('unchecked radios', () => {
-    it('searched by a valid element string should return false', () => {
+    it('searched by a valid element string should return {}', () => {
       const $form = document.createElement('form');
       $form.innerHTML = `
         <input type="radio" name="first" value="First value" />
@@ -10,6 +10,20 @@ describe('radio', () => {
         <input type="radio" name="third" value="First value" />
         <input type="radio" name="third" value="Second value" />
         <input type="radio" name="third" value="Third value" />
+    `;
+      const formToObject = new FormToObject($form);
+
+      expect(formToObject.convertToObj()).toEqual({});
+    });
+
+    it('field containing dot (.)', () => {
+      const $form = document.createElement('form');
+      $form.innerHTML = `
+        <input type="radio" name="person.choice" value="First value" />
+        <input type="radio" name="person.choice" value="Second value" />
+        <input type="radio" name="person.choice" value="Third value" />
+        <input type="radio" name="person.choice" value="Forth value" />
+        <input type="radio" name="person.choice" value="Fifth value" />
     `;
       const formToObject = new FormToObject($form);
 
@@ -38,6 +52,24 @@ describe('radio', () => {
         'second': 'First value from second',
         'third': 'Second value',
         'fourth': '0'
+      });
+    });
+
+    it('field containing dot (.)', () => {
+      const $form = document.createElement('form');
+      $form.innerHTML = `
+        <input type="radio" name="person.choice" value="First value" />
+        <input type="radio" name="person.choice" value="Second value" checked />
+        <input type="radio" name="person.choice" value="Third value" />
+        <input type="radio" name="person.choice" value="Forth value" />
+        <input type="radio" name="person.choice" value="Fifth value" />
+    `;
+      const formToObject = new FormToObject($form);
+
+      expect(formToObject.convertToObj()).toEqual({
+        'person': {
+          'choice': 'Second value'
+        }
       });
     });
 

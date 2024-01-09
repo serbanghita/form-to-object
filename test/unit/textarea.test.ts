@@ -10,6 +10,21 @@ describe('textarea', ()=> {
 
     expect(formToObject.convertToObj()).toEqual({'textarea':'textarea'});
   });
+
+  it('field named a.b should return an object', () => {
+    const $form = document.createElement('form');
+    $form.innerHTML = `
+      <textarea name="a.b">textarea</textarea>
+    `;
+    const formToObject = new FormToObject($form);
+
+    expect(formToObject.convertToObj()).toEqual({
+      'a': {
+        'b': 'textarea'
+      }
+    });
+  });
+
   it('should return {} when the field has no value', () => {
     const $form = document.createElement('form');
     $form.innerHTML = `
@@ -19,6 +34,7 @@ describe('textarea', ()=> {
 
     expect(formToObject.convertToObj()).toEqual({});
   });
+
   it('should return field name with empty value when the field has no value and includeEmptyValuedElements: true', () => {
     const $form = document.createElement('form');
     $form.innerHTML = `

@@ -57,6 +57,22 @@ describe('checkbox', () => {
     });
   });
 
+  it('two checkboxes with the same name a.b and different values, both checked, should return value as an array', () => {
+    const $form = document.createElement('form');
+    $form.innerHTML = `
+          <input type="checkbox" name="a.b" value="first" checked/>
+          <input type="checkbox" name="a.b" value="second" checked/>
+    `;
+
+    const formToObject = new FormToObject($form);
+
+    expect(formToObject.convertToObj()).toEqual({
+      'a': {
+        'b': ["first", "second"]
+      }
+    });
+  });
+
   it('checkboxes named checkbox[] should return an array of values, by default', () => {
     const $form = document.createElement('form');
     $form.innerHTML = `
@@ -90,6 +106,20 @@ describe('checkbox', () => {
     $form.innerHTML = `
         <input type="checkbox" name="checkbox[a]" value="a" checked />
         <input type="checkbox" name="checkbox[b]" value="b" checked />
+    `;
+
+    const formToObject = new FormToObject($form);
+
+    expect(formToObject.convertToObj()).toEqual({
+      checkbox: {"a": "a", "b": "b" }
+    });
+  });
+
+  it('checkboxes named checkbox.a and checkbox.b return an object', () => {
+    const $form = document.createElement('form');
+    $form.innerHTML = `
+        <input type="checkbox" name="checkbox.a" value="a" checked />
+        <input type="checkbox" name="checkbox.b" value="b" checked />
     `;
 
     const formToObject = new FormToObject($form);

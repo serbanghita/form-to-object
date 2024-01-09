@@ -91,3 +91,21 @@ export function extend(settings: IFormToObjectOptions, source: IFormToObjectOpti
 export function forEach<T extends Element>(arr: HTMLCollectionOf<T>, callback: (element: T, index?: number) => void) {
   return Array.prototype.forEach.call(arr, callback);
 }
+
+
+export function convertFieldNameToArrayOfKeys(fieldName: string): string[] {
+
+  // Spring MVC field styles.
+  // Test for fields containing a dot (.) name="customer.address.zipcode"
+  if (fieldName.indexOf(".") !== -1) {
+    return fieldName.split(".");
+  }
+
+  // PHP style field names.
+  // Test for fields containing brackets ([]) 'fieldName[...] or fieldName[]'.
+  if (fieldName.indexOf("[") !== -1 && fieldName.indexOf("]") !== -1) {
+    return fieldName.match(/[^[\]]+|\[]/g) as string[];
+  }
+
+  return [fieldName];
+}

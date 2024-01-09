@@ -12,7 +12,42 @@ describe('input', () => {
       expect(formToObject.convertToObj()).toEqual({'text':'value'});
     });
 
-    it('multi-level', () => {
+    it('field containing dot', () => {
+      const $form = document.createElement('form');
+      $form.innerHTML = `
+        <input type="text" name="a.b" value="b">
+        <input type="text" name="a.bb.c" value="c">
+        `;
+      const formToObject = new FormToObject($form);
+
+      expect(formToObject.convertToObj()).toEqual({
+        'a': {
+          'b': 'b',
+          'bb': {
+            'c': 'c'
+          }
+        },
+      });
+    });
+
+    it('field containing dot with overlapping names', () => {
+      const $form = document.createElement('form');
+      $form.innerHTML = `
+        <input type="text" name="a.b" value="b">
+        <input type="text" name="a.b.c" value="c">
+        `;
+      const formToObject = new FormToObject($form);
+
+      expect(formToObject.convertToObj()).toEqual({
+        'a': {
+          'b': {
+            'c': 'c'
+          }
+        },
+      });
+    });
+
+    it('multi-level fields containing brackets []', () => {
       const $form = document.createElement('form');
       $form.innerHTML = `
         <input type="text" name="matrix_one" value="a">

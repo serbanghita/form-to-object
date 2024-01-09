@@ -73,7 +73,7 @@ describe('select', () => {
       expect(formToObject.convertToObj()).toEqual({});
     });
 
-    it('should return an empty array when no options are selected and include empty values option is true', () => {
+    it('should return an empty array when no options are selected and includeEmptyValuedElements:true', () => {
       const formToObject = new FormToObject($form, {includeEmptyValuedElements: true});
       expect(formToObject.convertToObj()).toEqual({'multiple':[]});
     });
