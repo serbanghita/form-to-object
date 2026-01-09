@@ -14,7 +14,7 @@ const umdWrapper = {
     root.formToObject = factory();
   }
 }(typeof self !== 'undefined' ? self : this, function () {`,
-  footer: `return formToObject;
+  footer: `return formToObject.default;
 }));`
 };
 

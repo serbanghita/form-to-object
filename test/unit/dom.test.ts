@@ -4,18 +4,18 @@ describe('dom', () => {
   describe('getAllFormElementsAsArray', () => {
     it('querySelectorAll', () => {
       const $form = {querySelectorAll: () => ['a','b','c']};
-      // @ts-ignore
+      // @ts-expect-error testing invalid input
       expect(getAllFormElementsAsArray($form)).toEqual(['a', 'b', 'c']);
     });
     it('getElementsByTagName', () => {
       const $form = {getElementsByTagName: (tagName: string) => [tagName, tagName]};
-      // @ts-ignore
+      // @ts-expect-error testing invalid input
       expect(getAllFormElementsAsArray($form)).toEqual(['input', 'input', 'textarea', 'textarea', 'select', 'select']);
     });
     it('invalid DOM element', () => {
       expect(() => {
         const $form = {};
-        // @ts-ignore
+        // @ts-expect-error testing invalid input
         getAllFormElementsAsArray($form)
       }).toThrow('The <form> is either not a valid DOM element or the browser is very old.');
     });

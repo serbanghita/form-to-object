@@ -1,13 +1,5 @@
 import { NodeValueResult } from "./types";
 /**
- * Context passed to element handlers containing form state and settings.
- */
-export interface HandlerContext {
-    $form: HTMLFormElement | null;
-    includeEmptyValuedElements: boolean;
-    includeSubmitButton: boolean;
-}
-/**
  * Get value from a radio input element.
  * Returns the value only if the radio is checked.
  */

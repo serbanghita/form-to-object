@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import formToObject from "../../src/index";
 
 describe('formToObject (index)', () => {
@@ -16,7 +17,7 @@ describe('formToObject (index)', () => {
   });
 
   it('returns undefined and logs error for invalid selector', () => {
-    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
 
     const result = formToObject('non-existent-form');
 
@@ -30,7 +31,7 @@ describe('formToObject (index)', () => {
   });
 
   it('returns undefined and logs error for empty form', () => {
-    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+    const consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
     const $form = document.createElement('form');
     $form.id = 'emptyForm';
     document.body.appendChild($form);

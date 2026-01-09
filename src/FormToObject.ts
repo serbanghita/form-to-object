@@ -107,7 +107,7 @@ export class FormToObject {
     if (typeof this.formSelector === 'string') {
       // If the selector contains CSS selector characters, use it as-is.
       // Otherwise, treat it as an ID for backward compatibility.
-      const selector = /[.#\[\] >+~:*]/.test(this.formSelector)
+      const selector = /[.#[\] >+~:*]/.test(this.formSelector)
         ? this.formSelector
         : `#${this.formSelector}`;
       const element = document.querySelector(selector);
