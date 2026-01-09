@@ -62,6 +62,50 @@ Good to know:
 3. An empty `<form>` will throw an Error.
 4. In case of an error like non-existing form or invalid selector, an Error will be thrown.
 
+## TypeScript
+
+The library includes TypeScript definitions. Use generics to get typed results:
+
+```typescript
+import formToObject from 'form_to_object';
+
+// Define your form data interface
+interface UserSettingsForm {
+  name: string;
+  email: string;
+  settings: {
+    theme: 'light' | 'dark';
+    notifications: boolean;
+  };
+}
+
+// Pass the interface as a generic type parameter
+const data = formToObject<UserSettingsForm>('settingsForm');
+
+if (data) {
+  console.log(data.name);           // string
+  console.log(data.settings.theme); // 'light' | 'dark'
+}
+```
+
+You can also use CSS selectors (class, attribute, etc.):
+
+```typescript
+// By ID (with or without #)
+formToObject('#myForm');
+formToObject('myForm');
+
+// By class
+formToObject('.registration-form');
+
+// By attribute
+formToObject('form[data-type="checkout"]');
+
+// By DOM reference
+const form = document.querySelector('form') as HTMLFormElement;
+formToObject<MyFormData>(form);
+```
+
 ## Options
 
 | Option name                                 | Default                     | Description                                                                                                                          |

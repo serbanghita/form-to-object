@@ -186,14 +186,7 @@ Package name `form_to_object` differs from repository name `formToObject` - this
    - `getObjLength()` Object.keys fallback
    - `getAllFormElementsAsArray()` getElementsByTagName fallback
 
-5. **Add TypeScript usage examples to README**
-   ```typescript
-   interface MyFormData {
-     name: string;
-     settings: { theme: string };
-   }
-   const data = formToObject<MyFormData>('myForm');
-   ```
+5. ~~**Add TypeScript usage examples to README**~~ ✓ Added
 
 6. **Remove or implement `debug` setting**
     - Currently defaults to `true` but does nothing
