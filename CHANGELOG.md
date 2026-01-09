@@ -14,17 +14,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `getSelectSimpleValue()`, `getSelectMultipleValue()`, `getSubmitButtonValue()`, `getInputValue()`
 - Comprehensive test coverage (158 tests, 100% line coverage)
 - New test files: `handlers.test.ts`, `index.test.ts`, `file.test.ts`, `FormToObject.test.ts`
-- `CLAUDE-REVIEW.md` - Detailed code review document
 - `esbuild.config.js` - Fast bundler configuration
 - `eslint.config.mjs` - ESLint 9 flat config
 - `tsconfig.build.json` - Build-only TypeScript configuration
-- `jest.d.ts` - Jest 30 global type declarations
+- `vitest.config.mts` and `vitest-setup.mts` - Vitest test runner configuration
+- `prerelease` npm script - runs all checks (install, build, lint, test:unit, test:integration, test:e2e)
+- `release:patch`, `release:minor`, `release:major` npm scripts for publishing to npm
+- `test:unit` and `test:integration` npm scripts for granular test execution
+- `engines` field requiring Node.js >= 24.11.0
 
 ### Changed
 - Migrated build system from Webpack to esbuild (214x faster: 1499ms → 7ms)
+- Migrated test runner from Jest to Vitest (faster execution, native ESM support)
 - Updated ESLint 8 → 9 with new flat config format
-- Updated Jest 29 → 30 with proper TypeScript support
 - Updated TypeScript 5.2 → 5.8
+- Updated GitHub Actions workflow to Node.js 24.x
 - Updated all dev dependencies to latest versions
 - Improved type definitions with proper `NodeResult`, `FormFieldValue`, `NodeValueResult` types
 - Refactored `getNodeValues()` method to delegate to specialized handlers
@@ -33,6 +37,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 - Webpack configuration files (`webpack.common.js`, `webpack.dev.js`, `webpack.prod.js`)
 - Legacy ESLint config (`.eslintrc.cjs`)
+- Jest configuration files (`jest.config.js`, `jest-setup.js`, `jest.d.ts`)
+- Jest dependencies (`@jest/globals`, `jest`, `jest-environment-jsdom`, `ts-jest`)
+- Unused dependencies (`@testing-library/webdriverio`, `wdio-wait-for`)
+- Unused `HandlerContext` interface from handlers.ts
 
 ### Fixed
 - Resolved 33 security vulnerabilities in dev dependencies
