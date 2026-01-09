@@ -12,7 +12,7 @@
     ],
     "outDir": "build",
     "baseUrl": "src",
-    "types": ["node", "jest", "mocha", "@testing-library/jest-dom"]
+    "types": ["node", "mocha", "@testing-library/jest-dom"]
   },
   "include": [
     "src/index.ts",

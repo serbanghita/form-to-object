@@ -45,6 +45,6 @@ describe('submit', () => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             new FormToObject($form);
-        }).toThrowError('No <form> DOM elements were found. Form is empty.');
+        }).toThrow('No <form> DOM elements were found. Form is empty.');
     });
 });

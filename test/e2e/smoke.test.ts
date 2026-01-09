@@ -24,7 +24,7 @@ describe('smoke', () => {
     await $('#password').setValue('password field value');
     await $('#email').setValue('email@field.value');
     await $('#number').setValue(123456);
-    await $('#date').setValue('12/09/2023');
+    await browser.executeScript('return document.getElementById("date").value = "2023-12-09";', []);
     await browser.executeScript('return document.getElementById("time").value = "08:16";', []);
     await $('#range').click();
     for (let i = 0; i < 10; i++) {
