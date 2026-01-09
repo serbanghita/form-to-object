@@ -176,7 +176,7 @@ Package name `form_to_object` differs from repository name `formToObject` - this
    - Add `includeDisabledFields`
    - Clarify or remove `w3cSuccessfulControlsOnly`
 
-3. **Add CHANGELOG.md**
+3. ~~**Add CHANGELOG.md**~~ ✓ Added
    - Track version history
    - Document breaking changes
 
