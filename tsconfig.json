@@ -12,13 +12,14 @@
     ],
     "outDir": "build",
     "baseUrl": "src",
-    "types": ["node", "jest", "mocha", "@testing-library/jest-dom"]
+    "types": ["node", "@jest/globals", "mocha", "@testing-library/jest-dom"]
   },
   "include": [
     "src/index.ts",
     "test/unit/*",
     "test/integration/*",
-    "test/e2e/*"
+    "test/e2e/*",
+    "jest.d.ts"
   ],
   "exclude": [
     "node_modules",

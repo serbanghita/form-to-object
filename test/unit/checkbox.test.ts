@@ -128,6 +128,19 @@ describe('checkbox', () => {
       checkbox: {"a": "a", "b": "b" }
     });
   });
+
+  it('checked checkbox with empty value returns {} - empty checkbox values are skipped', () => {
+    const $form = document.createElement('form');
+    $form.innerHTML = `
+        <input type="checkbox" name="agree" value="" checked />
+    `;
+
+    // Even with includeEmptyValuedElements, checkbox with empty value returns {}
+    // because processSingleLevelNode returns early for empty checkbox values
+    const formToObject = new FormToObject($form, { includeEmptyValuedElements: true });
+
+    expect(formToObject.convertToObj()).toEqual({});
+  });
 });
 
 

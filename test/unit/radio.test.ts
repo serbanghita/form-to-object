@@ -74,4 +74,18 @@ describe('radio', () => {
     });
 
   });
+
+  describe('radio with empty value', () => {
+    it('checked radio with empty value returns {} - empty radio values are skipped', () => {
+      const $form = document.createElement('form');
+      $form.innerHTML = `
+        <input type="radio" name="choice" value="" checked />
+      `;
+      // Even with includeEmptyValuedElements, radio with empty value returns {}
+      // because processSingleLevelNode returns early for empty radio values
+      const formToObject = new FormToObject($form, { includeEmptyValuedElements: true });
+
+      expect(formToObject.convertToObj()).toEqual({});
+    });
+  });
 });

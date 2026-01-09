@@ -6,7 +6,7 @@ import {HTMLFormField} from "./types";
  *
  * @param $form
  */
-export function getAllFormElementsAsArray($form: HTMLFormElement) {
+export function getAllFormElementsAsArray($form: HTMLFormElement): HTMLFormField[] {
   if ('querySelectorAll' in $form) {
     return [...($form?.querySelectorAll('input, textarea, select') as NodeListOf<HTMLFormField>)];
   } else if ('getElementsByTagName' in $form) {
@@ -29,51 +29,67 @@ export function getAllFormElementsAsArray($form: HTMLFormElement) {
  * @param {HTMLFormElement | HTMLElement} node
  * @returns {boolean}
  */
-export function isDomElementNode(node: HTMLFormElement): boolean {
-  return (Boolean(node) && typeof node === 'object' && 'nodeType' in node && node.nodeType === 1);
+export function isDomElementNode(node: HTMLElement | null): node is HTMLFormElement {
+  return (node !== null && typeof node === 'object' && 'nodeType' in node && node.nodeType === 1);
 }
 
 export function isUploadForm($form: HTMLFormElement): boolean {
   return Boolean($form.enctype && $form.enctype === 'multipart/form-data');
 }
 
-export function isRadio($domNode: HTMLInputElement) {
-  return $domNode.nodeName === 'INPUT' && $domNode.type === 'radio';
+/**
+ * Check if element is a radio input.
+ */
+export function isRadio($domNode: HTMLFormField): boolean {
+  return $domNode.nodeName === 'INPUT' && ($domNode as HTMLInputElement).type === 'radio';
 }
 
-export function isCheckbox($domNode: HTMLFormField) {
-  return $domNode.nodeName === 'INPUT' && $domNode.type === 'checkbox';
+/**
+ * Check if element is a checkbox input.
+ */
+export function isCheckbox($domNode: HTMLFormField): boolean {
+  return $domNode.nodeName === 'INPUT' && ($domNode as HTMLInputElement).type === 'checkbox';
 }
 
-export function isFileField($domNode: HTMLInputElement) {
-  return $domNode.nodeName === 'INPUT' && $domNode.type === 'file';
+/**
+ * Check if element is a file input.
+ */
+export function isFileField($domNode: HTMLFormField): boolean {
+  return $domNode.nodeName === 'INPUT' && ($domNode as HTMLInputElement).type === 'file';
 }
 
-export function isTextarea($domNode: HTMLTextAreaElement) {
+/**
+ * Check if element is a textarea.
+ */
+export function isTextarea($domNode: HTMLFormField): boolean {
   return $domNode.nodeName === 'TEXTAREA';
 }
 
-export function isSelectSimple($domNode: HTMLFormField) {
+/**
+ * Check if element is a single select.
+ */
+export function isSelectSimple($domNode: HTMLFormField): boolean {
   return $domNode.nodeName === 'SELECT' && $domNode.type === 'select-one';
 }
 
-export function isSelectMultiple($domNode: HTMLFormField) {
+/**
+ * Check if element is a multiple select.
+ */
+export function isSelectMultiple($domNode: HTMLFormField): boolean {
   return $domNode.nodeName === 'SELECT' && $domNode.type === 'select-multiple';
 }
 
-export function isSubmitButton($domNode: HTMLButtonElement) {
+/**
+ * Check if element is a submit button.
+ */
+export function isSubmitButton($domNode: HTMLFormField): boolean {
   return ($domNode.nodeName === 'BUTTON' || $domNode.nodeName === 'INPUT') && $domNode.type === 'submit';
 }
 
-export function isChecked($domNode: HTMLInputElement) {
+export function isChecked($domNode: HTMLInputElement): boolean {
   return $domNode.checked;
 }
 
-//function isMultiple($domNode){
-//  return ($domNode.multiple ? true : false);
-//}
-
-export function isFileList($domNode: HTMLInputElement) {
+export function isFileList($domNode: HTMLInputElement): boolean {
   return (window.FileList && ($domNode.files instanceof window.FileList));
 }
-
