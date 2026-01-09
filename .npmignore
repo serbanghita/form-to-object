@@ -1,0 +1,30 @@
+# Source files (declarations are in build/)
+src/
+
+# Tests
+test/
+
+# Config files
+*.config.js
+*.config.mjs
+*.config.mts
+vitest-setup.mts
+wdio.conf.ts
+tsconfig.json
+tsconfig.build.json
+eslint.config.mjs
+
+# CI/CD
+.github/
+
+# Editor/IDE
+.claude/
+.editorconfig
+
+# Documentation (README is included)
+CONTRIBUTING.md
+CLAUDE.md
+demo.png
+
+# Other
+composer.json
