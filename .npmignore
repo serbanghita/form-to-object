@@ -19,6 +19,7 @@ eslint.config.mjs
 
 # Editor/IDE
 .claude/
+.idea/
 .editorconfig
 
 # Documentation (README is included)
