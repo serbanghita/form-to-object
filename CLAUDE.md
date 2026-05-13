@@ -36,7 +36,7 @@ npx vitest run --testNamePattern="radio"
 # Run tests in watch mode
 npm run test:watch
 
-# Run e2e tests (requires Chrome)
+# Run e2e tests (requires `npx playwright install chromium` once)
 npm run test:e2e
 
 # Run all pre-release checks
@@ -52,7 +52,7 @@ Run `npm run prerelease` to execute all stages:
 3. **lint** - Run ESLint
 4. **test:unit** - Run unit tests
 5. **test:integration** - Run integration tests
-6. **test:e2e** - Run end-to-end tests (requires Chrome)
+6. **test:e2e** - Run end-to-end tests (Playwright + Chromium)
 
 ## Architecture
 
@@ -81,7 +81,7 @@ src/
 ## Testing
 
 - **Unit/Integration:** Vitest + jsdom (`test/unit/`, `test/integration/`)
-- **E2E:** WebdriverIO 9 + Chrome (`test/e2e/`)
+- **E2E:** Playwright + Chromium (`test/e2e/`)
 - **Fixtures:** HTML form fixtures in `test/integration/fixtures/`
 
 ## Options

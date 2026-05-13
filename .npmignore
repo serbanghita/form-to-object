@@ -8,8 +8,8 @@ test/
 *.config.js
 *.config.mjs
 *.config.mts
+*.config.ts
 vitest-setup.mts
-wdio.conf.ts
 tsconfig.json
 tsconfig.build.json
 eslint.config.mjs

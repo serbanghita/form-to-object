@@ -5,3 +5,5 @@ browserstack-run.pid
 src/*.js
 build/src
 build/test
+test-results/
+playwright-report/

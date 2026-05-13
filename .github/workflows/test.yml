@@ -30,6 +30,7 @@ jobs:
       - run: npm run lint
       - run: npm run test:unit
       - run: npm run test:integration
+      - run: npx playwright install --with-deps chromium
       - run: npm run test:e2e
 
       - name: Upload coverage reports to Codecov
