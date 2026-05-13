@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.1] - 2026-05-13
+
+### Changed
+- Migrated E2E test runner from WebdriverIO + Mocha to Playwright + Chromium
+- Replaced `@wdio/static-server-service` with a tiny built-in Node static server (`test/e2e/server.mjs`)
+- Pinned every `devDependency` to an exact version for reproducible installs (no `^`/`~` ranges)
+- Switched the npm package to an explicit `files:` whitelist (only `build/bundle/`, `build/index.d.ts`, `build/types.d.ts`, `CHANGELOG.md` plus the npm defaults are shipped)
+
+### Added
+- `playwright.config.ts` and `test/e2e/smoke.spec.ts` (Playwright port of the previous smoke test)
+- `permissions: contents: read` block in the GitHub Actions workflow (CodeQL hardening, alert #2)
+
+### Removed
+- `@wdio/cli`, `@wdio/local-runner`, `@wdio/mocha-framework`, `@wdio/spec-reporter`, `@wdio/static-server-service`, `@wdio/types`, `@types/mocha`, `ts-node` dev dependencies
+- `serialize-javascript` `overrides` entry (vulnerability source removed with the mocha chain)
+- `wdio.conf.ts` and the old `test/e2e/smoke.test.ts`
+- Internal declaration files (`build/FormToObject.d.ts`, `build/dom.d.ts`, `build/handlers.d.ts`, `build/utils.d.ts`) from the published tarball — only the public surface ships
+
+### Fixed
+- Resolved 3 high-severity `serialize-javascript` advisories (GHSA-5c6j-r48x-rmvq, GHSA-qj8w-gfj5-8c6v) inherited from `mocha` via WebdriverIO
+- `package.json` `types` field pointed at `build/src/index.d.ts`, which never existed — corrected to `build/index.d.ts` so type resolution actually works for consumers
+- Excluded Playwright runtime artifacts (`test-results/`, `playwright-report/`) from git and the npm tarball
+
+### Security
+- GitHub Actions workflow now declares least-privilege `GITHUB_TOKEN` permissions
+
 ## [3.2.0] - 2026-01-09
 
 ### Added

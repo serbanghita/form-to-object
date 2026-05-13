@@ -2,12 +2,18 @@
   "name": "form_to_object",
   "title": "formToObject",
   "description": "Convert a HTML form to an a JavaScript plain object (multi-dimensional).",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "homepage": "https://github.com/serbanghita/formToObject",
   "author": "Serban Ghita <serbanghita@gmail.com>",
   "main": "build/bundle/formToObject.min.js",
-  "types": "build/src/index.d.ts",
+  "types": "build/index.d.ts",
   "sideEffects": false,
+  "files": [
+    "build/bundle/",
+    "build/index.d.ts",
+    "build/types.d.ts",
+    "CHANGELOG.md"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/serbanghita/formToObject.git"

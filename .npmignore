@@ -3,6 +3,8 @@ src/
 
 # Tests
 test/
+test-results/
+playwright-report/
 
 # Config files
 *.config.js
