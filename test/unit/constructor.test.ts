@@ -46,6 +46,12 @@ describe('constructor', () => {
       }).toThrow('The <form> is either not a valid DOM element or the browser is very old.');
     });
 
+    it('invalid CSS selector syntax should throw standard form not found error', () => {
+      expect(() => {
+        new FormToObject(':invalid[');
+      }).toThrow('The <form> DOM element could not be found.');
+    });
+
   });
 
   describe('An empty HTML form', () => {
