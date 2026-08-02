@@ -27,4 +27,17 @@ describe('extend', () => {
     expect(destination.includeDisabledFields).toBe(false);
     expect(destination.includeEmptyValuedElements).toBe(true);
   });
+
+  it('when source has prototype pollution keys (__proto__, constructor, prototype) they are ignored', () => {
+    const destination = {includeDisabledFields: false} as IFormToObjectOptions;
+    const dangerousJson = '{"__proto__": {"polluted": true}, "constructor": {"prototype": {"polluted": true}}, "prototype": {"polluted": true}, "includeDisabledFields": true}';
+    const source = JSON.parse(dangerousJson);
+    extend(destination, source);
+    expect(destination.includeDisabledFields).toBe(true);
+    expect(Object.prototype.hasOwnProperty.call(destination, '__proto__')).toBe(false);
+    expect(Object.prototype.hasOwnProperty.call(destination, 'constructor')).toBe(false);
+    expect(Object.prototype.hasOwnProperty.call(destination, 'prototype')).toBe(false);
+    expect(({} as Record<string, unknown>).polluted).toBeUndefined();
+  });
 });
+

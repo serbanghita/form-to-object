@@ -69,6 +69,12 @@ export function getObjLength(o: object): number {
   return l;
 }
 
+export const DANGEROUS_KEYS: readonly string[] = Object.freeze(['__proto__', 'constructor', 'prototype'] as const);
+
+export function isDangerousKey(key: string): boolean {
+  return typeof key === 'string' && DANGEROUS_KEYS.indexOf(key) !== -1;
+}
+
 /**
  * Simple extend of own properties.
  * Needed for our settings.
@@ -81,6 +87,9 @@ export function extend(settings: IFormToObjectOptions, source: IFormToObjectOpti
   let i: string;
   for (i in source) {
     if (Object.prototype.hasOwnProperty.call(source, i)) {
+      if (isDangerousKey(i)) {
+        continue;
+      }
       settings[i] = source[i];
     }
   }
@@ -94,18 +103,26 @@ export function forEach<T extends Element>(arr: HTMLCollectionOf<T>, callback: (
 
 
 export function convertFieldNameToArrayOfKeys(fieldName: string): string[] {
+  let keys: string[] = [];
 
   // Spring MVC field styles.
   // Test for fields containing a dot (.) name="customer.address.zipcode"
   if (fieldName.indexOf(".") !== -1) {
-    return fieldName.split(".");
+    keys = fieldName.split(".");
+  } else if (fieldName.indexOf("[") !== -1 && fieldName.indexOf("]") !== -1) {
+    // PHP style field names.
+    // Test for fields containing brackets ([]) 'fieldName[...] or fieldName[]'.
+    keys = (fieldName.match(/[^[\]]+|\[]/g) || []) as string[];
+  } else {
+    keys = [fieldName];
   }
 
-  // PHP style field names.
-  // Test for fields containing brackets ([]) 'fieldName[...] or fieldName[]'.
-  if (fieldName.indexOf("[") !== -1 && fieldName.indexOf("]") !== -1) {
-    return fieldName.match(/[^[\]]+|\[]/g) as string[];
+  for (let i = 0; i < keys.length; i++) {
+    if (isDangerousKey(keys[i])) {
+      return [];
+    }
   }
 
-  return [fieldName];
+  return keys;
 }
+

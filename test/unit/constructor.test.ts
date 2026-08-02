@@ -46,6 +46,26 @@ describe('constructor', () => {
       }).toThrow('The <form> is either not a valid DOM element or the browser is very old.');
     });
 
+    it('invalid CSS selector syntax should throw standard form not found error', () => {
+      expect(() => {
+        new FormToObject(':invalid[');
+      }).toThrow('The <form> DOM element could not be found.');
+    });
+
+    it('non-SyntaxError exceptions thrown during querySelector are re-thrown', () => {
+      const originalQuerySelector = document.querySelector;
+      try {
+        document.querySelector = () => {
+          throw new TypeError('Unexpected DOM error');
+        };
+        expect(() => {
+          new FormToObject('#myForm');
+        }).toThrow(TypeError);
+      } finally {
+        document.querySelector = originalQuerySelector;
+      }
+    });
+
   });
 
   describe('An empty HTML form', () => {
