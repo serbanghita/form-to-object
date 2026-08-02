@@ -14,6 +14,7 @@ import {
 import {
   convertFieldNameToArrayOfKeys,
   extend,
+  isDangerousKey,
   getLastIntegerKey,
   getNextIntegerKey,
   getObjLength
@@ -245,6 +246,9 @@ export class FormToObject {
   ): FormFieldValue | number | void {
     // Get the last remaining key.
     const key = arr[0];
+    if (isDangerousKey(key)) {
+      return;
+    }
 
     // We're only interested in the radio that is checked.
     if (isRadio($domNode)) {
@@ -298,6 +302,9 @@ export class FormToObject {
     result: NodeResult
   ): NodeResult | void {
     const keyName = arr[0];
+    if (isDangerousKey(keyName)) {
+      return;
+    }
 
     if (arr.length > 1) {
       if (keyName === '[]') {

@@ -79,4 +79,52 @@ describe('unexpected', () => {
     expect(formToObject.convertToObj()).toEqual({'text': ''});
   });
 
+  it('input with name "__proto__" should not create __proto__ key or pollute prototype', () => {
+    const $form = document.createElement('form');
+    $form.innerHTML = `
+      <input name="__proto__" value="polluted">
+    `;
+    const formToObject = new FormToObject($form);
+    const obj = formToObject.convertToObj();
+    expect(obj).toEqual({});
+    expect(Object.prototype.hasOwnProperty.call(obj, '__proto__')).toBe(false);
+    expect(({} as Record<string, unknown>).polluted).toBeUndefined();
+  });
+
+  it('input with name "__proto__.polluted" should not create __proto__ key or pollute prototype', () => {
+    const $form = document.createElement('form');
+    $form.innerHTML = `
+      <input name="__proto__.polluted" value="yes">
+    `;
+    const formToObject = new FormToObject($form);
+    const obj = formToObject.convertToObj();
+    expect(obj).toEqual({});
+    expect(Object.prototype.hasOwnProperty.call(obj, '__proto__')).toBe(false);
+    expect(({} as Record<string, unknown>).polluted).toBeUndefined();
+  });
+
+  it('input with name "constructor.prototype.polluted" should not create constructor key or pollute prototype', () => {
+    const $form = document.createElement('form');
+    $form.innerHTML = `
+      <input name="constructor.prototype.polluted" value="yes">
+    `;
+    const formToObject = new FormToObject($form);
+    const obj = formToObject.convertToObj();
+    expect(obj).toEqual({});
+    expect(Object.prototype.hasOwnProperty.call(obj, 'constructor')).toBe(false);
+    expect(({} as Record<string, unknown>).polluted).toBeUndefined();
+  });
+
+  it('input with name "user[__proto__][polluted]" should not create __proto__ key or pollute prototype', () => {
+    const $form = document.createElement('form');
+    $form.innerHTML = `
+      <input name="user[__proto__][polluted]" value="yes">
+    `;
+    const formToObject = new FormToObject($form);
+    const obj = formToObject.convertToObj();
+    expect(obj).toEqual({});
+    expect(({} as Record<string, unknown>).polluted).toBeUndefined();
+  });
+
 });
+
