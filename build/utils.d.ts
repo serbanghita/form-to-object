@@ -22,7 +22,7 @@ export declare function getNextIntegerKey(o: object): number;
  * @returns {number}
  */
 export declare function getObjLength(o: object): number;
-export declare const DANGEROUS_KEYS: string[];
+export declare const DANGEROUS_KEYS: readonly string[];
 export declare function isDangerousKey(key: string): boolean;
 /**
  * Simple extend of own properties.

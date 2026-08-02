@@ -52,6 +52,20 @@ describe('constructor', () => {
       }).toThrow('The <form> DOM element could not be found.');
     });
 
+    it('non-SyntaxError exceptions thrown during querySelector are re-thrown', () => {
+      const originalQuerySelector = document.querySelector;
+      try {
+        document.querySelector = () => {
+          throw new TypeError('Unexpected DOM error');
+        };
+        expect(() => {
+          new FormToObject('#myForm');
+        }).toThrow(TypeError);
+      } finally {
+        document.querySelector = originalQuerySelector;
+      }
+    });
+
   });
 
   describe('An empty HTML form', () => {

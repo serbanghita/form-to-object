@@ -69,10 +69,10 @@ export function getObjLength(o: object): number {
   return l;
 }
 
-export const DANGEROUS_KEYS = ['__proto__', 'constructor', 'prototype'];
+export const DANGEROUS_KEYS: readonly string[] = Object.freeze(['__proto__', 'constructor', 'prototype'] as const);
 
 export function isDangerousKey(key: string): boolean {
-  return DANGEROUS_KEYS.indexOf(key) !== -1;
+  return typeof key === 'string' && DANGEROUS_KEYS.indexOf(key) !== -1;
 }
 
 /**

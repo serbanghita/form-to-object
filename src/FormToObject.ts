@@ -114,8 +114,14 @@ export class FormToObject {
       let element: Element | null = null;
       try {
         element = document.querySelector(selector);
-      } catch {
-        return false;
+      } catch (err: unknown) {
+        if (
+          (err instanceof Error && err.name === 'SyntaxError') ||
+          (typeof err === 'object' && err !== null && (err as { name?: string }).name === 'SyntaxError')
+        ) {
+          return false;
+        }
+        throw err;
       }
       if (isDomElementNode(element as HTMLElement | null)) {
         this.$form = element as HTMLFormElement;
