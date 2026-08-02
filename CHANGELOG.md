@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.2] - 2026-08-02
+
+### Added
+- Prototype pollution defense-in-depth protection:
+  - Added `isDangerousKey()` validator and runtime-frozen `DANGEROUS_KEYS` (`Object.freeze(['__proto__', 'constructor', 'prototype'])`)
+  - Sanitized `extend()` and `convertFieldNameToArrayOfKeys()` in `src/utils.ts`
+  - Guarded `processSingleLevelNode()` and `processMultiLevelNode()` in `src/FormToObject.ts`
+  - Comprehensive unit tests covering prototype pollution vectors and runtime immutability
+
+### Fixed
+- Robust CSS selector error handling in `initForm()`: invalid CSS selector syntax (e.g. `:invalid[`) is caught gracefully as `SyntaxError` without throwing unhandled `DOMException`, while re-throwing unexpected runtime errors
+- Modernized CI/CD workflow actions to `@v4` (`actions/checkout@v4`, `actions/setup-node@v4`, `codecov/codecov-action@v4`)
+- Upgraded `vitest` and `@vitest/coverage-v8` to `4.1.10`, resolving all 7 devDependencies vulnerabilities (0 vulnerabilities found on audit)
+
+### Security
+- Hardened against prototype pollution payload injections via malicious input field names or option objects
+- Clean `npm audit` across all dependencies
+
 ## [3.2.1] - 2026-05-13
 
 ### Changed
