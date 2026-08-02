@@ -52,13 +52,13 @@
     "@playwright/test": "1.60.0",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/user-event": "14.6.1",
-    "@vitest/coverage-v8": "4.0.16",
+    "@vitest/coverage-v8": "4.1.10",
     "esbuild": "0.25.12",
     "eslint": "9.39.2",
     "globals": "17.0.0",
     "jsdom": "27.4.0",
     "typescript": "5.9.3",
     "typescript-eslint": "8.52.0",
-    "vitest": "4.0.16"
+    "vitest": "4.1.10"
   }
 }
