@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [24.x]
+        node-version: [24.15.0, 24.x, 26.x]
 
     steps:
       - uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: npm ci
+      - run: npm ci --engine-strict
       - run: npm run build
       - run: npm run lint
       - run: npm run typecheck
@@ -38,6 +38,7 @@ jobs:
       - run: npm run test:e2e
 
       - name: Upload coverage reports to Codecov
+        if: matrix.node-version == '24.x'
         uses: codecov/codecov-action@v4
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
