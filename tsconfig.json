@@ -11,7 +11,7 @@
       "src"
     ],
     "outDir": "build",
-    "types": ["@testing-library/jest-dom"]
+    "types": ["node", "vitest/globals", "@testing-library/jest-dom"]
   },
   "include": [
     "src/index.ts",
