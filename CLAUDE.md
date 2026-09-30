@@ -18,6 +18,9 @@ npm run dev
 # Lint
 npm run lint
 
+# Typecheck src and tests (no emit)
+npm run typecheck
+
 # Run all unit/integration tests
 npm test
 
@@ -50,9 +53,10 @@ Run `npm run prerelease` to execute all stages:
 1. **install** - Clean install dependencies (`npm ci`)
 2. **build** - Build UMD bundle and TypeScript declarations
 3. **lint** - Run ESLint
-4. **test:unit** - Run unit tests
-5. **test:integration** - Run integration tests
-6. **test:e2e** - Run end-to-end tests (Playwright + Chromium)
+4. **typecheck** - Typecheck src and tests with `tsc --noEmit`
+5. **test:unit** - Run unit tests
+6. **test:integration** - Run integration tests
+7. **test:e2e** - Run end-to-end tests (Playwright + Chromium)
 
 ## Architecture
 

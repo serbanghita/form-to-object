@@ -103,7 +103,7 @@ export function forEach<T extends Element>(arr: HTMLCollectionOf<T>, callback: (
 
 
 export function convertFieldNameToArrayOfKeys(fieldName: string): string[] {
-  let keys: string[] = [];
+  let keys: string[];
 
   // Spring MVC field styles.
   // Test for fields containing a dot (.) name="customer.address.zipcode"
