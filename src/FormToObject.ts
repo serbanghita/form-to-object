@@ -111,7 +111,7 @@ export class FormToObject {
       const selector = /[.#[\] >+~:*]/.test(this.formSelector)
         ? this.formSelector
         : `#${this.formSelector}`;
-      let element: Element | null = null;
+      let element: Element | null;
       try {
         element = document.querySelector(selector);
       } catch (err: unknown) {
