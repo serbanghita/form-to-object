@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.3] - 2026-10-29
+
+### Changed
+- Upgraded `vitest` and `@vitest/coverage-v8` to `5.0.5`
+- Raised the Node engine range to `^24.15.0 || >=26.0.0` to match the upgraded devDependency tree; CI installs with `--engine-strict` and tests Node 24.15.0, 24.x and 26.x
+- Test files are now typechecked (`npm run typecheck`, also run in `prerelease` and CI)
+- Upgraded devDependencies to latest majors: `eslint` 10, `@eslint/js` 10, `jsdom` 30, `@testing-library/jest-dom` 7, `typescript` 6.0, `esbuild` 0.28, `@playwright/test` 1.63
+
+### Security
+- Resolved Dependabot high-severity alerts in devDependencies: `vite` 8.3.1 → 8.3.5 (launch-editor `fs.existsSync()` bypass on Windows, GHSA-587h-7wmj-h5pm) and `source-map-js` 1.2.1 → 1.2.2 (event-loop denial of service, GHSA-68fv-2mgg-jv7q)
+- Resolved the remaining `vite` and `@vitest/mocker` medium/low alerts (GHSA-qxg6-89mg-rqv8, GHSA-xp26-3454-mjgp, GHSA-rq7h-c2jc-7f22, GHSA-vfpm-58rq-9qcg, GHSA-r825-w8mm-5pxw, GHSA-698v-4r3x-3vcv, GHSA-9jrq-w75r-8gcw)
+- Upgraded transitive `undici` to 8.12.3 (via `jsdom`), fixing eight advisories reported by `npm audit`
+- Clean `npm audit` across all dependencies
+
 ## [3.2.2] - 2026-08-02
 
 ### Added
